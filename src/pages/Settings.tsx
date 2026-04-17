@@ -15,6 +15,10 @@ import {
   Megaphone,
   Clock,
   Save,
+  FileSpreadsheet,
+  Loader2,
+  Eye,
+  EyeOff,
 } from 'lucide-react'
 
 // ── Types ──
@@ -25,6 +29,9 @@ interface ShopifyStatus {
   hasStoreUrl: boolean
   maskedToken: string | null
   storeUrl: string | null
+  tokenSource?: 'env' | 'supabase' | 'none'
+  supabaseToken?: string | null
+  envToken?: string | null
 }
 
 interface FacebookStatus {
@@ -37,9 +44,18 @@ interface FacebookStatus {
   tokenExpiry: string | null
 }
 
+interface GoogleSheetsConfig {
+  serviceAccountJson: string
+  orderSheetId: string
+  dataPngSheetId: string
+  orderTab: string
+  pasterOrdersTab: string
+  dataPngTab: string
+  fieldMapping: string
+}
+
 interface ScheduleConfig {
   shopifyInterval: string
-  facebookInterval: string
   autoLoadTime: string
   timezone: string
   pnlRefreshInterval: string
@@ -63,23 +79,34 @@ export default function SettingsPage() {
 
   // ── Facebook ──
   const [fbStatus, setFbStatus] = useState<FacebookStatus | null>(null)
-  const [refreshingFb, setRefreshingFb] = useState(false)
-  const [fbResult, setFbResult] = useState<string | null>(null)
-  const [fbError, setFbError] = useState<string | null>(null)
-  const [fbTokenInput, setFbTokenInput] = useState('')
-  const [fbToken, setFbToken] = useState('') // Track current token
-  const [savingFbToken, setSavingFbToken] = useState(false)
 
   // ── Schedule & Timezone ──
   const [schedule, setSchedule] = useState<ScheduleConfig>({
     shopifyInterval: '12',
-    facebookInterval: '1',
     autoLoadTime: '08:00',
     timezone: 'GMT-7',
     pnlRefreshInterval: '1',
   })
   const [savingSchedule, setSavingSchedule] = useState(false)
   const [scheduleResult, setScheduleResult] = useState<string | null>(null)
+
+  // ── Google Sheets ──
+  const [gsheetsConfig, setGsheetsConfig] = useState<GoogleSheetsConfig>({
+    serviceAccountJson: '',
+    orderSheetId: '',
+    dataPngSheetId: '',
+    orderTab: 'order',
+    pasterOrdersTab: 'pasterorders',
+    dataPngTab: 'Sheet1',
+    fieldMapping: '[{"shopifyField":"order_name","column":"B","headerName":"ITEM-CODE","type":"string","source":"shopify"},{"shopifyField":"line_item_quantity","column":"C","headerName":"Quantity","type":"number","source":"shopify"},{"shopifyField":"line_item_title","column":"D","headerName":"PRODUCT","type":"string","source":"shopify"},{"shopifyField":"variant_color","column":"E","headerName":"Color","type":"string","source":"shopify"},{"shopifyField":"variant_size","column":"F","headerName":"Size","type":"string","source":"shopify"},{"shopifyField":"mockup","column":"G","headerName":"Mockup","type":"string","source":"other_sheet"},{"shopifyField":"front_design","column":"H","headerName":"Front Design","type":"string","source":"other_sheet"},{"shopifyField":"shipping_name","column":"P","headerName":"BUYER NAME","type":"string","source":"shopify"},{"shopifyField":"shipping_address_combined","column":"Q","headerName":"ADDRESS","type":"string","source":"shopify"},{"shopifyField":"shipping_city","column":"R","headerName":"CITY","type":"string","source":"shopify"},{"shopifyField":"shipping_province","column":"S","headerName":"PROVINCE","type":"string","source":"shopify"},{"shopifyField":"shipping_zip","column":"T","headerName":"POSTCODE","type":"string","source":"shopify"},{"shopifyField":"shipping_country_code","column":"U","headerName":"COUNTRY CODE","type":"string","source":"shopify"}]',
+  })
+  const [savingGsheets, setSavingGsheets] = useState(false)
+  const [gsheetsResult, setGsheetsResult] = useState<string | null>(null)
+  const [gsheetsError, setGsheetsError] = useState<string | null>(null)
+  const [testingGsheets, setTestingGsheets] = useState(false)
+  const [gsheetsConnected, setGsheetsConnected] = useState<boolean | null>(null)
+  const [gsheetsEmail, setGsheetsEmail] = useState<string | null>(null)
+  const [showSaJson, setShowSaJson] = useState(false)
 
   // ── Timezone ──
   const [timezones, setTimezones] = useState<TimezoneSettings>({
@@ -95,6 +122,7 @@ export default function SettingsPage() {
     fetchFacebookStatus()
     loadScheduleConfig()
     loadTimezoneSettings()
+    loadGsheetsConfig()
   }, [])
 
   // ── Load Timezone Settings ──
@@ -143,6 +171,15 @@ export default function SettingsPage() {
       const res = await fetch('/api/shopify/renew-token', { method: 'POST' })
       const data = await res.json()
       if (res.ok && data.success) {
+        // Server already saves to Supabase, but fallback save from frontend too
+        if (!data.savedToSupabase && data.newToken && supabaseConfigured) {
+          try {
+            await supabase.from('system_settings').upsert(
+              { key: 'SHOPIFY_ADMIN_TOKEN', value: data.newToken, updated_at: new Date().toISOString() },
+              { onConflict: 'key' }
+            )
+          } catch { /* server-side save is primary */ }
+        }
         setShopifyResult(data.message)
         await fetchShopifyStatus()
       } else {
@@ -161,51 +198,6 @@ export default function SettingsPage() {
     } catch { setFbStatus(null) }
   }
 
-  const refreshFacebookToken = async () => {
-    setRefreshingFb(true); setFbResult(null); setFbError(null)
-    try {
-      const res = await fetch('/api/facebook/refresh-token', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ token: fbToken }),
-      })
-      const data = await res.json()
-      if (res.ok && data.success) {
-        setFbResult(data.message)
-        setFbToken('') // Clear after successful refresh (new token is in .env)
-        await fetchFacebookStatus()
-      } else {
-        setFbError(data.error || 'Unknown error')
-      }
-    } catch (err: any) {
-      setFbError(err.message || 'Network error')
-    } finally { setRefreshingFb(false) }
-  }
-
-  const saveFbTokenManual = async () => {
-    if (!fbTokenInput.trim()) return
-    setSavingFbToken(true); setFbResult(null); setFbError(null)
-    try {
-      const trimmedToken = fbTokenInput.trim()
-      const res = await fetch('/api/facebook/save-token', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ token: trimmedToken }),
-      })
-      const data = await res.json()
-      if (res.ok && data.success) {
-        setFbResult('Token saved successfully!')
-        setFbToken(trimmedToken) // Keep token in state
-        setFbTokenInput('')
-        await fetchFacebookStatus()
-      } else {
-        setFbError(data.error || 'Failed to save')
-      }
-    } catch (err: any) {
-      setFbError(err.message)
-    } finally { setSavingFbToken(false) }
-  }
-
   // ── Schedule Config ──
   const loadScheduleConfig = async () => {
     if (!supabaseConfigured) return
@@ -213,13 +205,12 @@ export default function SettingsPage() {
       const { data } = await supabase
         .from('system_settings')
         .select('key, value')
-        .in('key', ['SCHEDULE_SHOPIFY_INTERVAL', 'SCHEDULE_FACEBOOK_INTERVAL', 'SCHEDULE_AUTO_LOAD_TIME', 'TIMEZONE_SYSTEM', 'PNL_REFRESH_INTERVAL'])
+        .in('key', ['SCHEDULE_SHOPIFY_INTERVAL', 'SCHEDULE_AUTO_LOAD_TIME', 'TIMEZONE_SYSTEM', 'PNL_REFRESH_INTERVAL'])
       if (data) {
         const map: Record<string, string> = {}
         for (const row of data) map[row.key] = row.value
         setSchedule({
           shopifyInterval: map['SCHEDULE_SHOPIFY_INTERVAL'] || '12',
-          facebookInterval: map['SCHEDULE_FACEBOOK_INTERVAL'] || '1',
           autoLoadTime: map['SCHEDULE_AUTO_LOAD_TIME'] || '08:00',
           timezone: map['TIMEZONE_SYSTEM'] || 'GMT-7',
           pnlRefreshInterval: map['PNL_REFRESH_INTERVAL'] || '1',
@@ -233,7 +224,6 @@ export default function SettingsPage() {
     try {
       const settings = [
         { key: 'SCHEDULE_SHOPIFY_INTERVAL', value: schedule.shopifyInterval, category: 'Schedule', label: 'Shopify refresh interval (hours)' },
-        { key: 'SCHEDULE_FACEBOOK_INTERVAL', value: schedule.facebookInterval, category: 'Schedule', label: 'Facebook refresh interval (hours)' },
         { key: 'SCHEDULE_AUTO_LOAD_TIME', value: schedule.autoLoadTime, category: 'Schedule', label: 'Auto load time' },
         { key: 'TIMEZONE_SYSTEM', value: schedule.timezone, category: 'Timezone', label: 'System timezone' },
         { key: 'PNL_REFRESH_INTERVAL', value: schedule.pnlRefreshInterval, category: 'Schedule', label: 'PnL refresh interval (hours)' },
@@ -249,6 +239,139 @@ export default function SettingsPage() {
     } catch (err: any) {
       setScheduleResult('Error: ' + err.message)
     } finally { setSavingSchedule(false) }
+  }
+
+  // ── Google Sheets ──
+  const loadGsheetsConfig = async () => {
+    if (!supabaseConfigured) return
+    try {
+      const { data } = await supabase
+        .from('system_settings')
+        .select('key, value')
+        .in('key', [
+          'GSHEET_SERVICE_ACCOUNT_JSON',
+          'GSHEET_ORDER_SHEET_ID',
+          'GSHEET_DATA_PNG_SHEET_ID',
+          'GSHEET_ORDER_TAB',
+          'GSHEET_PASTERORDERS_TAB',
+          'GSHEET_DATA_PNG_TAB',
+          'GSHEET_FIELD_MAPPING',
+        ])
+      if (data) {
+        const map: Record<string, string> = {}
+        for (const row of data) map[row.key] = row.value
+        setGsheetsConfig({
+          serviceAccountJson: map['GSHEET_SERVICE_ACCOUNT_JSON'] || '',
+          orderSheetId: map['GSHEET_ORDER_SHEET_ID'] || '',
+          dataPngSheetId: map['GSHEET_DATA_PNG_SHEET_ID'] || '',
+          orderTab: map['GSHEET_ORDER_TAB'] || 'order',
+          pasterOrdersTab: map['GSHEET_PASTERORDERS_TAB'] || 'pasterorders',
+          dataPngTab: map['GSHEET_DATA_PNG_TAB'] || 'Sheet1',
+          fieldMapping: map['GSHEET_FIELD_MAPPING'] || '[]',
+        })
+        // Check if we have a valid SA email
+        if (map['GSHEET_SERVICE_ACCOUNT_JSON']) {
+          try {
+            const sa = JSON.parse(map['GSHEET_SERVICE_ACCOUNT_JSON'])
+            setGsheetsEmail(sa.client_email || null)
+          } catch { /* invalid JSON */ }
+        }
+      }
+    } catch { /* not critical */ }
+  }
+
+  // Helper: extract Google Sheet ID from URL or return as-is
+  const extractSheetId = (input: string): string => {
+    const trimmed = (input || '').trim()
+    // Match: https://docs.google.com/spreadsheets/d/{SHEET_ID}/...
+    const match = trimmed.match(/\/spreadsheets\/d\/([a-zA-Z0-9_-]+)/)
+    if (match) return match[1]
+    // Already just an ID
+    return trimmed
+  }
+
+  const saveGsheetsConfig = async () => {
+    setSavingGsheets(true); setGsheetsResult(null); setGsheetsError(null)
+    try {
+      // Clean and validate Service Account JSON if provided
+      let saJsonToSave = gsheetsConfig.serviceAccountJson
+        .trim()
+        .replace(/[\u200B-\u200D\uFEFF]/g, '') // Remove zero-width chars
+        .replace(/\r\n/g, '\n') // Normalize line endings
+      if (saJsonToSave) {
+        try {
+          const parsed = JSON.parse(saJsonToSave)
+          if (!parsed.client_email || !parsed.private_key) {
+            setGsheetsError('Service Account JSON thiếu client_email hoặc private_key')
+            setSavingGsheets(false)
+            return
+          }
+          // Re-serialize to ensure clean JSON
+          saJsonToSave = JSON.stringify(parsed)
+        } catch (parseErr) {
+          setGsheetsError(`Service Account JSON lỗi format: ${parseErr}. Hãy paste lại toàn bộ nội dung file .json`)
+          setSavingGsheets(false)
+          return
+        }
+      }
+
+      // Auto-extract Sheet IDs from URLs
+      const orderSheetId = extractSheetId(gsheetsConfig.orderSheetId)
+      const dataPngSheetId = extractSheetId(gsheetsConfig.dataPngSheetId)
+
+      const settings = [
+        { key: 'GSHEET_SERVICE_ACCOUNT_JSON', value: saJsonToSave, category: 'Google Sheets', label: 'Service Account JSON' },
+        { key: 'GSHEET_ORDER_SHEET_ID', value: orderSheetId, category: 'Google Sheets', label: 'Order Sheet ID' },
+        { key: 'GSHEET_DATA_PNG_SHEET_ID', value: dataPngSheetId, category: 'Google Sheets', label: 'Data PNG Sheet ID' },
+        { key: 'GSHEET_ORDER_TAB', value: gsheetsConfig.orderTab, category: 'Google Sheets', label: 'Order tab name' },
+        { key: 'GSHEET_PASTERORDERS_TAB', value: gsheetsConfig.pasterOrdersTab, category: 'Google Sheets', label: 'Paster Orders tab name' },
+        { key: 'GSHEET_DATA_PNG_TAB', value: gsheetsConfig.dataPngTab, category: 'Google Sheets', label: 'Data PNG tab name' },
+        { key: 'GSHEET_FIELD_MAPPING', value: gsheetsConfig.fieldMapping, category: 'Google Sheets', label: 'Field mapping' },
+      ]
+      for (const s of settings) {
+        await supabase.from('system_settings').upsert(
+          { ...s, setting_type: s.key.includes('JSON') || s.key.includes('MAPPING') ? 'json' : 'text', updated_at: new Date().toISOString() },
+          { onConflict: 'key' },
+        )
+      }
+
+      // Update local state with cleaned values
+      setGsheetsConfig(prev => ({
+        ...prev,
+        orderSheetId: orderSheetId,
+        dataPngSheetId: dataPngSheetId,
+      }))
+
+      if (saJsonToSave) {
+        try {
+          const sa = JSON.parse(saJsonToSave)
+          setGsheetsEmail(sa.client_email || null)
+        } catch { /* */ }
+      }
+
+      setGsheetsResult('Google Sheets config saved to Supabase!')
+      setTimeout(() => setGsheetsResult(null), 3000)
+    } catch (err: any) {
+      setGsheetsError('Error: ' + err.message)
+    } finally { setSavingGsheets(false) }
+  }
+
+  const testGsheetsConnection = async () => {
+    setTestingGsheets(true); setGsheetsConnected(null); setGsheetsError(null)
+    try {
+      const res = await fetch('/api/gsheets/status')
+      const data = await res.json()
+      if (res.ok && data.connected) {
+        setGsheetsConnected(true)
+        setGsheetsEmail(data.email || null)
+      } else {
+        setGsheetsConnected(false)
+        setGsheetsError(data.error || 'Connection failed')
+      }
+    } catch (err: any) {
+      setGsheetsConnected(false)
+      setGsheetsError(err.message || 'Network error')
+    } finally { setTestingGsheets(false) }
   }
 
   const saveTimezoneSettings = async () => {
@@ -330,6 +453,13 @@ export default function SettingsPage() {
                 <span>Client ID: {shopifyStatus?.hasClientId ? '✓' : '✗'}</span>
                 <span>Client Secret: {shopifyStatus?.hasClientSecret ? '✓' : '✗'}</span>
               </div>
+              {shopifyStatus?.tokenSource && (
+                <div className="flex gap-2 text-xs text-muted-foreground">
+                  <span>Source: <strong>{shopifyStatus.tokenSource}</strong></span>
+                  {shopifyStatus.envToken && <span>Env: {shopifyStatus.envToken}</span>}
+                  {shopifyStatus.supabaseToken && <span>DB: {shopifyStatus.supabaseToken}</span>}
+                </div>
+              )}
             </div>
             <Button onClick={renewShopifyToken} disabled={refreshingShopify} className="w-full"
               variant={shopifyStatus?.hasToken ? 'outline' : 'default'}>
@@ -339,7 +469,7 @@ export default function SettingsPage() {
             {shopifyResult && <div className="rounded-md bg-green-500/10 p-3 text-sm text-green-400">{shopifyResult}</div>}
             {shopifyError && <div className="rounded-md bg-red-500/10 p-3 text-sm text-red-400">{shopifyError}</div>}
             <p className="text-xs text-muted-foreground">
-              Set SHOPIFY_CLIENT_ID, SHOPIFY_CLIENT_SECRET, VITE_SHOPIFY_STORE_URL in .env.
+              Token auto-saved to Supabase on renewal. Fallback: env → Supabase DB.
             </p>
           </CardContent>
         </Card>
@@ -368,39 +498,19 @@ export default function SettingsPage() {
                 <span>App Secret: {fbStatus?.hasAppSecret ? '✓' : '✗'}</span>
                 <span>Ad Account: {fbStatus?.adAccountId || '✗'}</span>
               </div>
-            </div>
-
-            {/* Manual token input */}
-            <div>
-              <label className="text-sm font-medium text-muted-foreground">Paste Access Token (first time)</label>
-              <div className="flex gap-2 mt-1">
-                <Input
-                  value={fbTokenInput}
-                  onChange={(e) => setFbTokenInput(e.target.value)}
-                  placeholder="EAAxxxxxxx..."
-                  type="password"
-                  className="flex-1"
-                />
-                <Button size="sm" onClick={saveFbTokenManual} disabled={savingFbToken || !fbTokenInput.trim()}>
-                  <Save className="mr-1 h-3.5 w-3.5" /> Save
-                </Button>
+              <div className="flex gap-3 text-xs text-muted-foreground flex-wrap">
+                <span>Valid: {fbStatus?.tokenValid ? '✓' : '✗'}</span>
+                <span>Expiry: {fbStatus?.tokenExpiry ?? 'Never (System User)'}</span>
               </div>
             </div>
 
-            {/* Refresh button */}
-            <Button onClick={refreshFacebookToken} disabled={refreshingFb} className="w-full"
-              variant={fbStatus?.hasToken ? 'outline' : 'default'}>
-              <RefreshCw className={`mr-2 h-4 w-4 ${refreshingFb ? 'animate-spin' : ''}`} />
-              {refreshingFb ? 'Refreshing...' : 'Refresh Long-Lived Token'}
-            </Button>
-
-            {fbResult && <div className="rounded-md bg-green-500/10 p-3 text-sm text-green-400">{fbResult}</div>}
-            {fbError && <div className="rounded-md bg-red-500/10 p-3 text-sm text-red-400">{fbError}</div>}
-
-            <p className="text-xs text-muted-foreground">
-              Set FB_APP_ID, FB_APP_SECRET, FB_AD_ACCOUNT_ID in .env.
-              Paste a short-lived token above, then click "Refresh" to exchange for long-lived (~60 days).
-            </p>
+            <div className="rounded-md border border-dashed p-3 text-xs text-muted-foreground space-y-1">
+              <p className="font-medium text-foreground">System User Token — không hết hạn</p>
+              <p>
+                Token được lưu ở biến môi trường <code>FB_ACCESS_TOKEN</code> (Vercel + .env local).
+                Khi cần đổi token, cập nhật trực tiếp trên Vercel Dashboard rồi redeploy.
+              </p>
+            </div>
           </CardContent>
         </Card>
 
@@ -470,21 +580,6 @@ export default function SettingsPage() {
               />
             </div>
 
-            <div>
-              <label className="text-sm font-medium text-muted-foreground">
-                Facebook token refresh interval (hours)
-              </label>
-              <Input
-                type="number" min="1" max="720"
-                value={schedule.facebookInterval}
-                onChange={(e) => setSchedule({ ...schedule, facebookInterval: e.target.value })}
-                className="mt-1 w-24"
-              />
-              <p className="mt-1 text-xs text-muted-foreground">
-                Facebook long-lived tokens last ~60 days. Recommend refreshing every 24-48h.
-              </p>
-            </div>
-
             <Button onClick={saveScheduleConfig} disabled={savingSchedule} className="w-full">
               <Save className={`mr-2 h-4 w-4`} />
               {savingSchedule ? 'Saving...' : 'Save Schedule'}
@@ -499,7 +594,171 @@ export default function SettingsPage() {
         </Card>
       </div>
 
-      {/* Row 3: Timezone Settings */}
+      {/* Row 3: Google Sheets */}
+      <Card>
+        <CardHeader>
+          <CardTitle className="flex items-center gap-2 text-base">
+            <FileSpreadsheet className="h-4 w-4" /> Google Sheets (Auto Fulfillment)
+          </CardTitle>
+        </CardHeader>
+        <CardContent className="space-y-4">
+          {/* Connection Status */}
+          <div className="flex items-center gap-3">
+            <Button variant="outline" size="sm" onClick={testGsheetsConnection} disabled={testingGsheets}>
+              {testingGsheets ? <Loader2 className="mr-1 h-3 w-3 animate-spin" /> : null}
+              {testingGsheets ? 'Testing...' : 'Test Connection'}
+            </Button>
+            {gsheetsConnected === true && <Badge variant="success" className="gap-1"><CheckCircle className="h-3 w-3" /> Connected</Badge>}
+            {gsheetsConnected === false && <Badge variant="destructive" className="gap-1"><XCircle className="h-3 w-3" /> Failed</Badge>}
+            {gsheetsEmail && <span className="text-xs text-muted-foreground">{gsheetsEmail}</span>}
+          </div>
+
+          {/* Service Account JSON */}
+          <div>
+            <label className="text-sm font-medium text-muted-foreground">Service Account JSON</label>
+            {gsheetsConfig.serviceAccountJson && !showSaJson ? (
+              <div className="mt-1 flex items-center gap-2">
+                <div className="flex-1 rounded-md border border-input bg-muted/50 px-3 py-2 text-sm">
+                  <span className="text-green-400">Configured</span>
+                  {gsheetsEmail && <span className="ml-2 text-xs text-muted-foreground">({gsheetsEmail})</span>}
+                </div>
+                <Button variant="outline" size="sm" onClick={() => setShowSaJson(true)}>
+                  <Eye className="mr-1 h-3 w-3" /> Sửa
+                </Button>
+              </div>
+            ) : (
+              <div className="mt-1">
+                <textarea
+                  className="w-full rounded-md border border-input bg-background px-3 py-2 text-xs font-mono ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring"
+                  rows={6}
+                  placeholder={'Paste toàn bộ nội dung file .json Service Account vào đây...\n\n{\n  "type": "service_account",\n  "project_id": "...",\n  "private_key": "...",\n  "client_email": "...@....iam.gserviceaccount.com",\n  ...\n}'}
+                  value={gsheetsConfig.serviceAccountJson}
+                  onChange={(e) => setGsheetsConfig({ ...gsheetsConfig, serviceAccountJson: e.target.value })}
+                />
+                {gsheetsConfig.serviceAccountJson && (
+                  <div className="mt-1 flex items-center gap-2">
+                    {(() => {
+                      try {
+                        const parsed = JSON.parse(gsheetsConfig.serviceAccountJson)
+                        return parsed.client_email ? (
+                          <span className="text-xs text-green-400">Valid JSON - Email: {parsed.client_email}</span>
+                        ) : (
+                          <span className="text-xs text-yellow-400">JSON thiếu client_email</span>
+                        )
+                      } catch {
+                        return <span className="text-xs text-red-400">JSON không hợp lệ</span>
+                      }
+                    })()}
+                    {showSaJson && (
+                      <Button variant="ghost" size="sm" onClick={() => setShowSaJson(false)} className="ml-auto h-6 px-2 text-xs">
+                        <EyeOff className="mr-1 h-3 w-3" /> Ẩn
+                      </Button>
+                    )}
+                  </div>
+                )}
+              </div>
+            )}
+            <p className="mt-1 text-xs text-muted-foreground">
+              Mở file JSON từ Google Cloud Console, copy toàn bộ nội dung và paste vào đây. Nhớ share Google Sheet cho email service account (quyền Editor).
+            </p>
+          </div>
+
+          {/* Sheet IDs */}
+          <div className="grid grid-cols-2 gap-4">
+            <div>
+              <label className="text-sm font-medium text-muted-foreground">Order Sheet ID</label>
+              <Input
+                value={gsheetsConfig.orderSheetId}
+                onChange={(e) => setGsheetsConfig({ ...gsheetsConfig, orderSheetId: e.target.value })}
+                placeholder="Paste link Google Sheet hoặc ID"
+                className="mt-1"
+              />
+              <p className="mt-0.5 text-xs text-muted-foreground">Paste link hoặc ID đều được — tự extract</p>
+            </div>
+            <div>
+              <label className="text-sm font-medium text-muted-foreground">Data PNG Sheet ID</label>
+              <Input
+                value={gsheetsConfig.dataPngSheetId}
+                onChange={(e) => setGsheetsConfig({ ...gsheetsConfig, dataPngSheetId: e.target.value })}
+                placeholder="Paste link Google Sheet hoặc ID"
+                className="mt-1"
+              />
+              <p className="mt-0.5 text-xs text-muted-foreground">Paste link hoặc ID đều được — tự extract</p>
+            </div>
+          </div>
+
+          {/* Tab Names */}
+          <div className="grid grid-cols-3 gap-4">
+            <div>
+              <label className="text-sm font-medium text-muted-foreground">Order Tab</label>
+              <Input
+                value={gsheetsConfig.orderTab}
+                onChange={(e) => setGsheetsConfig({ ...gsheetsConfig, orderTab: e.target.value })}
+                placeholder="order"
+                className="mt-1"
+              />
+            </div>
+            <div>
+              <label className="text-sm font-medium text-muted-foreground">Paster Orders Tab</label>
+              <Input
+                value={gsheetsConfig.pasterOrdersTab}
+                onChange={(e) => setGsheetsConfig({ ...gsheetsConfig, pasterOrdersTab: e.target.value })}
+                placeholder="pasterorders"
+                className="mt-1"
+              />
+            </div>
+            <div>
+              <label className="text-sm font-medium text-muted-foreground">Data PNG Tab</label>
+              <Input
+                value={gsheetsConfig.dataPngTab}
+                onChange={(e) => setGsheetsConfig({ ...gsheetsConfig, dataPngTab: e.target.value })}
+                placeholder="Sheet1"
+                className="mt-1"
+              />
+            </div>
+          </div>
+
+          {/* Field Mapping (JSON) */}
+          <div>
+            <label className="text-sm font-medium text-muted-foreground">Field Mapping (JSON)</label>
+            <textarea
+              className="mt-1 w-full rounded-md border border-input bg-background px-3 py-2 text-xs font-mono ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring"
+              rows={4}
+              value={gsheetsConfig.fieldMapping}
+              onChange={(e) => setGsheetsConfig({ ...gsheetsConfig, fieldMapping: e.target.value })}
+              placeholder='[{"shopifyField":"order_name","column":"B","headerName":"ITEM-CODE","type":"string","source":"shopify"},...]'
+            />
+            <p className="mt-1 text-xs text-muted-foreground">
+              Array format: mỗi row có shopifyField, column (A-Z), headerName, type (string/number), source (shopify/other_sheet). Nên chỉnh ở trang Auto FF → Settings.
+            </p>
+            {(() => {
+              try {
+                const parsed = JSON.parse(gsheetsConfig.fieldMapping)
+                const count = Array.isArray(parsed) ? parsed.length : Object.keys(parsed).length
+                return (
+                  <span className="text-xs text-green-400">
+                    Valid JSON — {count} field{count !== 1 ? 's' : ''}
+                  </span>
+                )
+              } catch {
+                return gsheetsConfig.fieldMapping ? (
+                  <span className="text-xs text-red-400">JSON không hợp lệ</span>
+                ) : null
+              }
+            })()}
+          </div>
+
+          <Button onClick={saveGsheetsConfig} disabled={savingGsheets} className="w-full">
+            <Save className="mr-2 h-4 w-4" />
+            {savingGsheets ? 'Saving...' : 'Save Google Sheets Config'}
+          </Button>
+
+          {gsheetsResult && <div className="rounded-md bg-green-500/10 p-3 text-sm text-green-400">{gsheetsResult}</div>}
+          {gsheetsError && <div className="rounded-md bg-red-500/10 p-3 text-sm text-red-400">{gsheetsError}</div>}
+        </CardContent>
+      </Card>
+
+      {/* Row 4: Timezone Settings */}
       <Card>
         <CardHeader>
           <CardTitle className="flex items-center gap-2 text-base">

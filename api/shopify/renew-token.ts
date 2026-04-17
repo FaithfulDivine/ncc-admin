@@ -1,4 +1,5 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node'
+import { saveSystemSetting, getShopifyStoreUrl } from './_helpers'
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
   if (req.method !== 'POST') {
@@ -6,18 +7,17 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   }
 
   const clean = (s: string) => (s || '').replace(/\0/g, '').trim()
-  const storeUrl = clean(process.env.VITE_SHOPIFY_STORE_URL || '')
   const clientId = clean(process.env.SHOPIFY_CLIENT_ID || '')
   const clientSecret = clean(process.env.SHOPIFY_CLIENT_SECRET || '')
 
   if (!clientId || !clientSecret) {
     return res.status(400).json({ error: 'Missing SHOPIFY_CLIENT_ID or SHOPIFY_CLIENT_SECRET' })
   }
-  if (!storeUrl) {
-    return res.status(400).json({ error: 'Missing VITE_SHOPIFY_STORE_URL' })
-  }
 
-  const cleanUrl = storeUrl.replace(/^https?:\/\//, '')
+  const cleanUrl = await getShopifyStoreUrl()
+  if (!cleanUrl) {
+    return res.status(400).json({ error: 'Missing Shopify store URL (env or Supabase)' })
+  }
 
   try {
     const tokenUrl = `https://${cleanUrl}/admin/oauth/access_token`
@@ -55,18 +55,19 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
 
     const expiresHours = expiresIn ? Math.round(expiresIn / 3600) : null
 
-    // NOTE: On Vercel, we can't write to .env at runtime.
-    // The new token should be saved to Supabase system_settings from the frontend,
-    // then updated in Vercel env vars if needed.
+    // Save new token to Supabase immediately (server-side)
+    const savedToSupabase = await saveSystemSetting('SHOPIFY_ADMIN_TOKEN', newToken)
+
     return res.status(200).json({
       success: true,
       verified,
+      savedToSupabase,
       expiresInHours: expiresHours,
       masked: '****' + newToken.slice(-4),
-      newToken, // Frontend should persist this to Supabase
+      newToken, // Frontend can also persist if needed
       message: verified
-        ? `Token renewed! Expires in ${expiresHours || '?'}h. Verified OK.`
-        : 'Token renewed but verification failed.',
+        ? `Token renewed! Expires in ${expiresHours || '?'}h. Verified OK.${savedToSupabase ? ' Saved to DB.' : ' DB save failed.'}`
+        : `Token renewed but verification failed.${savedToSupabase ? ' Saved to DB.' : ' DB save failed.'}`,
     })
   } catch (err: any) {
     return res.status(502).json({ error: `Cannot reach Shopify: ${err.message}` })

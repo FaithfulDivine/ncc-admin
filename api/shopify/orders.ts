@@ -1,16 +1,15 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node'
+import { getShopifyConfig } from './_helpers'
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
-  const storeUrl = (process.env.VITE_SHOPIFY_STORE_URL || '').replace(/\0/g, '').trim()
-  const accessToken = (process.env.SHOPIFY_ACCESS_TOKEN || '').replace(/\0/g, '').trim()
+  const { token: accessToken, storeUrl: cleanStore } = await getShopifyConfig()
 
-  if (!storeUrl || !accessToken) {
-    return res.status(500).json({ error: 'Shopify not configured. Set env vars first.' })
+  if (!cleanStore || !accessToken) {
+    return res.status(500).json({ error: 'Shopify not configured. Set env vars or Supabase settings.' })
   }
 
   const from = (req.query.from as string) || ''
   const to = (req.query.to as string) || ''
-  const cleanStore = storeUrl.replace(/^https?:\/\//, '').replace(/\/$/, '')
 
   let allOrders: any[] = []
   let pageCount = 0

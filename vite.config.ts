@@ -2,6 +2,7 @@ import { defineConfig, loadEnv } from 'vite'
 import react from '@vitejs/plugin-react'
 import path from 'path'
 import fs from 'fs'
+import crypto from 'crypto'
 import type { Plugin } from 'vite'
 import type { IncomingMessage, ServerResponse } from 'http'
 
@@ -512,8 +513,421 @@ function facebookProxy(): Plugin {
   }
 }
 
+/**
+ * Google Sheets proxy plugin — handles:
+ * 1. JWT authentication with Google Service Account
+ * 2. OAuth token generation
+ * 3. Read/write operations on Google Sheets
+ * 4. Sheet metadata retrieval
+ */
+function googleSheetsProxy(): Plugin {
+  let serviceAccountPath = ''
+  let serviceAccount: any = null
+  let envPath = ''
+  let supabaseUrl = ''
+  let supabaseAnonKey = ''
+
+  function loadServiceAccount() {
+    try {
+      const env = loadEnv('', process.cwd(), '')
+      const clean = (s: string) => (s || '').replace(/\0/g, '').trim()
+      serviceAccountPath = clean(env.GOOGLE_SERVICE_ACCOUNT_PATH)
+      supabaseUrl = clean(env.VITE_SUPABASE_URL)
+      supabaseAnonKey = clean(env.VITE_SUPABASE_ANON_KEY)
+
+      // Try loading from local file first
+      if (serviceAccountPath) {
+        const fullPath = path.isAbsolute(serviceAccountPath)
+          ? serviceAccountPath
+          : path.resolve(process.cwd(), serviceAccountPath)
+
+        if (fs.existsSync(fullPath)) {
+          const content = fs.readFileSync(fullPath, 'utf-8')
+          serviceAccount = JSON.parse(content)
+          console.log('[Google Sheets] Loaded SA from file:', serviceAccount.client_email)
+        }
+      }
+    } catch (err: any) {
+      console.warn('[Google Sheets] Failed to load SA from file:', err.message)
+    }
+  }
+
+  // Fallback: load Service Account JSON from Supabase
+  async function loadServiceAccountFromSupabase(): Promise<any> {
+    if (!supabaseUrl || !supabaseAnonKey) {
+      console.log('[Google Sheets] No Supabase config, skipping DB lookup')
+      return null
+    }
+    try {
+      const url = `${supabaseUrl}/rest/v1/system_settings?key=eq.GSHEET_SERVICE_ACCOUNT_JSON&select=value`
+      console.log('[Google Sheets] Fetching SA from Supabase...')
+      const res = await fetch(url, {
+        headers: {
+          apikey: supabaseAnonKey,
+          Authorization: `Bearer ${supabaseAnonKey}`,
+        },
+      })
+      const rows = await res.json()
+      const rawValue = rows?.[0]?.value
+      if (rawValue) {
+        console.log('[Google Sheets] Supabase returned SA value, length:', rawValue.length)
+        const sa = JSON.parse(rawValue)
+        if (sa.client_email && sa.private_key) {
+          console.log('[Google Sheets] Loaded SA from Supabase:', sa.client_email)
+          return sa
+        }
+        console.warn('[Google Sheets] SA from Supabase missing client_email or private_key')
+      } else {
+        console.log('[Google Sheets] Supabase SA value is empty. Save SA JSON in Settings first.')
+      }
+    } catch (err: any) {
+      console.warn('[Google Sheets] Failed to load SA from Supabase:', err.message)
+    }
+    return null
+  }
+
+  // Get service account: cached → file reload → Supabase fallback
+  async function getServiceAccount(): Promise<any> {
+    // Return cached if available
+    if (serviceAccount) return serviceAccount
+
+    // Try file again (user may have added it after server start)
+    loadServiceAccount()
+    if (serviceAccount) return serviceAccount
+
+    // Fallback to Supabase
+    const fromDb = await loadServiceAccountFromSupabase()
+    if (fromDb) {
+      serviceAccount = fromDb // cache in memory
+      return fromDb
+    }
+    return null
+  }
+
+  function json(res: ServerResponse, status: number, data: any) {
+    res.writeHead(status, { 'Content-Type': 'application/json' })
+    res.end(JSON.stringify(data))
+  }
+
+  async function readBody(req: IncomingMessage): Promise<any> {
+    return new Promise((resolve) => {
+      let body = ''
+      req.on('data', (chunk: Buffer) => (body += chunk.toString()))
+      req.on('end', () => {
+        try { resolve(JSON.parse(body)) } catch { resolve({}) }
+      })
+    })
+  }
+
+  // Create JWT token for Google Service Account authentication
+  function createJWT(serviceAccountJson: any): string {
+    const now = Math.floor(Date.now() / 1000)
+    const header = { alg: 'RS256', typ: 'JWT' }
+    const payload = {
+      iss: serviceAccountJson.client_email,
+      scope: 'https://www.googleapis.com/auth/spreadsheets',
+      aud: 'https://oauth2.googleapis.com/token',
+      exp: now + 3600,
+      iat: now,
+    }
+
+    const headerEncoded = Buffer.from(JSON.stringify(header)).toString('base64url')
+    const payloadEncoded = Buffer.from(JSON.stringify(payload)).toString('base64url')
+    const signatureInput = `${headerEncoded}.${payloadEncoded}`
+
+    const signer = crypto.createSign('RSA-SHA256')
+    signer.update(signatureInput)
+    const signature = signer.sign(serviceAccountJson.private_key, 'base64url')
+
+    return `${signatureInput}.${signature}`
+  }
+
+  // Exchange JWT for access token
+  async function getAccessToken(serviceAccountJson: any): Promise<string> {
+    const jwt = createJWT(serviceAccountJson)
+    const response = await fetch('https://oauth2.googleapis.com/token', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: new URLSearchParams({
+        grant_type: 'urn:ietf:params:oauth:grant-type:jwt-bearer',
+        assertion: jwt,
+      }).toString(),
+    })
+
+    const data = await response.json()
+    if (!data.access_token) {
+      throw new Error(`Failed to get access token: ${data.error}`)
+    }
+    return data.access_token
+  }
+
+  return {
+    name: 'google-sheets-proxy',
+    configResolved() {
+      envPath = path.resolve(process.cwd(), '.env')
+      loadServiceAccount()
+    },
+    configureServer(server) {
+      // ── GET /api/gsheets/status ──
+      // Check Google Sheets connection status (file → Supabase fallback)
+      server.middlewares.use('/api/gsheets/status', async (req, res) => {
+        console.log('[GSheets Status] Checking connection...')
+
+        // Step 1: Try get service account
+        const sa = await getServiceAccount()
+        if (!sa) {
+          console.log('[GSheets Status] No SA found (file or Supabase)')
+          json(res, 200, {
+            connected: false,
+            error: 'Service Account not configured. Paste JSON in Settings page.',
+            source: 'none',
+          })
+          return
+        }
+
+        console.log('[GSheets Status] SA loaded:', sa.client_email, '| source:', serviceAccount === sa ? 'file' : 'supabase')
+
+        try {
+          // Step 2: Get access token (this validates the SA credentials)
+          const token = await getAccessToken(sa)
+          console.log('[GSheets Status] Got access token OK')
+
+          // Step 3: Try reading a known sheet to verify token works
+          // Use the order sheet ID from env or Supabase if available
+          let testOk = false
+          const env = loadEnv('', process.cwd(), '')
+          const orderSheetId = (env.GSHEET_ORDER_ID || '').trim()
+
+          if (orderSheetId) {
+            const testUrl = `https://sheets.googleapis.com/v4/spreadsheets/${orderSheetId}?fields=spreadsheetId`
+            const testRes = await fetch(testUrl, {
+              headers: { Authorization: `Bearer ${token}` },
+            })
+            testOk = testRes.ok
+            console.log('[GSheets Status] Sheet test:', testRes.status, testOk ? 'OK' : 'FAIL')
+          } else {
+            // No sheet ID to test, but token was obtained successfully
+            testOk = true
+            console.log('[GSheets Status] No sheet ID to test, but token OK')
+          }
+
+          json(res, 200, {
+            connected: testOk,
+            email: sa.client_email,
+            projectId: sa.project_id,
+            source: serviceAccount === sa ? 'file' : 'supabase',
+          })
+        } catch (err: any) {
+          console.error('[GSheets Status] Error:', err.message)
+          json(res, 200, {
+            connected: false,
+            email: sa.client_email,
+            error: err.message,
+          })
+        }
+      })
+
+      // ── GET /api/gsheets/read ──
+      server.middlewares.use('/api/gsheets/read', async (req, res) => {
+        const sa = await getServiceAccount()
+        if (!sa) {
+          json(res, 400, { error: 'Google Service Account not configured' })
+          return
+        }
+
+        try {
+          const url = new URL(req.url || '', 'http://localhost')
+          const sheetId = url.searchParams.get('sheetId')
+          const range = url.searchParams.get('range')
+
+          if (!sheetId || !range) {
+            json(res, 400, { error: 'Missing sheetId or range parameter' })
+            return
+          }
+
+          const token = await getAccessToken(sa)
+          const readUrl = `https://sheets.googleapis.com/v4/spreadsheets/${sheetId}/values/${encodeURIComponent(range)}`
+
+          const response = await fetch(readUrl, {
+            headers: { Authorization: `Bearer ${token}` },
+          })
+
+          if (!response.ok) {
+            json(res, response.status, { error: 'Failed to read from Google Sheet' })
+            return
+          }
+
+          const data = await response.json()
+          json(res, 200, data.values || [])
+        } catch (err: any) {
+          json(res, 500, { error: err.message })
+        }
+      })
+
+      // ── POST /api/gsheets/write ──
+      server.middlewares.use('/api/gsheets/write', async (req, res) => {
+        if (req.method !== 'POST') {
+          json(res, 405, { error: 'Method not allowed' })
+          return
+        }
+
+        const sa = await getServiceAccount()
+        if (!sa) {
+          json(res, 400, { error: 'Google Service Account not configured' })
+          return
+        }
+
+        try {
+          const body = await readBody(req)
+          const { sheetId, range, values } = body
+
+          if (!sheetId || !range || !values) {
+            json(res, 400, { error: 'Missing sheetId, range, or values' })
+            return
+          }
+
+          const token = await getAccessToken(sa)
+          const writeUrl = `https://sheets.googleapis.com/v4/spreadsheets/${sheetId}/values/${encodeURIComponent(range)}?valueInputOption=USER_ENTERED`
+
+          const response = await fetch(writeUrl, {
+            method: 'PUT',
+            headers: {
+              Authorization: `Bearer ${token}`,
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ values }),
+          })
+
+          if (!response.ok) {
+            json(res, response.status, { error: 'Failed to write to Google Sheet' })
+            return
+          }
+
+          const data = await response.json()
+          json(res, 200, {
+            updatedRows: data.updatedRows,
+            updatedColumns: data.updatedColumns,
+            updatedCells: data.updatedCells,
+          })
+        } catch (err: any) {
+          json(res, 500, { error: err.message })
+        }
+      })
+
+      // ── GET /api/gsheets/meta ──
+      server.middlewares.use('/api/gsheets/meta', async (req, res) => {
+        const sa = await getServiceAccount()
+        if (!sa) {
+          json(res, 400, { error: 'Google Service Account not configured' })
+          return
+        }
+
+        try {
+          const url = new URL(req.url || '', 'http://localhost')
+          const sheetId = url.searchParams.get('sheetId')
+
+          if (!sheetId) {
+            json(res, 400, { error: 'Missing sheetId parameter' })
+            return
+          }
+
+          const token = await getAccessToken(sa)
+          const metaUrl = `https://sheets.googleapis.com/v4/spreadsheets/${sheetId}?fields=sheets.properties`
+
+          const response = await fetch(metaUrl, {
+            headers: { Authorization: `Bearer ${token}` },
+          })
+
+          if (!response.ok) {
+            json(res, response.status, { error: 'Failed to fetch sheet metadata' })
+            return
+          }
+
+          const data = await response.json()
+          const sheets = (data.sheets || []).map((sheet: any) => ({
+            id: sheet.properties.sheetId,
+            title: sheet.properties.title,
+          }))
+
+          json(res, 200, { sheets })
+        } catch (err: any) {
+          json(res, 500, { error: err.message })
+        }
+      })
+
+      // ── POST /api/shopify/fulfill ──
+      // Fulfill a Shopify order with tracking number and carrier
+      // Body: { orderId, trackingNumber, carrier }
+      server.middlewares.use('/api/shopify/fulfill', async (req, res) => {
+        if (req.method !== 'POST') {
+          json(res, 405, { error: 'Method not allowed' })
+          return
+        }
+
+        const env = loadEnv('', process.cwd(), '')
+        const clean = (s: string) => (s || '').replace(/\0/g, '').trim()
+        const storeUrl = clean(env.VITE_SHOPIFY_STORE_URL)
+        const accessToken = clean(env.SHOPIFY_ACCESS_TOKEN)
+
+        if (!storeUrl || !accessToken) {
+          json(res, 500, { error: 'Shopify not configured' })
+          return
+        }
+
+        try {
+          const body = await readBody(req)
+          const { orderId, trackingNumber, carrier } = body
+
+          if (!orderId || !trackingNumber) {
+            json(res, 400, { error: 'Missing orderId or trackingNumber' })
+            return
+          }
+
+          const cleanStore = storeUrl.replace(/^https?:\/\//, '').replace(/\/$/, '')
+          const fulfillUrl = `https://${cleanStore}/admin/api/2024-10/orders/${orderId}/fulfillments.json`
+
+          const fulfillmentData = {
+            fulfillment: {
+              line_items_by_fulfillment_order: [
+                {
+                  fulfillment_order_id: orderId,
+                  fulfillment_order_line_items: [],
+                },
+              ],
+              tracking_info: {
+                number: trackingNumber,
+                company: carrier || 'other',
+              },
+            },
+          }
+
+          const response = await fetch(fulfillUrl, {
+            method: 'POST',
+            headers: {
+              'X-Shopify-Access-Token': accessToken,
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(fulfillmentData),
+          })
+
+          if (!response.ok) {
+            const errorData = await response.json()
+            json(res, response.status, { error: errorData.errors || 'Fulfillment failed' })
+            return
+          }
+
+          const data = await response.json()
+          json(res, 200, data.fulfillment)
+        } catch (err: any) {
+          json(res, 500, { error: err.message })
+        }
+      })
+    },
+  }
+}
+
 export default defineConfig({
-  plugins: [react(), shopifyProxy(), facebookProxy()],
+  plugins: [react(), shopifyProxy(), facebookProxy(), googleSheetsProxy()],
   resolve: {
     alias: {
       '@': path.resolve(__dirname, './src'),

@@ -9,6 +9,7 @@ import {
   LayoutDashboard,
   Building2,
   Megaphone,
+  Truck,
 } from 'lucide-react'
 import { cn } from '@/lib/utils'
 
@@ -19,6 +20,7 @@ const navItems = [
   { to: '/store/fixed-costs', label: 'Chi phí CĐ', icon: Building2 },
   { to: '/store/ad-spend', label: 'Quảng cáo', icon: Megaphone },
   { to: '/store/orders', label: 'Orders', icon: ShoppingCart },
+  { to: '/store/auto-fulfillment', label: 'Auto FF', icon: Truck },
   { to: '/analytics', label: 'Analytics', icon: BarChart3 },
   { to: '/org', label: 'Org Chart', icon: Users },
   { to: '/settings', label: 'Settings', icon: Settings },
