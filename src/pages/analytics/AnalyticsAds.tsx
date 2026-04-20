@@ -245,34 +245,126 @@ export default function AnalyticsAds() {
         </Button>
       </div>
 
-      {/* Data source banner */}
-      {meta && (
-        <Card className="bg-amber-50 border-amber-200">
-          <CardContent className="pt-4 pb-4 flex items-start gap-3 text-sm">
-            <AlertCircle className="h-5 w-5 text-amber-600 flex-shrink-0 mt-0.5" />
-            <div className="space-y-1 text-amber-900">
-              <div>
-                <b>Cửa sổ dữ liệu:</b> {fmtDate(meta.window_since)} → {fmtDate(meta.window_until)} ({meta.window_days} ngày) — lấy từ FB Curator run mới nhất.
+      {/* Match Level Panel — mức độ khớp với FB spend */}
+      {meta && (() => {
+        const timePct = meta.window_days > 0 ? (meta.fb_spend_days / meta.window_days) * 100 : 0
+        const measuredPct = meta.total_fb_spend > 0 ? (meta.total_fb_spend_raw / meta.total_fb_spend) * 100 : 100
+        const extrapolatedPct = 100 - measuredPct
+        const matchQuality =
+          timePct >= 80 ? { label: 'Tốt', color: 'text-green-600', bg: 'bg-green-500' }
+          : timePct >= 50 ? { label: 'Khá', color: 'text-amber-600', bg: 'bg-amber-500' }
+          : { label: 'Yếu', color: 'text-red-600', bg: 'bg-red-500' }
+        return (
+          <Card>
+            <CardHeader className="pb-3">
+              <CardTitle className="text-base flex items-center gap-2">
+                <Target className="h-4 w-4 text-primary" />
+                Mức độ khớp với FB Ad Spend
+                <span className={`text-sm font-semibold ${matchQuality.color}`}>
+                  · {matchQuality.label} ({timePct.toFixed(0)}%)
+                </span>
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                {/* Time coverage */}
+                <div>
+                  <div className="flex items-center justify-between text-sm mb-1.5">
+                    <span className="font-medium">Time coverage</span>
+                    <span className="font-mono font-semibold">
+                      {meta.fb_spend_days}/{meta.window_days} ngày
+                    </span>
+                  </div>
+                  <div className="h-3 bg-gray-200 rounded-full overflow-hidden">
+                    <div
+                      className={`h-full ${matchQuality.bg} transition-all`}
+                      style={{ width: `${timePct.toFixed(1)}%` }}
+                    />
+                  </div>
+                  <div className="text-xs text-muted-foreground mt-1.5">
+                    {meta.fb_spend_min_date
+                      ? <>FB có data từ {fmtDate(meta.fb_spend_min_date)} → {fmtDate(meta.fb_spend_max_date)}</>
+                      : 'Chưa có FB spend data'}
+                  </div>
+                  <div className="text-xs text-muted-foreground">
+                    Cửa sổ Shopify: {fmtDate(meta.window_since)} → {fmtDate(meta.window_until)}
+                  </div>
+                </div>
+
+                {/* Spend composition */}
+                <div>
+                  <div className="flex items-center justify-between text-sm mb-1.5">
+                    <span className="font-medium">Spend composition</span>
+                    <span className="font-mono font-semibold">
+                      {formatCurrency(meta.total_fb_spend)}
+                    </span>
+                  </div>
+                  <div className="h-3 flex rounded-full overflow-hidden bg-gray-200">
+                    <div
+                      className="bg-emerald-500 transition-all"
+                      style={{ width: `${measuredPct.toFixed(1)}%` }}
+                      title={`Measured: ${formatCurrency(meta.total_fb_spend_raw)}`}
+                    />
+                    {extrapolate && extrapolatedPct > 0 && (
+                      <div
+                        className="bg-amber-400 transition-all"
+                        style={{ width: `${extrapolatedPct.toFixed(1)}%` }}
+                        title={`Extrapolated: ${formatCurrency(meta.total_fb_spend - meta.total_fb_spend_raw)}`}
+                      />
+                    )}
+                  </div>
+                  <div className="flex items-center justify-between text-xs mt-1.5">
+                    <span className="text-emerald-700 inline-flex items-center gap-1">
+                      <span className="inline-block h-2 w-2 rounded-full bg-emerald-500" />
+                      Đo thực: {formatCurrency(meta.total_fb_spend_raw)}
+                    </span>
+                    {extrapolate && extrapolatedPct > 0.5 && (
+                      <span className="text-amber-700 inline-flex items-center gap-1">
+                        <span className="inline-block h-2 w-2 rounded-full bg-amber-400" />
+                        Ước tính: {formatCurrency(meta.total_fb_spend - meta.total_fb_spend_raw)}
+                      </span>
+                    )}
+                  </div>
+                  {!extrapolate && timePct < 100 && (
+                    <div className="text-[11px] text-muted-foreground mt-1">
+                      Bật extrapolate để scale spend cho đủ cửa sổ.
+                    </div>
+                  )}
+                </div>
+
+                {/* Overall ROAS */}
+                <div>
+                  <div className="flex items-center justify-between text-sm mb-1.5">
+                    <span className="font-medium">Overall ROAS</span>
+                    <span className="font-mono font-semibold">
+                      {formatCurrency(meta.total_revenue)}
+                    </span>
+                  </div>
+                  <div className={`text-3xl font-bold ${
+                    overallRoas >= breakeven ? 'text-green-600'
+                    : overallRoas >= watchLow ? 'text-amber-600'
+                    : 'text-red-600'
+                  }`}>
+                    {overallRoas > 0 ? overallRoas.toFixed(2) : '—'}
+                  </div>
+                  <div className="text-xs text-muted-foreground">
+                    {formatCurrency(meta.total_revenue)} ÷ {formatCurrency(meta.total_fb_spend)}
+                  </div>
+                  <div className="text-[11px] text-muted-foreground mt-1">
+                    Breakeven {breakeven.toFixed(1)} · Watch {watchLow.toFixed(1)}
+                  </div>
+                </div>
               </div>
-              <div>
-                <b>FB Ad Spend coverage:</b> {meta.fb_spend_days}/{meta.window_days} ngày
-                {meta.fb_spend_min_date && (
-                  <> ({fmtDate(meta.fb_spend_min_date)} → {fmtDate(meta.fb_spend_max_date)})</>
-                )}
-                {spendCoveragePct < 100 && (
-                  <span className="text-amber-700"> ({spendCoveragePct.toFixed(0)}%)</span>
-                )}
+
+              {/* Explanation */}
+              <div className="mt-4 pt-3 border-t text-xs text-muted-foreground">
+                <AlertCircle className="inline h-3.5 w-3.5 mr-1 text-amber-600" />
+                FB Curator (v11) chưa lưu spend theo Product ID. Spend được phân bổ cho từng design theo <b>tỉ trọng units</b> → ROAS design ≈ AOV design / CPU tổng. Mức độ khớp cao (time coverage ≥80%) thì con số đáng tin, thấp thì chỉ để xếp hạng tương đối.
               </div>
-              <div className="text-xs text-amber-700">
-                ⚠️ FB Curator (v11) không lưu spend theo Product ID. Spend được phân bổ cho mỗi design theo tỉ trọng <b>units</b> → ROAS ước tính dựa trên AOV của design.
-                {extrapolate && meta.fb_spend_days < meta.window_days && (
-                  <> Đang <b>extrapolate</b> spend từ {meta.fb_spend_days}d → {meta.window_days}d (raw ${meta.total_fb_spend_raw.toFixed(0)} → scaled ${meta.total_fb_spend.toFixed(0)}).</>
-                )}
-              </div>
-            </div>
-          </CardContent>
-        </Card>
-      )}
+            </CardContent>
+          </Card>
+        )
+      })()}
 
       {/* Controls */}
       <Card>
