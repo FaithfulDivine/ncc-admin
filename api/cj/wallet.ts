@@ -10,9 +10,12 @@ export default async function handler(_req: VercelRequest, res: VercelResponse) 
   if (!token) return res.status(500).json({ error: 'CJ chưa cấu hình' })
 
   try {
-    const wallet = await cjGetWalletBalance(token)
-    const minBalanceStr = (await getSystemSetting('CJ_WALLET_MIN_BALANCE')) || '50'
-    const minBalance = Number(minBalanceStr)
+    // Song song: gọi CJ API và đọc min-balance threshold cùng lúc
+    const [wallet, minBalanceStr] = await Promise.all([
+      cjGetWalletBalance(token),
+      getSystemSetting('CJ_WALLET_MIN_BALANCE'),
+    ])
+    const minBalance = Number(minBalanceStr || '50')
     return res.status(200).json({
       ...wallet,
       low_balance: wallet.amount < minBalance,

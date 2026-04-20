@@ -1,6 +1,7 @@
 import { useQuery } from '@tanstack/react-query'
 import { supabase, supabaseConfigured } from '@/lib/supabase'
 import { formatNumber } from '@/lib/utils'
+import { QUERY_STALE } from '@/lib/queryDefaults'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
@@ -18,6 +19,7 @@ export default function Dashboard() {
   const { data: cogsCount } = useQuery({
     queryKey: ['cogs-count'],
     enabled: supabaseConfigured,
+    staleTime: QUERY_STALE.longLived,
     queryFn: async () => {
       const { count, error } = await supabase
         .from('cogs_mapping')
@@ -30,6 +32,7 @@ export default function Dashboard() {
   const { data: styleMappingCount } = useQuery({
     queryKey: ['style-mapping-count'],
     enabled: supabaseConfigured,
+    staleTime: QUERY_STALE.longLived,
     queryFn: async () => {
       const { count, error } = await supabase
         .from('style_mapping')

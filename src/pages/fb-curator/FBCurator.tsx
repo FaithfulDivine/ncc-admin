@@ -2,7 +2,8 @@ import { useState } from 'react'
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
 import { Link } from 'react-router-dom'
 import { supabase, supabaseConfigured } from '@/lib/supabase'
-import { formatCurrency, formatNumber } from '@/lib/utils'
+import { REFETCH_INTERVAL } from '@/lib/queryDefaults'
+import { formatCurrency, formatNumber, formatDateTimeVN } from '@/lib/utils'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
@@ -69,17 +70,7 @@ interface RunRow {
   error_msg: string | null
 }
 
-function fmtTime(iso: string | null): string {
-  if (!iso) return '—'
-  return new Date(iso).toLocaleString('vi-VN', {
-    year: 'numeric',
-    month: '2-digit',
-    day: '2-digit',
-    hour: '2-digit',
-    minute: '2-digit',
-    hour12: false,
-  })
-}
+const fmtTime = (iso: string | null): string => formatDateTimeVN(iso)
 
 function describeCron(expr: string | null): string {
   if (!expr) return '—'
@@ -108,7 +99,7 @@ export default function FBCurator() {
       if (error) throw error
       return data as Stats
     },
-    refetchInterval: 15000,
+    refetchInterval: REFETCH_INTERVAL.live,
   })
 
   const { data: cronJobs } = useQuery({
@@ -132,7 +123,7 @@ export default function FBCurator() {
       if (error) throw error
       return data as RunRow[]
     },
-    refetchInterval: 15000,
+    refetchInterval: REFETCH_INTERVAL.live,
   })
 
   const triggerMutation = useMutation({

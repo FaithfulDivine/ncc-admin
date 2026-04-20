@@ -1,6 +1,7 @@
 import { useQuery } from '@tanstack/react-query'
 import { supabase, supabaseConfigured } from '@/lib/supabase'
-import { formatCurrency } from '@/lib/utils'
+import { formatCurrency, formatDateVN } from '@/lib/utils'
+import { QUERY_STALE } from '@/lib/queryDefaults'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { AlertCircle, Target } from 'lucide-react'
 
@@ -29,17 +30,13 @@ interface Props {
   compact?: boolean
 }
 
-function fmtDate(d: string | null): string {
-  if (!d) return '—'
-  const dt = new Date(d)
-  if (isNaN(dt.getTime())) return d
-  return dt.toLocaleDateString('vi-VN', { day: '2-digit', month: '2-digit' })
-}
+const fmtDate = formatDateVN
 
 export default function MatchLevelPanel({ runId, title = 'Mức độ khớp với FB Ad Spend', compact = false }: Props) {
   const { data, isLoading, error } = useQuery({
     queryKey: ['fbc-match-level', runId ?? 'latest'],
     enabled: supabaseConfigured,
+    staleTime: QUERY_STALE.medium,
     queryFn: async () => {
       const { data, error } = await supabase
         .rpc('fbc_match_level', { p_run_id: runId ?? null })

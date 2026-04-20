@@ -1,5 +1,6 @@
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
 import { supabase, supabaseConfigured } from '@/lib/supabase'
+import { QUERY_STALE } from '@/lib/queryDefaults'
 
 // ── Types ──
 export interface PnLSnapshot {
@@ -52,7 +53,7 @@ export function usePnLSnapshots(dateFrom?: string, dateTo?: string) {
       if (error) throw error
       return (data || []) as PnLSnapshot[]
     },
-    staleTime: 1 * 60 * 1000, // 1 minute
+    staleTime: QUERY_STALE.shortLived,
   })
 }
 

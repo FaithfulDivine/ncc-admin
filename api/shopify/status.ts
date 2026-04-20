@@ -1,5 +1,5 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node'
-import { getShopifyToken, getShopifyStoreUrl, getSystemSetting } from './_helpers'
+import { getSystemSettings } from './_helpers'
 
 export default async function handler(_req: VercelRequest, res: VercelResponse) {
   const clean = (s: string) => (s || '').replace(/\0/g, '').trim()
@@ -8,10 +8,16 @@ export default async function handler(_req: VercelRequest, res: VercelResponse) 
   const clientSecret = clean(process.env.SHOPIFY_CLIENT_SECRET || '')
   const envStoreUrl = clean(process.env.VITE_SHOPIFY_STORE_URL || '')
 
-  // Also check Supabase for the active token
-  const dbToken = await getSystemSetting('SHOPIFY_ADMIN_TOKEN')
-  const activeToken = await getShopifyToken()
-  const activeStoreUrl = await getShopifyStoreUrl()
+  // Batch đọc cả 2 key cùng lúc (1 RTT Supabase thay vì 3)
+  const { SHOPIFY_ADMIN_TOKEN: dbToken, shopify_domain: dbDomain } = await getSystemSettings([
+    'SHOPIFY_ADMIN_TOKEN',
+    'shopify_domain',
+  ])
+  const activeToken = envToken || dbToken || ''
+  const rawStoreUrl = envStoreUrl || dbDomain || ''
+  const activeStoreUrl = rawStoreUrl
+    ? rawStoreUrl.replace(/^https?:\/\//, '').replace(/\/$/, '')
+    : ''
 
   return res.status(200).json({
     hasToken: !!activeToken,

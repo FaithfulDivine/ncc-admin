@@ -17,7 +17,7 @@ import type { VercelRequest, VercelResponse } from '@vercel/node'
 import {
   getCJAccessToken,
   getSupabaseClient,
-  getSystemSetting,
+  getSystemSettings,
   buildCJOrderPayload,
   type ShopifyOrderLite,
   type CJMappingRow,
@@ -37,6 +37,13 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
 
   const sb = getSupabaseClient()
   if (!sb) return res.status(500).json({ error: 'Supabase not configured' })
+
+  // Batch đọc config của handler (1 RTT thay vì 2 RTT tuần tự).
+  // 2 key này được dùng ở L69 và L118 của flow cũ.
+  const handlerCfgPromise = getSystemSettings([
+    'CJ_DEFAULT_SHIPPING',
+    'CJ_AUTO_PAY_ENABLED',
+  ])
 
   const token = await getCJAccessToken()
   if (!token) return res.status(500).json({ error: 'CJ credentials chưa cấu hình' })
@@ -65,8 +72,9 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
 
   if (mapErr) return res.status(500).json({ error: `Supabase: ${mapErr.message}` })
 
-  // 3. Build payload
-  const defaultShipping = (await getSystemSetting('CJ_DEFAULT_SHIPPING')) || 'CJPacket'
+  // 3. Build payload — config đã batch ở đầu handler
+  const handlerCfg = await handlerCfgPromise
+  const defaultShipping = handlerCfg['CJ_DEFAULT_SHIPPING'] || 'CJPacket'
   const { payload, unmapped } = buildCJOrderPayload(
     order,
     (mappings || []) as CJMappingRow[],
@@ -114,8 +122,8 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     return res.status(502).json({ error: errorMessage })
   }
 
-  // 6. Auto-pay?
-  const autoPay = (await getSystemSetting('CJ_AUTO_PAY_ENABLED')) === 'true'
+  // 6. Auto-pay? (đã batch đọc ở đầu handler)
+  const autoPay = handlerCfg['CJ_AUTO_PAY_ENABLED'] === 'true'
   if (autoPay) {
     try {
       await cjPayOrder(token, cjOrderResult.orderId)

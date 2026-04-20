@@ -1,5 +1,6 @@
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
 import { supabase, supabaseConfigured } from '@/lib/supabase'
+import { QUERY_STALE, QUERY_GC } from '@/lib/queryDefaults'
 
 export interface ShopifyOrderItem {
   id: string
@@ -51,7 +52,8 @@ export function useShopifyOrdersCache(dateFrom?: string, dateTo?: string) {
       if (error) throw error
       return (data || []) as ShopifyOrderCache[]
     },
-    staleTime: 60 * 60 * 1000, // 1 hour
+    staleTime: QUERY_STALE.historical, // orders cache theo date range cố định → giữ lâu
+    gcTime: QUERY_GC.long,
   })
 }
 
@@ -73,7 +75,8 @@ export function useShopifyOrderItems(dateFrom?: string, dateTo?: string) {
       if (error) throw error
       return (data || []) as ShopifyOrderItem[]
     },
-    staleTime: 60 * 60 * 1000, // 1 hour
+    staleTime: QUERY_STALE.historical, // orders cache theo date range cố định → giữ lâu
+    gcTime: QUERY_GC.long,
   })
 }
 
@@ -159,7 +162,7 @@ export function useSyncStatus() {
       if (error && error.code !== 'PGRST116') throw error
       return (data || null) as SyncStatus | null
     },
-    staleTime: 5 * 60 * 1000, // 5 minutes
+    staleTime: QUERY_STALE.medium,
   })
 }
 

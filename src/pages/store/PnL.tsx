@@ -2,7 +2,8 @@ import { useState, useMemo, useEffect, useCallback } from 'react'
 import { useQuery } from '@tanstack/react-query'
 import { supabase, supabaseConfigured } from '@/lib/supabase'
 import { useCogsExclusions, usePhysicalProducts } from '@/hooks/useCogs'
-import { formatCurrency, formatNumber } from '@/lib/utils'
+import { formatCurrency, formatNumber, formatVND } from '@/lib/utils'
+import { QUERY_STALE, QUERY_GC } from '@/lib/queryDefaults'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
@@ -58,16 +59,6 @@ function startOfDayGMT7(date: Date): Date {
 
 function toISO(date: Date): string {
   return date.toISOString()
-}
-
-// ── Format VND ──
-function formatVND(value: number): string {
-  return new Intl.NumberFormat('vi-VN', {
-    style: 'currency',
-    currency: 'VND',
-    minimumFractionDigits: 0,
-    maximumFractionDigits: 0,
-  }).format(value)
 }
 
 // ── Shopify payment fee: 2.9% + $0.30 per transaction ──
@@ -283,8 +274,8 @@ export default function PnL() {
       return (Array.isArray(data) ? data : []) as ShopifyOrder[]
     },
     enabled: preset !== 'custom' || (!!customFrom && !!customTo),
-    staleTime: 0,                 // Fetch fresh data when queryKey changes (time range changes)
-    gcTime: 5 * 60 * 1000,        // Keep cached data 5 phút để reuse nếu user quay lại
+    staleTime: 0,                 // Fetch fresh khi queryKey (time range) đổi
+    gcTime: QUERY_GC.default,     // Giữ cache để reuse khi user quay lại
     retry: 1,
   })
 
@@ -292,6 +283,7 @@ export default function PnL() {
   const { data: cogsData } = useQuery({
     queryKey: ['cogs-mapping'],
     enabled: supabaseConfigured,
+    staleTime: QUERY_STALE.longLived, // COGS mapping ít đổi trong phiên
     queryFn: async () => {
       const { data, error } = await supabase
         .from('cogs_mapping')
@@ -316,6 +308,7 @@ export default function PnL() {
   const { data: fixedCosts } = useQuery({
     queryKey: ['fixed-costs'],
     enabled: supabaseConfigured,
+    staleTime: QUERY_STALE.longLived, // fixed costs hầu như không đổi trong phiên
     queryFn: async () => {
       const { data, error } = await supabase.from('fixed_costs').select('*')
       if (error) return []
@@ -327,6 +320,7 @@ export default function PnL() {
   const { data: fbAdsData } = useQuery({
     queryKey: ['fb-ads-spend', from, to],
     enabled: supabaseConfigured,
+    staleTime: QUERY_STALE.medium, // ad spend có thể sync ngầm 5-10 phút/lần
     queryFn: async () => {
       const { data, error } = await supabase
         .from('facebook_ad_spend')

@@ -1,5 +1,6 @@
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
 import { supabase, supabaseConfigured } from '@/lib/supabase'
+import { QUERY_STALE } from '@/lib/queryDefaults'
 
 // ── Types ──
 export interface CogsMapping {
@@ -25,6 +26,9 @@ export function useCogsMapping() {
   return useQuery({
     queryKey: ['cogs-mapping'],
     enabled: supabaseConfigured,
+    // COGS mapping ít đổi trong phiên làm việc → staleTime dài, tránh refetch
+    // mỗi lần mount trang khác nhau (PnL + Cogs cùng dùng hook này).
+    staleTime: QUERY_STALE.longLived,
     queryFn: async () => {
       const { data, error } = await supabase
         .from('cogs_mapping')
@@ -127,6 +131,7 @@ export function useCogsExclusions() {
   return useQuery({
     queryKey: ['cogs-exclusions'],
     enabled: supabaseConfigured,
+    staleTime: QUERY_STALE.longLived,
     queryFn: async () => {
       const { data, error } = await supabase
         .from('cogs_exclusions')
@@ -189,6 +194,7 @@ export function usePhysicalProducts() {
   return useQuery({
     queryKey: ['cogs-physical'],
     enabled: supabaseConfigured,
+    staleTime: QUERY_STALE.longLived,
     queryFn: async () => {
       const { data, error } = await supabase
         .from('cogs_physical_products')

@@ -2,6 +2,7 @@ import { useMemo, useState } from 'react'
 import { useQuery } from '@tanstack/react-query'
 import { supabase, supabaseConfigured } from '@/lib/supabase'
 import { formatCurrency, formatNumber } from '@/lib/utils'
+import { QUERY_STALE } from '@/lib/queryDefaults'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
@@ -194,6 +195,7 @@ export default function AnalyticsAds() {
   const { data, isLoading, error, refetch, isFetching } = useQuery({
     queryKey: ['analytics-design-pnl', breakeven, watchLow, extrapolate],
     enabled: supabaseConfigured,
+    staleTime: QUERY_STALE.medium,
     queryFn: async () => {
       const { data, error } = await supabase.rpc('analytics_design_pnl', {
         p_breakeven: breakeven,

@@ -2,7 +2,8 @@ import { useState, useMemo } from 'react'
 import { useQuery } from '@tanstack/react-query'
 import { Link, useParams } from 'react-router-dom'
 import { supabase, supabaseConfigured } from '@/lib/supabase'
-import { formatCurrency } from '@/lib/utils'
+import { formatCurrency, formatDateTimeVN } from '@/lib/utils'
+import { QUERY_STALE } from '@/lib/queryDefaults'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
@@ -65,18 +66,7 @@ interface Decision {
   apply_error: string | null
 }
 
-function fmtTime(iso: string | null): string {
-  if (!iso) return '—'
-  return new Date(iso).toLocaleString('vi-VN', {
-    year: 'numeric',
-    month: '2-digit',
-    day: '2-digit',
-    hour: '2-digit',
-    minute: '2-digit',
-    second: '2-digit',
-    hour12: false,
-  })
-}
+const fmtTime = (iso: string | null): string => formatDateTimeVN(iso, { showSeconds: true })
 
 function StatusBadge({ status }: { status: string }) {
   if (status === 'success') return <Badge variant="success">success</Badge>
@@ -102,6 +92,7 @@ export default function FBCuratorRunDetail() {
   const { data: run, isLoading: runLoading } = useQuery({
     queryKey: ['fbc-run', runId],
     enabled: supabaseConfigured && !!runId,
+    staleTime: QUERY_STALE.longLived, // một run đã hoàn tất thì immutable
     queryFn: async () => {
       const { data, error } = await supabase.rpc('fbc_run_get', { p_run_id: runId! }).single()
       if (error) throw error
@@ -112,6 +103,7 @@ export default function FBCuratorRunDetail() {
   const { data: decisions, isLoading: decLoading } = useQuery({
     queryKey: ['fbc-run-decisions', runId],
     enabled: supabaseConfigured && !!runId,
+    staleTime: QUERY_STALE.longLived,
     queryFn: async () => {
       const { data, error } = await supabase.rpc('fbc_run_decisions', { p_run_id: runId! })
       if (error) throw error

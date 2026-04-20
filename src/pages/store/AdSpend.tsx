@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
 import { supabase, supabaseConfigured } from '@/lib/supabase'
 import { formatCurrency, formatNumber } from '@/lib/utils'
+import { QUERY_STALE } from '@/lib/queryDefaults'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
@@ -69,6 +70,7 @@ export default function AdSpend() {
   const { data: adSpend, isLoading } = useQuery({
     queryKey: ['fb-ad-spend-all', dateFrom, dateTo],
     enabled: supabaseConfigured,
+    staleTime: QUERY_STALE.medium,
     queryFn: async () => {
       const { data, error } = await supabase
         .from('facebook_ad_spend')

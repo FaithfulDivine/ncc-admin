@@ -18,6 +18,7 @@ import {
   type PhysicalProduct,
 } from '@/hooks/useCogs'
 import { sortSizes, formatCurrency } from '@/lib/utils'
+import { QUERY_STALE } from '@/lib/queryDefaults'
 import { Card, CardContent } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
@@ -219,6 +220,7 @@ export default function Cogs() {
   // ── Fetch recent orders to find unmapped variants ──
   const { data: orders, isLoading: ordersLoading, refetch: refetchOrders } = useQuery({
     queryKey: ['shopify-orders-for-cogs'],
+    staleTime: QUERY_STALE.medium, // orders 90-ngày thay đổi chậm
     queryFn: async () => {
       const now = new Date()
       const from90 = new Date(now.getTime() - 90 * 86400000).toISOString()

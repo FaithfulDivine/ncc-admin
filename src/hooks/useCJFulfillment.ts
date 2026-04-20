@@ -9,6 +9,7 @@
  *  - useCJActions()    — mutation helpers: fulfill, upsertMap, deleteMap
  */
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
+import { QUERY_STALE } from '@/lib/queryDefaults'
 
 // ── Types ────────────────────────────────────────────────
 
@@ -94,7 +95,7 @@ export function useCJStatus() {
   return useQuery<CJStatusResponse>({
     queryKey: ['cj', 'status'],
     queryFn: () => fetchJSON('/api/cj/status'),
-    staleTime: 60 * 1000,
+    staleTime: QUERY_STALE.shortLived,
   })
 }
 
@@ -102,7 +103,7 @@ export function useCJWallet() {
   return useQuery<CJWalletResponse>({
     queryKey: ['cj', 'wallet'],
     queryFn: () => fetchJSON('/api/cj/wallet'),
-    staleTime: 60 * 1000,
+    staleTime: QUERY_STALE.shortLived,
   })
 }
 

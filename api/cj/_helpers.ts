@@ -2,30 +2,36 @@
  * CJ API helper — server-side token management.
  * Cache access token trong system_settings, tự refresh khi expire.
  */
-import { getSupabaseClient, getSystemSetting, saveSystemSetting } from '../shopify/_helpers'
+import {
+  getSupabaseClient,
+  getSystemSetting,
+  getSystemSettings,
+  saveSystemSetting,
+} from '../shopify/_helpers'
 import { cjGetAccessToken } from '../../src/lib/cj'
 
-export { getSupabaseClient, getSystemSetting, saveSystemSetting }
-
-interface CJCredentials {
-  email: string
-  password: string
-}
-
-async function getCJCredentials(): Promise<CJCredentials | null> {
-  const email = await getSystemSetting('CJ_API_EMAIL')
-  const password = await getSystemSetting('CJ_API_PASSWORD')
-  if (!email || !password) return null
-  return { email, password }
-}
+export { getSupabaseClient, getSystemSetting, getSystemSettings, saveSystemSetting }
 
 /**
  * Lấy access token CJ hiện hành. Nếu đã hết hạn → login lại.
  * Trả về null nếu chưa config credential.
+ *
+ * Tối ưu: batch 4 key config trong 1 round-trip thay vì 4 RTT tuần tự.
+ * - Happy path (token còn sống): 1 RTT duy nhất cho call cả hàm.
+ * - Cold path (hết hạn): 1 RTT đọc config + 1 CJ login + 2 save = như cũ.
  */
 export async function getCJAccessToken(): Promise<string | null> {
-  const cachedToken = await getSystemSetting('CJ_ACCESS_TOKEN')
-  const expiresAt = await getSystemSetting('CJ_TOKEN_EXPIRES_AT')
+  const {
+    CJ_ACCESS_TOKEN: cachedToken,
+    CJ_TOKEN_EXPIRES_AT: expiresAt,
+    CJ_API_EMAIL: email,
+    CJ_API_PASSWORD: password,
+  } = await getSystemSettings([
+    'CJ_ACCESS_TOKEN',
+    'CJ_TOKEN_EXPIRES_AT',
+    'CJ_API_EMAIL',
+    'CJ_API_PASSWORD',
+  ])
 
   // Token còn sống (còn ít nhất 1h) → dùng cache
   if (cachedToken && expiresAt) {
@@ -37,13 +43,15 @@ export async function getCJAccessToken(): Promise<string | null> {
   }
 
   // Refresh: login lại
-  const creds = await getCJCredentials()
-  if (!creds) return null
+  if (!email || !password) return null
 
   try {
-    const auth = await cjGetAccessToken(creds.email, creds.password)
-    await saveSystemSetting('CJ_ACCESS_TOKEN', auth.accessToken)
-    await saveSystemSetting('CJ_TOKEN_EXPIRES_AT', auth.accessTokenExpiryDate)
+    const auth = await cjGetAccessToken(email, password)
+    // Save 2 key song song để không chặn return
+    await Promise.all([
+      saveSystemSetting('CJ_ACCESS_TOKEN', auth.accessToken),
+      saveSystemSetting('CJ_TOKEN_EXPIRES_AT', auth.accessTokenExpiryDate),
+    ])
     return auth.accessToken
   } catch (err) {
     console.error('[CJ] Token refresh failed:', err)

@@ -110,25 +110,29 @@ async function handleShipped(
 
   if (!order) return
 
-  // Upsert shipment
-  await sb.from('cj_shipments').upsert(
-    {
-      cj_order_id: order.id,
-      tracking_number: payload.trackNumber!,
-      carrier: payload.logisticName || null,
-      shipment_status: 'in_transit',
-      shipped_at: payload.timestamp || new Date().toISOString(),
-    },
-    { onConflict: 'tracking_number' },
-  )
-
-  await sb
-    .from('cj_orders')
-    .update({ status: 'shipped', shipped_at: payload.timestamp || new Date().toISOString() })
-    .eq('cj_order_id', payload.orderId)
+  // Song song: upsert shipment + update status + load Shopify config
+  // (3 thao tác độc lập, không phụ thuộc nhau → Promise.all thay vì tuần tự)
+  const shippedAt = payload.timestamp || new Date().toISOString()
+  const [, , shopifyCfg] = await Promise.all([
+    sb.from('cj_shipments').upsert(
+      {
+        cj_order_id: order.id,
+        tracking_number: payload.trackNumber!,
+        carrier: payload.logisticName || null,
+        shipment_status: 'in_transit',
+        shipped_at: shippedAt,
+      },
+      { onConflict: 'tracking_number' },
+    ),
+    sb
+      .from('cj_orders')
+      .update({ status: 'shipped', shipped_at: shippedAt })
+      .eq('cj_order_id', payload.orderId),
+    getShopifyConfig(),
+  ])
 
   // Push fulfillment sang Shopify
-  const { token, storeUrl } = await getShopifyConfig()
+  const { token, storeUrl } = shopifyCfg
   if (!token || !storeUrl) return
 
   try {
