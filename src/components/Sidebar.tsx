@@ -1,6 +1,7 @@
 import { NavLink } from 'react-router-dom'
 import {
   BarChart3,
+  Activity,
   DollarSign,
   Package,
   Package2,
@@ -25,6 +26,7 @@ const navItems = [
   { to: '/store/auto-fulfillment', label: 'Auto FF', icon: Truck },
   { to: '/store/cj-fulfill', label: 'CJ Fulfill', icon: Package2 },
   { to: '/fb-curator', label: 'FB Best Seller', icon: Sparkles },
+  { to: '/analytics/ads', label: 'Phân tích Design', icon: Activity },
   { to: '/analytics', label: 'Analytics', icon: BarChart3 },
   { to: '/org', label: 'Org Chart', icon: Users },
   { to: '/settings', label: 'Settings', icon: Settings },
