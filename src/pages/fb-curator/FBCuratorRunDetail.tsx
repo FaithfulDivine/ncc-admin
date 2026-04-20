@@ -85,9 +85,15 @@ function ActionBadge({ action }: { action: string | null }) {
 }
 
 // ── Report helpers ───────────────────────────────────────────────────────────
+// DB stores recommended_action in UPPER CASE (ADD/REMOVE/KEEP/GRACE_NEW).
+// Helpers accept action in lowercase ('add'/'remove') for convenience.
+function matchAction(d: Decision, action: string): boolean {
+  return (d.recommended_action ?? '').toLowerCase() === action.toLowerCase()
+}
+
 function topByPriority(decisions: Decision[], action: string, n = 10): Decision[] {
   return decisions
-    .filter((d) => d.recommended_action === action)
+    .filter((d) => matchAction(d, action))
     .sort((a, b) => {
       const pa = Number(a.priority_score ?? 0)
       const pb = Number(b.priority_score ?? 0)
@@ -100,7 +106,7 @@ function topByPriority(decisions: Decision[], action: string, n = 10): Decision[
 function groupReasons(decisions: Decision[], action: string): { reason: string; count: number }[] {
   const acc = new Map<string, number>()
   for (const d of decisions) {
-    if (d.recommended_action !== action) continue
+    if (!matchAction(d, action)) continue
     const r = (d.reason ?? '').trim() || '(không có lý do)'
     acc.set(r, (acc.get(r) ?? 0) + 1)
   }
@@ -112,7 +118,7 @@ function groupReasons(decisions: Decision[], action: string): { reason: string; 
 function sumBy(decisions: Decision[], action: string, field: keyof Decision): number {
   let s = 0
   for (const d of decisions) {
-    if (d.recommended_action !== action) continue
+    if (!matchAction(d, action)) continue
     const v = d[field]
     if (typeof v === 'number' && !Number.isNaN(v)) s += v
   }
