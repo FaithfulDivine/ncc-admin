@@ -18,7 +18,7 @@ let _sb: SupabaseClient | null = null
  *      (chứa secret) sau khi migration 007 siết RLS sẽ vẫn chạy.
  *   2. VITE_SUPABASE_ANON_KEY      — fallback để giữ backward compatibility trước
  *      khi đại vương set env mới. Sau migration 007 anon sẽ KHÔNG đọc được
- *      system_settings/cj_*/sync_logs nữa — vì vậy phải set SERVICE_ROLE_KEY
+ *      system_settings, cj_* và sync_logs nữa — vì vậy phải set SERVICE_ROLE_KEY
  *      trên Vercel.
  *
  * Log nhắc 1 lần ở cold start nếu fallback về anon để admin dễ phát hiện.

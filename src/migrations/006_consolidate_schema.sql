@@ -74,38 +74,67 @@ CREATE INDEX IF NOT EXISTS idx_job_runs_status
   ON public.job_runs(status)
   WHERE status IN ('running', 'failed');
 
--- Backfill từ 3 bảng log cũ (ghi job_name phân biệt)
+-- Backfill từ 3 bảng log cũ (ghi job_name phân biệt).
+-- Schema thực tế 2026-04-20: sync_logs/fb_ad_spend_sync_log dùng started_at/finished_at;
+-- agent_runs dùng completed_at (không có finished_at, không có source column).
+-- Giá trị status upstream: 'success'|'failed'|'running' → normalize về enum
+-- ('running','completed','failed','cancelled') của job_runs.
 INSERT INTO public.job_runs (job_name, status, started_at, finished_at, error, metrics)
 SELECT
   'shopify_sync',
-  COALESCE(status, 'completed'),
-  COALESCE(started_at, created_at, now()),
-  COALESCE(finished_at, completed_at),
+  CASE LOWER(status)
+    WHEN 'success' THEN 'completed'
+    WHEN 'error'   THEN 'failed'
+    WHEN 'failed'  THEN 'failed'
+    WHEN 'running' THEN 'running'
+    WHEN 'cancelled' THEN 'cancelled'
+    ELSE 'completed'
+  END,
+  COALESCE(started_at, now()),
+  finished_at,
   error_message,
   jsonb_build_object('legacy_id', id::text)
 FROM public.sync_logs
 ON CONFLICT DO NOTHING;
 
-INSERT INTO public.job_runs (job_name, status, started_at, finished_at, error)
+INSERT INTO public.job_runs (job_name, status, started_at, finished_at, error, metadata)
 SELECT
   'facebook_ad_spend_sync',
-  COALESCE(status, 'completed'),
+  CASE LOWER(status)
+    WHEN 'success' THEN 'completed'
+    WHEN 'error'   THEN 'failed'
+    WHEN 'failed'  THEN 'failed'
+    WHEN 'running' THEN 'running'
+    WHEN 'cancelled' THEN 'cancelled'
+    ELSE 'completed'
+  END,
   COALESCE(started_at, now()),
-  COALESCE(completed_at, finished_at),
-  error_msg
+  finished_at,
+  error_msg,
+  jsonb_build_object('mode', mode, 'triggered_by', triggered_by)
 FROM public.facebook_ad_spend_sync_log
 ON CONFLICT DO NOTHING;
 
-INSERT INTO public.job_runs (job_name, source, status, started_at, finished_at, error, metadata)
+INSERT INTO public.job_runs (job_name, status, started_at, finished_at, error, metadata)
 SELECT
   'agent:' || COALESCE(agent_name, 'unknown'),
-  source,
-  COALESCE(status, 'completed'),
+  CASE LOWER(status)
+    WHEN 'success' THEN 'completed'
+    WHEN 'error'   THEN 'failed'
+    WHEN 'failed'  THEN 'failed'
+    WHEN 'running' THEN 'running'
+    WHEN 'cancelled' THEN 'cancelled'
+    ELSE 'completed'
+  END,
   COALESCE(started_at, now()),
-  finished_at,
+  completed_at,
   error,
-  to_jsonb(ar)
-FROM public.agent_runs ar
+  jsonb_build_object(
+    'legacy_id', id::text,
+    'input_summary', input_summary,
+    'output_preview', output_preview
+  )
+FROM public.agent_runs
 ON CONFLICT DO NOTHING;
 
 -- ═══════════════════════════════════════════════════════════════════════════
@@ -121,7 +150,7 @@ SELECT
   SUM(impressions)      AS impressions,
   SUM(clicks)           AS clicks,
   SUM(purchases)        AS purchases,
-  SUM(purchases_value)  AS purchases_value,
+  SUM(purchase_value)   AS purchase_value,
   COUNT(*)              AS ad_count
 FROM public.facebook_ad_spend_product
 GROUP BY date, campaign_id;
