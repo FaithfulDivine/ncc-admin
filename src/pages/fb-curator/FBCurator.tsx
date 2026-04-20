@@ -26,6 +26,7 @@ import {
   RefreshCw,
   ExternalLink,
 } from 'lucide-react'
+import MatchLevelPanel from '@/components/MatchLevelPanel'
 
 interface Stats {
   total_runs: number
@@ -255,6 +256,9 @@ export default function FBCurator() {
           </CardContent>
         </Card>
       </div>
+
+      {/* Match-level panel (latest successful run window vs facebook_ad_spend) */}
+      <MatchLevelPanel title="Mức độ khớp FB spend · lần chạy mới nhất" />
 
       {/* Trigger panel */}
       <Card>

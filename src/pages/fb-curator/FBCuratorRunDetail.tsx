@@ -16,6 +16,7 @@ import {
   TableRow,
 } from '@/components/ui/table'
 import { ArrowLeft, Search } from 'lucide-react'
+import MatchLevelPanel from '@/components/MatchLevelPanel'
 
 interface RunDetail {
   id: string
@@ -260,6 +261,9 @@ export default function FBCuratorRunDetail() {
               )}
             </CardContent>
           </Card>
+
+          {/* Match-level panel for this specific run */}
+          <MatchLevelPanel runId={run.id} title="Mức độ khớp FB spend · lần chạy này" />
 
           {/* report_json */}
           {run.report_json && (
