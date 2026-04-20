@@ -28,6 +28,7 @@ import {
   ExternalLink,
 } from 'lucide-react'
 import MatchLevelPanel from '@/components/MatchLevelPanel'
+import ProductBackfillProgress from '@/components/ProductBackfillProgress'
 
 interface Stats {
   total_runs: number
@@ -163,6 +164,11 @@ export default function FBCurator() {
           </p>
         </div>
         <div className="flex gap-2">
+          <Link to="/fb-curator/design-backlog">
+            <Button variant="outline" size="sm">
+              🎨 Thiết kế tiềm năng
+            </Button>
+          </Link>
           <Link to="/fb-curator/config">
             <Button variant="outline" size="sm">
               <SettingsIcon className="mr-2 h-4 w-4" />
@@ -247,6 +253,9 @@ export default function FBCurator() {
           </CardContent>
         </Card>
       </div>
+
+      {/* Product-level backfill progress (variant_id grain) */}
+      <ProductBackfillProgress />
 
       {/* Match-level panel (latest successful run window vs facebook_ad_spend) */}
       <MatchLevelPanel title="Mức độ khớp FB spend · lần chạy mới nhất" />

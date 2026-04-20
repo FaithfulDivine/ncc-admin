@@ -14,6 +14,7 @@ import SettingsPage from './pages/Settings'
 import FBCurator from './pages/fb-curator/FBCurator'
 import FBCuratorRunDetail from './pages/fb-curator/FBCuratorRunDetail'
 import FBCuratorConfig from './pages/fb-curator/FBCuratorConfig'
+import FBCuratorDesignBacklog from './pages/fb-curator/FBCuratorDesignBacklog'
 import AnalyticsAds from './pages/analytics/AnalyticsAds'
 
 export default function App() {
@@ -30,6 +31,7 @@ export default function App() {
         <Route path="store/cj-fulfill" element={<CJFulfillment />} />
         <Route path="fb-curator" element={<FBCurator />} />
         <Route path="fb-curator/config" element={<FBCuratorConfig />} />
+        <Route path="fb-curator/design-backlog" element={<FBCuratorDesignBacklog />} />
         <Route path="fb-curator/runs/:runId" element={<FBCuratorRunDetail />} />
         <Route path="analytics" element={<Analytics />} />
         <Route path="analytics/ads" element={<AnalyticsAds />} />
