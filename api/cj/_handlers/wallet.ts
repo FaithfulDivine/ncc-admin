@@ -2,8 +2,8 @@
  * GET /api/cj/wallet — lấy số dư ví CJ hiện tại.
  */
 import type { VercelRequest, VercelResponse } from '@vercel/node'
-import { getCJAccessToken, getSystemSetting } from './_helpers'
-import { cjGetWalletBalance } from '../../src/lib/cj'
+import { getCJAccessToken, getSystemSetting } from '../_helpers'
+import { cjGetWalletBalance } from '../../../src/lib/cj'
 
 export default async function handler(_req: VercelRequest, res: VercelResponse) {
   const token = await getCJAccessToken()

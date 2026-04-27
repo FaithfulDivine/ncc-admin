@@ -1,5 +1,5 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node'
-import { getSystemSettings } from './_helpers'
+import { getSystemSettings } from '../_helpers'
 
 export default async function handler(_req: VercelRequest, res: VercelResponse) {
   const clean = (s: string) => (s || '').replace(/\0/g, '').trim()

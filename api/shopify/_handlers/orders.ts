@@ -1,5 +1,5 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node'
-import { getShopifyConfig } from './_helpers'
+import { getShopifyConfig } from '../_helpers'
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
   const { token: accessToken, storeUrl: cleanStore } = await getShopifyConfig()
@@ -22,7 +22,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     while (apiUrl && pageCount < maxPages) {
       pageCount++
 
-      const response = await fetch(apiUrl, {
+      const response: Response = await fetch(apiUrl, {
         headers: {
           'X-Shopify-Access-Token': accessToken,
           'Content-Type': 'application/json',
@@ -37,14 +37,14 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       allOrders = allOrders.concat(data.orders || [])
 
       // Check for next page via Link header
-      const linkHeader = response.headers.get('link')
+      const linkHeader: string | null = response.headers.get('link')
       apiUrl = null
 
       if (linkHeader) {
-        const links = linkHeader.split(',')
-        for (const link of links) {
+        const links: string[] = linkHeader.split(',')
+        for (const link of links as string[]) {
           if (link.includes('rel="next"')) {
-            const match = link.match(/<([^>]+)>/)
+            const match: RegExpMatchArray | null = link.match(/<([^>]+)>/)
             if (match) apiUrl = match[1]
             break
           }

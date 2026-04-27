@@ -4,7 +4,7 @@
  * DELETE /api/cj/sku-map?id=… — xoá
  */
 import type { VercelRequest, VercelResponse } from '@vercel/node'
-import { getSupabaseClient } from './_helpers'
+import { getSupabaseClient } from '../_helpers'
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
   const sb = getSupabaseClient()

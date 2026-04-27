@@ -10,8 +10,8 @@
  */
 import type { VercelRequest, VercelResponse } from '@vercel/node'
 import crypto from 'node:crypto'
-import { getSupabaseClient, getSystemSetting } from './_helpers'
-import { getShopifyConfig } from '../shopify/_helpers'
+import { getSupabaseClient, getSystemSetting } from '../_helpers'
+import { getShopifyConfig } from '../../shopify/_helpers'
 
 interface CJWebhookPayload {
   eventType: string

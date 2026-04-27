@@ -21,9 +21,9 @@ import {
   buildCJOrderPayload,
   type ShopifyOrderLite,
   type CJMappingRow,
-} from './_helpers'
-import { cjCreateOrder, cjPayOrder, CJApiError } from '../../src/lib/cj'
-import { getShopifyConfig } from '../shopify/_helpers'
+} from '../_helpers'
+import { cjCreateOrder, cjPayOrder, CJApiError } from '../../../src/lib/cj'
+import { getShopifyConfig } from '../../shopify/_helpers'
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
   if (req.method !== 'POST') {
