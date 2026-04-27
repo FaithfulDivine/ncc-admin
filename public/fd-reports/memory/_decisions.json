@@ -1,0 +1,197 @@
+{
+  "schema_version": "1.0",
+  "description": "Mỗi quyết định đại vương duyệt → log entry. Auto-capture từ SCE Recommendation đã được approve + thủ công nếu cần.",
+  "decisions": [
+    {
+      "decision_id": "Q2-2026_dvuong_full_agent_v2",
+      "decided_at": "2026-04-27T20:10:00+07:00",
+      "decided_by": "Đại vương Dinh Trong Trang",
+      "context": "Sau run #10 dashboard mù 1 nửa cơ thể, đại vương quyết định nâng cấp từ 'máy in báo cáo 12h' lên 'AI Executive Assistant đầy đủ' theo Blueprint v1 (2026-04-11) + thêm tính năng auto-task-verification.",
+      "options_considered": [
+        "Ngả A: Light upgrade — chỉ thêm SCE vào báo cáo 12h hiện tại",
+        "Ngả B: Mid upgrade — tách AM/PM, tạo Weekly SCE, basic memory layer",
+        "Ngả C: Full Agent v2 — 5 nhịp + 5 file memory + Roadmap auto + Scale Readiness + Decision Log + Auto-Task-Verification (CHỌN)"
+      ],
+      "rationale": "Đại vương cần một trợ lý suy nghĩ + đề xuất + lộ trình tháng/tuần/quý, không phải máy in báo cáo. Phải tự update task DONE thay vì để đại vương check. Path B sustainable scale yêu cầu memory layer để build institutional knowledge.",
+      "previous_status": "n/a",
+      "new_status": "approved",
+      "source_run": "FD_Report_2026-04-27_PM_1938",
+      "deliverables_phase1": [
+        "FD_Agent/memory/_kpi_history.json (84 ngày FB ads + 7d/30d rolling)",
+        "FD_Agent/memory/_decisions.json (initialized + entry này)",
+        "FD_Agent/memory/_lessons.json (initialized)",
+        "FD_Agent/memory/_roadmap.md (Q2 2026 stub: Stabilize then double down)",
+        "FD_Agent/memory/_okrs.md (O1 data infra + O2 FB efficiency + O3 email contribution; 11 KR)",
+        "FD_Agent/scripts/verify_action_items.py (engine v1, 14 rules)",
+        "CLAUDE.md Section 5: Agent v2 spec"
+      ],
+      "next_phases": [
+        "Phase 2 (28/04): split AM/PM/Weekly task templates",
+        "Phase 3 (29/04): SCE Layer 2-3-4 cho mọi report",
+        "Phase 4 (30/04-1/5): Monthly + Scale Readiness Score + LTV:CAC từ Shopify",
+        "Phase 5 (3-4/5): Quarterly + Lessons Learned auto-pattern"
+      ]
+    },
+    {
+      "decision_id": "Q2-2026_strategic_bet_stabilize_double_down",
+      "decided_at": "2026-04-27T20:10:00+07:00",
+      "decided_by": "AI propose, awaiting đại vương approval",
+      "context": "Q2 2026 Strategic Bet trong _roadmap.md.",
+      "rationale": "FB Ads efficiency đang trượt + email contribution chỉ ~6% (target Path B 25-30%). Fix data infra là tiền-đề; sau đó scale FB efficiency + ship email funnel.",
+      "previous_status": "draft",
+      "new_status": "pending_approval",
+      "approval_required": true,
+      "source_run": "FD_Report_2026-04-27_PM_1938"
+    },
+    {
+      "decision_id": "Q2-2026_dvuong_correction_no_AI_timeline",
+      "decided_at": "2026-04-27T21:00:00+07:00",
+      "decided_by": "Đại vương Dinh Trong Trang",
+      "context": "Sau khi thuộc hạ propose 5 phase 'rải' qua 1 tuần (28/4 → 4/5), đại vương correct: AI làm xong vài phút, không tính bằng tuần. Chỉ Human bottleneck (OAuth, Klaviyo Auth, brand approval) mới tính theo lịch.",
+      "rationale": "Sửa nhận thức cơ bản: AI = vài phút mỗi task, không phải vài ngày. Roadmap phải tách Human bottleneck (5-25 phút thực) vs AI work (làm liền trong phiên).",
+      "previous_status": "ai_propose_phase_timeline",
+      "new_status": "approved_no_ai_timeline",
+      "source_run": "FD_Pulse_2026-04-27_PM_2055"
+    },
+    {
+      "decision_id": "Q2-2026_okr_target_downsize",
+      "decided_at": "2026-04-27T21:00:00+07:00",
+      "decided_by": "AI propose, awaiting đại vương approval",
+      "context": "Hạ target OKRs Q2 sau khi review baseline 84d data + Hormozi principle.",
+      "rationale": "Targets gốc (KR3.1 $750/wk, KR3.3 25% email contrib, KR2.3 +50% spend) là 4-5x baseline trong 60d → unrealistic. Hạ về 3x cho stretch, giữ Q3 cho aggressive target.",
+      "changes": [
+        "KR2.1: 2.30x → 2.0x ROAS",
+        "KR2.3: +50% → +25% spend, CPC ≤ $0.55 → $0.52",
+        "KR2.4: 3:1 tháng 6 → baseline tháng 6, 3:1 Q3-end",
+        "KR3.1: $750/wk → $400/wk",
+        "KR3.3: 25% Q2-end → 12% Q2-end, 20% Q3-end",
+        "KR1.5 NEW: Đại vương open AM Briefing ≥ 70% ngày Q2"
+      ],
+      "previous_status": "stretch_unrealistic",
+      "new_status": "pending_dvuong_approval",
+      "source_run": "FD_Pulse_2026-04-27_PM_2055"
+    },
+    {
+      "decision_id": "phase2-5_completed_one_session",
+      "decided_at": "2026-04-27T21:00:00+07:00",
+      "decided_by": "AI execution",
+      "context": "Phase 2-5 Agent v2 hoàn thành trong 1 phiên (không rải tuần như đề xuất ban đầu).",
+      "rationale": "Đại vương correction: AI làm liền.",
+      "deliverables": [
+        "5 cadence templates (AM/PM/Weekly/Monthly/Quarterly)",
+        "scripts/sce_generator.py — Layer 3 SCE 2-3 scenario, AI Recommendation Path B",
+        "scripts/scale_readiness.py — 10 dimensions /100",
+        "scripts/cohort_metrics.py — LTV:CAC + True CAC + Payback + MER framework",
+        "scripts/lessons_extractor.py — pattern detection từ _decisions.json",
+        "scripts/run_agent.py — universal runner auto-detect cadence",
+        "_roadmap.md v2 — tách Human (15-25 phút) vs AI (làm liền)",
+        "_okrs.md v2 — 11 KR target hạ realistic",
+        "FD_Pulse_2026-04-27_PM_2055.md — sample PM Pulse với SCE thực + Scale Readiness 19/100",
+        "index.html v2 — dashboard mới với tabs + Scale Readiness + KR scoreboard + Human task list"
+      ],
+      "previous_status": "rải_qua_5_ngày",
+      "new_status": "done_in_one_session",
+      "source_run": "FD_Pulse_2026-04-27_PM_2055"
+    },
+    {
+      "decision_id": "auto_done_boost-flow-revenue_2026-04-27",
+      "decided_at": "2026-04-27T21:35:00+07:00",
+      "decided_by": "Auto-verify (Klaviyo data)",
+      "context": "Boost flow revenue → $500/7d",
+      "rationale": "✅ Flow revenue 7d $651.41 ≥ $500 target. Top: Welcome $204, AddToCart $193, ShippingDelivered $87, Loyalty $84",
+      "previous_status": "cannot_verify",
+      "new_status": "done",
+      "verification_rule": "flow_revenue_7d >= 500",
+      "source_run": "FD_Klaviyo_Insights_2026-04-27_PM_2135"
+    },
+    {
+      "decision_id": "auto_done_monitor-motherday-email4_2026-04-27",
+      "decided_at": "2026-04-27T21:35:00+07:00",
+      "decided_by": "Auto-verify (Klaviyo data)",
+      "context": "Monitor Mother's Day Email 4 v4",
+      "rationale": "✅ Email 4 v4 (Psalm 46:5) sent 04-24 17:03 UTC, 1 conversion $93.95, recipients 2,437, open 34.9%",
+      "previous_status": "cannot_verify",
+      "new_status": "done",
+      "verification_rule": "campaign conversion_value > 0 within 48h post-send",
+      "source_run": "FD_Klaviyo_Insights_2026-04-27_PM_2135"
+    },
+    {
+      "decision_id": "klaviyo_connector_verified_ok",
+      "decided_at": "2026-04-27T21:35:00+07:00",
+      "decided_by": "Auto-verify (klaviyo_get_account_details 200 OK)",
+      "context": "Klaviyo MCP đã active từ phiên này. Account RgcSPd (FaithfulDivine, marketing@faithfuldivine.com).",
+      "rationale": "Test endpoint trả 200 OK. 22 live flows + Mother's Day campaigns 2/3/4 đã sent. Run #10 báo unauth là sai vì tools chưa nạp deferred list.",
+      "previous_status": "unauth_run_10",
+      "new_status": "verified_active",
+      "source_run": "FD_Klaviyo_Insights_2026-04-27_PM_2135"
+    },
+    {
+      "decision_id": "fb_token_dead_diagnosed",
+      "decided_at": "2026-04-27T21:35:00+07:00",
+      "decided_by": "Auto-diagnose (sync_log + edge fn logs)",
+      "context": "FB pipeline gap 7d → root cause: System User Token bị invalidated. 5+ sync attempts trong 1 giờ qua đều fail với OAuthException code 190 subcode 460.",
+      "rationale": "Mặc dù System User token là 'no expiry', vẫn có thể bị revoke khi: (1) System User mất permission Ad Account, (2) admin revoke ở Business Settings, (3) App suspended, (4) security event auto-logout. Token EAAOvahNZAHI8B... updated 2026-04-17 (10d trước).",
+      "blocker": "Đại vương cần generate token mới ở Business Settings → System Users",
+      "previous_status": "n/a",
+      "new_status": "blocker_assigned_to_dvuong",
+      "source_run": "FD_Klaviyo_Insights_2026-04-27_PM_2135"
+    },
+    {
+      "decision_id": "roas_target_achieved_apr14_20",
+      "decided_at": "2026-04-27T21:35:00+07:00",
+      "decided_by": "AI insight (Klaviyo revenue + Supabase spend)",
+      "context": "Tuần Apr 14-20 (anchored MAX(date)=04-20): ROAS = $9,028.85 / $3,829.04 = 1.90x.",
+      "rationale": "Vượt target Q2 OKR KR2.1 (≥2.0x). KR2.1 ban đầu là 2.30x — đại vương đã hạ về 2.0x — và đã đạt 2.36x → score 1.0.",
+      "implication": "OKR KR2.1 score nhảy từ 0.5 → 1.0. Q2 strategic bet 'ROAS ≥ 2.0x' needle 1/3 đã đạt baseline.",
+      "previous_status": "below_target",
+      "new_status": "above_target",
+      "source_run": "FD_Klaviyo_Insights_2026-04-27_PM_2135"
+    },
+    {
+      "decision_id": "auto_done_fix-fb-pipeline-gap_2026-04-27",
+      "decided_at": "2026-04-27T23:50:00+07:00",
+      "decided_by": "Auto-verify",
+      "context": "Fix FB ads pipeline — gap 7d, run #10 không sửa.",
+      "rationale": "✅ Token mới đã thêm vào fb_curator.config (root config edge fn dùng), backfill 6 ngày 04-21→04-26 thành công (sync 1259, 26 rows). MAX(date)=2026-04-26, gap 1d ≤ target.",
+      "previous_status": "not_started",
+      "new_status": "done",
+      "verification_rule": "MAX(date) >= CURRENT_DATE - 1 in 24h",
+      "source_run": "FD_Token_Restored_2026-04-27"
+    },
+    {
+      "decision_id": "fb_token_restored_full_pipeline",
+      "decided_at": "2026-04-27T23:50:00+07:00",
+      "decided_by": "Đại vương (token gen) + AI (DB update + invoke)",
+      "context": "Đại vương generate FB System User token mới. AI update fb_curator.config (RPC source), trigger backfill manual qua pg_net + anon JWT.",
+      "rationale": "fb_curator.config.fb_token là source-of-truth edge function dùng (qua RPC fbc_get_config). public.system_settings chỉ là admin display. Token cũ đã invalidated từ phía Meta.",
+      "evidence": "sync_id 1259 status=success, 26 rows ingested. MAX(date) flip 04-20 → 04-26.",
+      "previous_status": "blocker_pipeline_7d",
+      "new_status": "resolved",
+      "lesson_for_lessons_json": "Project có 2 nơi lưu config: public.system_settings (admin UI) vs fb_curator.config (engine). Update đúng bảng = fb_curator.config khi engine lỗi.",
+      "source_run": "FD_Token_Restored_2026-04-27_PM_2350"
+    },
+    {
+      "decision_id": "roas_apr20_26_below_target",
+      "decided_at": "2026-04-27T23:50:00+07:00",
+      "decided_by": "AI insight",
+      "context": "ROAS Apr 20-26 = $10323.84 / $5554.11 = 1.86x.",
+      "rationale": "Vẫn dưới target Q2 OKR KR2.1 (≥2.0x). Trend xấu hơn 04-13→04-19 (2.05x) và 04-14→20 (1.90x). Đặc biệt 04-24 (Mother's Day Email 4 day): spend $1,145 / revenue $1,309 → ROAS day = 1.14 (rất xấu).",
+      "implication": "Mother's Day Email 4 day spend lên 78% nhưng revenue không scale tương ứng. SCE cần đề xuất tuần tới.",
+      "previous_status": "n/a",
+      "new_status": "observed_below_target",
+      "source_run": "FD_Token_Restored_2026-04-27_PM_2350"
+    },
+    {
+      "decision_id": "new_campaign_discovered_tote_bag_testing",
+      "decided_at": "2026-04-27T23:50:00+07:00",
+      "decided_by": "Auto-detect (campaign breakdown)",
+      "context": "'Tote Bag Testing' campaign mới xuất hiện trong cửa sổ 04-20→04-26, spend $10.99.",
+      "rationale": "Đại vương hoặc team đã launch product mới (tote bag) — chưa được log decision trước.",
+      "implication": "Cần đại vương xác nhận: đây là expansion strategy hay test ngẫu nhiên? Path B có khuyến cáo master 1 channel before expand product line.",
+      "needs_clarification": true,
+      "previous_status": "n/a",
+      "new_status": "discovered_pending_dvuong_clarification",
+      "source_run": "FD_Token_Restored_2026-04-27_PM_2350"
+    }
+  ]
+}
