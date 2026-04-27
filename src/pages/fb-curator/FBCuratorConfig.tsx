@@ -30,11 +30,6 @@ interface Criteria {
   churn_cap_pct: number
   max_adds_per_cycle: number
   priority_aov_benchmark: number
-  tier1_spend: number
-  tier2_spend: number
-  tier2_min_roas: number
-  tier3_spend: number
-  tier3_min_roas: number
   notes: string | null
   created_at: string
   updated_at: string
@@ -42,11 +37,6 @@ interface Criteria {
 
 type EditableKey =
   | 'window_days'
-  | 'tier1_spend'
-  | 'tier2_spend'
-  | 'tier2_min_roas'
-  | 'tier3_spend'
-  | 'tier3_min_roas'
   | 'add_min_units'
   | 'add_min_roas'
   | 'add_organic_units_threshold'
@@ -67,50 +57,41 @@ interface FieldDef {
   key: EditableKey
   label: string
   hint: string
-  group: 'window' | 'ladder' | 'add' | 'remove' | 'grace' | 'churn'
+  group: 'window' | 'add' | 'remove' | 'grace' | 'churn'
   type: 'int' | 'num' | 'text'
   step?: string
 }
 
 const FIELDS: FieldDef[] = [
   // Window
-  { key: 'window_days', label: 'Window (days)', hint: 'Số ngày nhìn lại Shopify orders + FB Insights', group: 'window', type: 'int' },
-  // Ladder (v13 — PRIMARY)
-  { key: 'tier1_spend', label: 'Tier 1 – spend $', hint: 'Spend vượt ngưỡng này mà 0 orders → REMOVE (1 CPA)', group: 'ladder', type: 'num', step: '1' },
-  { key: 'tier2_spend', label: 'Tier 2 – spend $', hint: 'Spend vượt ngưỡng này mà ROAS < Tier 2 min ROAS → REMOVE (2 CPA)', group: 'ladder', type: 'num', step: '1' },
-  { key: 'tier2_min_roas', label: 'Tier 2 – min ROAS', hint: 'ROAS tối thiểu để KEEP ở tier 2 (mặc định 1.5x = break-even)', group: 'ladder', type: 'num', step: '0.1' },
-  { key: 'tier3_spend', label: 'Tier 3 – spend $', hint: 'Spend vượt ngưỡng này mà ROAS < Tier 3 min ROAS → REMOVE (3 CPA)', group: 'ladder', type: 'num', step: '1' },
-  { key: 'tier3_min_roas', label: 'Tier 3 – min ROAS', hint: 'ROAS tối thiểu để KEEP ở tier 3. Nếu ROAS ∈ [tier2_min_roas, tier3_min_roas) khi remove → vào danh sách thiết kế tiềm năng.', group: 'ladder', type: 'num', step: '0.1' },
-  // Add rules (legacy — kept for backward compat but not used by v13 decide)
-  { key: 'add_min_units', label: 'Add – min units', hint: '(Legacy) Đơn vị bán tối thiểu để được đề xuất add (có FB)', group: 'add', type: 'int' },
-  { key: 'add_min_roas', label: 'Add – min ROAS', hint: '(Legacy) ROAS tối thiểu nếu có FB spend', group: 'add', type: 'num', step: '0.1' },
-  { key: 'add_organic_units_threshold', label: 'Add – organic units', hint: '(Legacy) Units để add mà không cần FB data', group: 'add', type: 'int' },
-  { key: 'add_momentum_recent_units', label: 'Add – momentum 30d units', hint: '(Legacy) Units 30 ngày gần nhất để coi là momentum', group: 'add', type: 'int' },
-  // Remove rules (legacy)
-  { key: 'remove_max_units', label: 'Remove – max units', hint: '(Legacy) Dưới ngưỡng này thì đề xuất remove', group: 'remove', type: 'int' },
-  { key: 'remove_max_refund_pct', label: 'Remove – max refund %', hint: '(Legacy) Tỷ lệ refund vượt ngưỡng thì remove', group: 'remove', type: 'num', step: '0.5' },
-  { key: 'remove_max_roas', label: 'Remove – max ROAS', hint: '(Legacy) ROAS dưới ngưỡng và có spend thì remove', group: 'remove', type: 'num', step: '0.1' },
-  { key: 'remove_min_spend_for_roas', label: 'Remove – min spend for ROAS', hint: '(Legacy) Chỉ áp dụng rule ROAS nếu spend ≥ ngưỡng', group: 'remove', type: 'num', step: '5' },
-  // Grace rules (legacy)
-  { key: 'grace_first_order_days', label: 'Grace – first order (days)', hint: '(Legacy) Sản phẩm mới trong N ngày được miễn remove', group: 'grace', type: 'int' },
-  { key: 'grace_low_spend_threshold', label: 'Grace – low spend $', hint: '(Legacy) FB spend dưới ngưỡng thì miễn rule ROAS', group: 'grace', type: 'num', step: '5' },
-  // Churn control (still used)
+  { key: 'window_days', label: 'Window (days)', hint: 'Số ngày nhìn lại Shopify orders', group: 'window', type: 'int' },
+  // Add rules
+  { key: 'add_min_units', label: 'Add – min units', hint: 'Đơn vị bán tối thiểu để được đề xuất add (có FB)', group: 'add', type: 'int' },
+  { key: 'add_min_roas', label: 'Add – min ROAS', hint: 'ROAS tối thiểu nếu có FB spend', group: 'add', type: 'num', step: '0.1' },
+  { key: 'add_organic_units_threshold', label: 'Add – organic units', hint: 'Units để add mà không cần FB data', group: 'add', type: 'int' },
+  { key: 'add_momentum_recent_units', label: 'Add – momentum 30d units', hint: 'Units 30 ngày gần nhất để coi là momentum', group: 'add', type: 'int' },
+  // Remove rules
+  { key: 'remove_max_units', label: 'Remove – max units', hint: 'Dưới ngưỡng này thì đề xuất remove', group: 'remove', type: 'int' },
+  { key: 'remove_max_refund_pct', label: 'Remove – max refund %', hint: 'Tỷ lệ refund vượt ngưỡng thì remove', group: 'remove', type: 'num', step: '0.5' },
+  { key: 'remove_max_roas', label: 'Remove – max ROAS', hint: 'ROAS dưới ngưỡng và có spend thì remove', group: 'remove', type: 'num', step: '0.1' },
+  { key: 'remove_min_spend_for_roas', label: 'Remove – min spend for ROAS', hint: 'Chỉ áp dụng rule ROAS nếu spend ≥ ngưỡng', group: 'remove', type: 'num', step: '5' },
+  // Grace rules
+  { key: 'grace_first_order_days', label: 'Grace – first order (days)', hint: 'Sản phẩm mới trong N ngày được miễn remove', group: 'grace', type: 'int' },
+  { key: 'grace_low_spend_threshold', label: 'Grace – low spend $', hint: 'FB spend dưới ngưỡng thì miễn rule ROAS', group: 'grace', type: 'num', step: '5' },
+  // Churn control
   { key: 'cooldown_removed_days', label: 'Cooldown (days)', hint: 'Variant vừa bị remove không được re-add trong N ngày', group: 'churn', type: 'int' },
-  { key: 'churn_cap_pct', label: 'Churn cap %', hint: 'Giới hạn % thay đổi set mỗi lần chạy (không áp dụng cho blacklist)', group: 'churn', type: 'num', step: '1' },
+  { key: 'churn_cap_pct', label: 'Churn cap %', hint: 'Giới hạn % thay đổi set mỗi lần chạy', group: 'churn', type: 'num', step: '1' },
   { key: 'max_adds_per_cycle', label: 'Max adds/cycle', hint: 'Tối đa variants được add mỗi lần', group: 'churn', type: 'int' },
   { key: 'priority_aov_benchmark', label: 'Priority AOV benchmark', hint: 'Dùng để xếp priority khi cắt tới churn cap', group: 'churn', type: 'num', step: '1' },
 ]
 
 const GROUP_LABELS: Record<FieldDef['group'], string> = {
   window: 'Cửa sổ thời gian',
-  ladder: 'Ladder 3 tầng (v13 — quy tắc chính)',
-  add: 'Quy tắc ADD (legacy — không còn dùng)',
-  remove: 'Quy tắc REMOVE (legacy — không còn dùng)',
-  grace: 'Grace period (legacy — không còn dùng)',
+  add: 'Quy tắc ADD (thêm vào set)',
+  remove: 'Quy tắc REMOVE (loại khỏi set)',
+  grace: 'Grace period (miễn trừ)',
   churn: 'Kiểm soát churn + priority',
 }
-
-const GROUP_ORDER: FieldDef['group'][] = ['window', 'ladder', 'churn', 'add', 'remove', 'grace']
 
 function groupBy<T, K extends string>(items: T[], key: (t: T) => K): Record<K, T[]> {
   const out = {} as Record<K, T[]>
@@ -253,7 +234,7 @@ export default function FBCuratorConfig() {
             </CardContent>
           </Card>
 
-          {GROUP_ORDER.filter((g) => grouped[g]?.length).map((g) => (
+          {(Object.keys(grouped) as FieldDef['group'][]).map((g) => (
             <Card key={g}>
               <CardHeader>
                 <CardTitle className="text-base">{GROUP_LABELS[g]}</CardTitle>

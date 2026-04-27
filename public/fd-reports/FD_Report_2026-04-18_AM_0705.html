@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<title>FaithfulDivine — Báo cáo 12 giờ (2026-04-18 AM)</title>
+<style>
+  :root { --bg:#fafafa; --fg:#1a1a1a; --muted:#5b5b5b; --line:#e5e5e5; --accent:#7a1f1f; --good:#0a7a3d; --warn:#b47500; --bad:#b02020; }
+  body { font-family: -apple-system, "Segoe UI", Roboto, "Noto Sans", Arial, sans-serif; background:var(--bg); color:var(--fg); max-width: 960px; margin: 0 auto; padding: 32px 24px 80px; line-height: 1.55; }
+  h1 { font-size: 26px; margin: 0 0 6px; color: var(--accent); }
+  h2 { font-size: 20px; margin: 32px 0 12px; padding-bottom: 6px; border-bottom: 2px solid var(--line); }
+  h3 { font-size: 16px; margin: 22px 0 8px; color: #333; }
+  .meta { color: var(--muted); font-size: 14px; margin-bottom: 22px; }
+  table { width: 100%; border-collapse: collapse; margin: 10px 0 18px; font-size: 14px; }
+  th, td { padding: 8px 10px; border: 1px solid var(--line); text-align: left; vertical-align: top; }
+  th { background: #f0efea; font-weight: 600; }
+  td.num { text-align: right; font-variant-numeric: tabular-nums; }
+  .tag-good { color: var(--good); font-weight: 600; }
+  .tag-warn { color: var(--warn); font-weight: 600; }
+  .tag-bad { color: var(--bad); font-weight: 600; }
+  .callout { background: #fff8ee; border-left: 4px solid var(--warn); padding: 10px 14px; margin: 14px 0; border-radius: 4px; }
+  .callout.bad { background: #fff0f0; border-color: var(--bad); }
+  .callout.good { background: #f0f8f2; border-color: var(--good); }
+  ol li, ul li { margin: 4px 0; }
+  code { background: #f1efe8; padding: 1px 5px; border-radius: 3px; font-size: 13px; }
+  .sig { margin-top: 40px; padding-top: 14px; border-top: 1px dashed var(--line); color: var(--muted); font-style: italic; }
+  .pill { display:inline-block; padding: 2px 8px; border-radius: 12px; font-size: 12px; font-weight:600; }
+  .pill.green { background:#e2f2e8; color:var(--good); }
+  .pill.yellow { background:#fcefd1; color:var(--warn); }
+  .pill.red { background:#fbe1e1; color:var(--bad); }
+</style>
+</head>
+<body>
+
+<h1>FaithfulDivine — Báo cáo 12 giờ</h1>
+<div class="meta">
+  <b>Bẩm đại vương</b>, thuộc hạ xin tường trình kết quả rà soát hiệu suất 12 giờ cho FaithfulDivine.<br>
+  <b>Thời điểm chạy:</b> 2026-04-18 07:05 (AM) &middot;
+  <b>Nguồn:</b> Facebook Ad Spend [Supabase] &middot; Klaviyo Flow/Campaign/Metric [Klaviyo API] &middot;
+  <b>Task:</b> <code>faithfuldivine-12h-report</code>
+</div>
+
+<h2>1. Tổng quan nhanh</h2>
+<table>
+  <thead>
+    <tr><th>Chỉ số</th><th>Giá trị 7 ngày</th><th>Nguồn</th><th>Benchmark / Mục tiêu</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Doanh thu Placed Order (04-11 → 04-17)</td><td class="num"><b>$6,869.41</b> / 119 đơn</td><td>[Klaviyo API]</td><td>—</td></tr>
+    <tr><td>Doanh thu cùng kỳ với FB ads (04-04 → 04-10)</td><td class="num">$5,072.71 / 96 đơn</td><td>[Klaviyo API]</td><td>—</td></tr>
+    <tr><td>Chi quảng cáo FB (04-04 → 04-10, dữ liệu mới nhất)</td><td class="num"><b>$2,929.53</b></td><td>[Supabase]</td><td>—</td></tr>
+    <tr><td><b>ROAS ước tính</b> (04-04 → 04-10)</td><td class="num"><b class="tag-bad">1.73x</b> [Estimated]</td><td>Revenue ÷ Spend</td><td>≥ 2.30x</td></tr>
+    <tr><td>Doanh thu Email Flows (7 ngày)</td><td class="num">$244.41</td><td>[Klaviyo API]</td><td>$3,000/tháng</td></tr>
+    <tr><td>Doanh thu Email Campaigns (7 ngày)</td><td class="num">$219.37</td><td>[Klaviyo API]</td><td>$2,500/tháng</td></tr>
+    <tr><td>AOV (Klaviyo, 7 ngày)</td><td class="num">~$57.73</td><td>[Estimated]</td><td>—</td></tr>
+  </tbody>
+</table>
+
+<div class="callout good">
+  <b>Xu hướng:</b> Kỳ mới nhất (04-11 → 04-17) <b>$6,869.41 / 119 đơn</b> vs kỳ trước (04-04 → 04-10) $5,072.71 / 96 đơn —
+  <span class="tag-good">Δ Doanh thu +35.4% · Δ Đơn +24.0%</span> — xu hướng <b>TĂNG</b> rõ rệt.
+</div>
+
+<div class="callout bad">
+  <b>⚠️ Cảnh báo dữ liệu:</b> bảng <code>facebook_ad_spend</code> trong Supabase có ngày mới nhất là <b>2026-04-10</b> — <b>trễ 8 ngày</b> so với hôm nay (04-18). Phần phân tích FB Ads dưới đây dùng cửa sổ 7 ngày có dữ liệu gần nhất (04-04 → 04-10).
+</div>
+
+<h2>2. FB Ads Performance</h2>
+<h3>Tổng 7 ngày (04-04 → 04-10) [Supabase]</h3>
+<table>
+  <thead><tr><th>Metric</th><th>Giá trị</th><th>Benchmark</th><th>Trạng thái</th></tr></thead>
+  <tbody>
+    <tr><td>Spend</td><td class="num">$2,929.53</td><td>—</td><td>—</td></tr>
+    <tr><td>Impressions</td><td class="num">173,897</td><td>—</td><td>—</td></tr>
+    <tr><td>Clicks</td><td class="num">5,790</td><td>—</td><td>—</td></tr>
+    <tr><td>CPC</td><td class="num">$0.51</td><td>$0.45</td><td><span class="pill yellow">🟡 Cao hơn 13%</span></td></tr>
+    <tr><td>CPM</td><td class="num">$16.85</td><td>$13.48–$16.80</td><td><span class="pill yellow">🟡 Vừa vượt trần</span></td></tr>
+    <tr><td>CTR</td><td class="num">3.33%</td><td>1.24% apparel / 2–3% ecom</td><td><span class="pill green">🟢 Vượt xa</span></td></tr>
+  </tbody>
+</table>
+
+<h3>Breakdown theo campaign (04-04 → 04-10)</h3>
+<table>
+  <thead><tr><th>Campaign</th><th>Spend</th><th>Clicks</th><th>CPC</th><th>CTR</th><th>CPM</th></tr></thead>
+  <tbody>
+    <tr><td>All US Shirt Product link tăng Spend Campain 20/03</td><td class="num">$1,250.91</td><td class="num">2,516</td><td class="num">$0.50</td><td class="num">3.51%</td><td class="num">$17.44</td></tr>
+    <tr><td>Best Sellers Catalog</td><td class="num">$720.53</td><td class="num">1,512</td><td class="num">$0.48</td><td class="num">3.36%</td><td class="num">$16.00</td></tr>
+    <tr><td>Testing</td><td class="num">$617.14</td><td class="num">1,162</td><td class="num">$0.53</td><td class="num">3.25%</td><td class="num">$17.26</td></tr>
+    <tr><td>Best Sellers</td><td class="num">$340.95</td><td class="num">600</td><td class="num">$0.57</td><td class="num">2.80%</td><td class="num">$15.94</td></tr>
+  </tbody>
+</table>
+
+<ul>
+  <li><b>Campaign tốt nhất (hiệu quả chi phí):</b> <i>Best Sellers Catalog</i> — CPC thấp nhất ($0.48), CPM tốt nhất ($16.00).</li>
+  <li><b>Campaign kém nhất:</b> <i>Best Sellers</i> — CPC cao nhất ($0.57), CTR thấp nhất (2.80%).</li>
+  <li><b>Cash burner:</b> <i>All US Shirt Product link…</i> chiếm 42.7% tổng spend, CTR tốt nhưng cần đối chiếu ROAS riêng.</li>
+</ul>
+
+<p><b>Ngữ cảnh 30 ngày [Supabase]:</b> Spend $9,658.97 · 495,219 imp · 18,157 clicks · CPC $0.53 · CPM $19.50 · CTR 3.67% · 22/30 ngày có dữ liệu.</p>
+
+<h2>3. Email Performance</h2>
+<h3>3.1 Campaigns đã gửi trong 7 ngày</h3>
+<p>Có <b>2 campaigns</b> Mother's Day 2026 được gửi — <b>KHÔNG</b> trigger alert "không có campaign".</p>
+<table>
+  <thead><tr><th>Campaign</th><th>Gửi</th><th>Recipients</th><th>Open</th><th>Click</th><th>Conv.</th><th>Revenue</th><th>Unsub</th></tr></thead>
+  <tbody>
+    <tr>
+      <td>FD - Mother's Day 2026 - Email 1 - The Woman Who Shaped Your Faith</td>
+      <td>04-12 07:03 UTC</td><td class="num">2,049</td>
+      <td class="num">35.53%</td><td class="num">0.34%</td><td class="num">1</td>
+      <td class="num">$45.47</td><td class="num tag-bad">1.43% 🔴</td>
+    </tr>
+    <tr>
+      <td>FD - Mother's Day 2026 - Email 2 - Gift Guide: Faith She Can Wear</td>
+      <td>04-17 17:03 UTC</td><td class="num">2,170</td>
+      <td class="num tag-bad">18.43% 🔴</td><td class="num">0.37%</td><td class="num">1</td>
+      <td class="num">$173.90</td><td class="num">0.42%</td>
+    </tr>
+  </tbody>
+</table>
+
+<ul>
+  <li>Cả 2 email đều dưới benchmark open rate 40%+.</li>
+  <li>Email 2 open rate 18.43% — <b>lệch -54%</b> so với benchmark; nghi do send-time (12:03 EST thứ Sáu) hoặc subject kém hơn Email 1.</li>
+  <li>Email 1 unsubscribe 1.43% — <b>gấp ~3× ngưỡng an toàn 0.5%</b>. Có thể do list-cleanup lâu chưa làm.</li>
+  <li>Conversion rate cả 2 đều &lt; 0.05% dù AOV Email 2 rất đẹp ($173.90) — bottleneck có khả năng ở landing page.</li>
+</ul>
+
+<h3>3.2 Top 5 Email Flows theo doanh thu 7 ngày</h3>
+<table>
+  <thead><tr><th>Flow</th><th>Recipients</th><th>Open</th><th>Click</th><th>Conv. uniques</th><th>Revenue</th></tr></thead>
+  <tbody>
+    <tr><td>MPG - Thank You Flow (T2.26)</td><td class="num">342</td><td class="num">43.40%</td><td class="num">6.45%</td><td class="num">2</td><td class="num"><b>$80.16</b></td></tr>
+    <tr><td>MPG - Browse Abandonment (T2.26)</td><td class="num">99</td><td class="num">45.45%</td><td class="num">1.01%</td><td class="num">1</td><td class="num">$66.79</td></tr>
+    <tr><td>MPG - Welcome Flow (T2.26)</td><td class="num">174</td><td class="num">43.68%</td><td class="num">1.72%</td><td class="num">1</td><td class="num">$35.59</td></tr>
+    <tr><td>MPG - Abandoned Add to Cart (T2.26)</td><td class="num">59</td><td class="num">30.51%</td><td class="num">1.69%</td><td class="num">1</td><td class="num">$32.89</td></tr>
+    <tr><td>MPG - Loyalty - Onboarding</td><td class="num">30</td><td class="num">43.33%</td><td class="num">3.33%</td><td class="num">1</td><td class="num">$28.98</td></tr>
+  </tbody>
+</table>
+<p><b>Tổng revenue flows 7 ngày: $244.41</b> — chỉ ~8% mục tiêu tháng $3,000. Cần bật thêm cross-sell / win-back / bump flow.</p>
+
+<h3>3.3 Flows có vấn đề</h3>
+<table>
+  <thead><tr><th>Flow</th><th>Recipients</th><th>Open</th><th>Click</th><th>Revenue</th><th>Vấn đề</th></tr></thead>
+  <tbody>
+    <tr><td>MPG - Welcome Series (Spf-newsub)</td><td class="num">1,338</td><td class="num">33.86%</td><td class="num">0.60%</td><td class="num tag-bad">$0</td><td>Audience lớn nhất, zero revenue</td></tr>
+    <tr><td>MPG - Shipping flow: Delivered</td><td class="num">168</td><td class="num">36.53%</td><td class="num tag-bad">0.00%</td><td class="num">$0</td><td>Zero click — thiếu CTA</td></tr>
+    <tr><td>MPG - Abandoned Checkout</td><td class="num">108</td><td class="num tag-bad">25.93%</td><td class="num">0.93%</td><td class="num">$0</td><td>Subject / timing yếu</td></tr>
+    <tr><td>MPG - Review request</td><td class="num">119</td><td class="num">43.70%</td><td class="num">0.84%</td><td class="num">$0</td><td>Click &lt; 1% (không bán nhưng vẫn thấp)</td></tr>
+    <tr><td>Fulfilled</td><td class="num">210</td><td class="num">45.24%</td><td class="num">8.57%</td><td class="num">$0</td><td>Engagement tốt nhưng không gắn upsell</td></tr>
+    <tr><td>Customer Winback - Standard</td><td class="num">38</td><td class="num tag-bad">26.32%</td><td class="num tag-bad">0.00%</td><td class="num">$0</td><td>Winback đang chết</td></tr>
+  </tbody>
+</table>
+
+<h3>3.4 Subscriber Lists (Klaviyo)</h3>
+<ul>
+  <li>MPG - Shopify Segment - New Subs</li>
+  <li>MPG - Unengaged L120 (List T1.2026)</li>
+  <li>MPG - Sign up Pop-up (tag: MPG)</li>
+  <li>Subcriber List <i>(audience chính của campaign Mother's Day)</i></li>
+  <li>SMS List</li>
+  <li>MPG - Suppress 11/2025</li>
+  <li>Preview List</li>
+</ul>
+
+<h2>4. Alerts &amp; Anomalies</h2>
+<ol>
+  <li><span class="pill red">🔴</span> <b>FB ad spend data stale — trễ 8 ngày.</b> <code>facebook_ad_spend.MAX(date) = 2026-04-10</code>. Pipeline có thể đã đứt từ 04-11.</li>
+  <li><span class="pill red">🔴</span> <b>ROAS 7 ngày = 1.73x</b> — dưới target 2.30x (-24.8%).</li>
+  <li><span class="pill red">🔴</span> <b>Email 1 Mother's Day unsub 1.43%</b> — ~2.9× ngưỡng 0.5%.</li>
+  <li><span class="pill red">🔴</span> <b>Email 2 Mother's Day open 18.43%</b> — lệch -54% so với 40% benchmark.</li>
+  <li><span class="pill yellow">🟡</span> <b>Flow revenue 7 ngày chỉ $244.41</b> — extrapolate tháng ≈ $1,047 (~35% target $3,000).</li>
+  <li><span class="pill yellow">🟡</span> <b>Welcome Series (Spf-newsub)</b> 1,338 recipients, $0 revenue.</li>
+  <li><span class="pill yellow">🟡</span> <b>Winback flow chết</b> (open 26%, click 0%, $0).</li>
+  <li><span class="pill green">🟢</span> <b>Doanh thu 7 ngày +35.4%</b> so với kỳ liền kề.</li>
+</ol>
+
+<h2>5. Action Items (trước báo cáo kế tiếp)</h2>
+<h3>🟢 Green Zone (thuộc hạ có thể tự làm)</h3>
+<ol>
+  <li><b>Fix pipeline FB Ads Supabase</b> — điều tra tại sao 04-11 → 04-18 chưa ingest; retry sync hoặc ping data team.</li>
+  <li><b>Draft lại Email 2 Mother's Day</b> — thử subject dạng story, dời send-time sớm (06:00 EST). Trình đại vương duyệt trước khi gửi.</li>
+  <li><b>Rà soát CTA của "MPG - Shipping flow: Delivered" và "Fulfilled"</b> — thêm block cross-sell nhẹ (best-seller / referral). Trình đại vương approve.</li>
+</ol>
+<h3>🟡 Yellow Zone (cần đại vương approve)</h3>
+<ol>
+  <li><b>Tạm tắt / rescale campaign "Best Sellers"</b> (CPC $0.57, CTR 2.80%) → chuyển ngân sách sang "Best Sellers Catalog".</li>
+  <li><b>Refresh flow "Customer Winback - Standard"</b> — rebuild copy + offer 10–15%.</li>
+  <li><b>List-hygiene cho "Subcriber List"</b> — suppress profile không tương tác 120 ngày sau Email 1 unsub 1.43%.</li>
+</ol>
+
+<div class="sig">
+  Ghi chú: So sánh cùng kỳ dựa trên 2 cửa sổ 7-ngày liên tiếp (Klaviyo event-time). ROAS là ước tính (chỉ FB spend + Klaviyo Placed Order), không bao gồm attribution multi-touch, tip, doanh thu offline hoặc organic.<br><br>
+  — Thuộc hạ báo cáo xong. <b>Bẩm đại vương, xin ngài chỉ đạo các mục Yellow Zone.</b>
+</div>
+
+</body>
+</html>

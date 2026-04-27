@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="vi"><head><meta charset="utf-8"/><title>FD Report 2026-04-20 AM 0703</title>
+<style>
+body{font-family:-apple-system,Segoe UI,Roboto,sans-serif;max-width:980px;margin:24px auto;padding:0 20px;color:#1f2937;line-height:1.55}
+h1{border-bottom:3px solid #6d28d9;padding-bottom:8px}
+h2{color:#6d28d9;margin-top:32px;border-bottom:1px solid #e5e7eb;padding-bottom:4px}
+h3{color:#374151;margin-top:24px}
+table{border-collapse:collapse;width:100%;margin:12px 0;font-size:14px}
+th,td{border:1px solid #e5e7eb;padding:8px 10px;text-align:left}
+th{background:#f3f4f6;font-weight:600}
+.red{color:#dc2626;font-weight:600}.yellow{color:#d97706;font-weight:600}.green{color:#059669;font-weight:600}.gray{color:#6b7280}
+.pill{display:inline-block;padding:2px 10px;border-radius:999px;font-size:12px;font-weight:600}
+.pill.r{background:#fee2e2;color:#b91c1c}.pill.y{background:#fef3c7;color:#b45309}.pill.g{background:#d1fae5;color:#047857}.pill.x{background:#e5e7eb;color:#4b5563}
+.num{text-align:right;font-variant-numeric:tabular-nums}
+blockquote{border-left:4px solid #6d28d9;padding:10px 16px;background:#f5f3ff;margin:16px 0}
+code{background:#f3f4f6;padding:1px 4px;border-radius:3px;font-size:12px}
+.kpi-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;margin:16px 0}
+.kpi-card{background:#fff;border:1px solid #e5e7eb;border-radius:10px;padding:14px}
+.kpi-card .label{font-size:11px;color:#6b7280;text-transform:uppercase;letter-spacing:.04em}
+.kpi-card .value{font-size:22px;font-weight:700;margin:4px 0}
+.kpi-card .delta{font-size:12px}
+</style></head><body>
+
+<h1>FD 12h Report — 2026-04-20 AM (07:03 ICT)</h1>
+<blockquote>Bẩm đại vương, thuộc hạ xin tường trình tình hình FaithfulDivine 12h qua. Auto-verify 6 action item từ run PM 2026-04-18 ở Section 6.</blockquote>
+
+<h2>1. Tổng quan nhanh (7d: 2026-04-13 → 2026-04-19)</h2>
+<div class="kpi-grid">
+  <div class="kpi-card"><div class="label">Revenue 7d</div><div class="value">$7,370.53</div><div class="delta green">+45.5% WoW ▲</div></div>
+  <div class="kpi-card"><div class="label">Orders 7d</div><div class="value">133</div><div class="delta green">+43.0% WoW ▲</div></div>
+  <div class="kpi-card"><div class="label">AOV 7d</div><div class="value">$55.42</div><div class="delta green">+1.7% WoW ▲</div></div>
+  <div class="kpi-card"><div class="label">Email revenue 7d</div><div class="value">$459.19</div><div class="delta green">+29.7%</div></div>
+  <div class="kpi-card"><div class="label">Flow revenue 7d</div><div class="value">$141.55</div><div class="delta red">0% (flat vs prior) — 20% target</div></div>
+  <div class="kpi-card"><div class="label">Campaign revenue 7d (est)</div><div class="value">~$317.64</div><div class="delta yellow">+12%</div></div>
+  <div class="kpi-card"><div class="label">FB Spend 7d (Apr 13-19)</div><div class="value">N/A</div><div class="delta red">Pipeline stale 10d</div></div>
+  <div class="kpi-card"><div class="label">ROAS (Apr 4-10 window)</div><div class="value">~1.27x</div><div class="delta red">vs target 2.30x</div></div>
+</div>
+
+<h2>2. FB Ads Performance</h2>
+<p><code>SELECT MAX(date) FROM facebook_ad_spend</code> → <b>2026-04-10</b> (không đổi từ 2026-04-18). Khoảng trống Apr 11 → Apr 19 = 9 ngày.</p>
+<h3>Window Apr 4-10 (last usable 7d)</h3>
+<table>
+<tr><th>Campaign</th><th class="num">Spend</th><th class="num">Impr</th><th class="num">Clicks</th><th class="num">CPC</th><th class="num">CTR</th></tr>
+<tr><td>All US Shirt Product link tăng Spend 20/03</td><td class="num">$803.21</td><td class="num">44,204</td><td class="num">1,557</td><td class="num">$0.52</td><td class="num">3.52%</td></tr>
+<tr><td>Best Sellers Catalog</td><td class="num">$465.23</td><td class="num">28,164</td><td class="num">936</td><td class="num">$0.50</td><td class="num">3.32%</td></tr>
+<tr><td>Testing <span class="pill g">BEST</span></td><td class="num">$389.76</td><td class="num">23,184</td><td class="num">796</td><td class="num">$0.49</td><td class="num">3.43%</td></tr>
+<tr><td>Best Sellers <span class="pill r">WORST</span></td><td class="num">$220.45</td><td class="num">12,752</td><td class="num">340</td><td class="num">$0.65</td><td class="num">2.67%</td></tr>
+<tr><th>Total (Apr 6-10, 5 days)</th><th class="num">$1,878.65</th><th class="num">108,304</th><th class="num">3,629</th><th class="num">$0.52</th><th class="num">3.35%</th></tr>
+<tr><th>Apr 4-10 (7d aggregate)</th><th class="num">$2,929.53</th><th class="num" colspan="4" style="text-align:center" class="gray">(detail ngoài window truy vấn)</th></tr>
+</table>
+
+<h2>3. Email Performance</h2>
+<h3>Top flows theo revenue (7d)</h3>
+<table>
+<tr><th>#</th><th>Flow</th><th class="num">Rec</th><th class="num">Open</th><th class="num">Click</th><th class="num">Revenue</th></tr>
+<tr><td>1</td><td>MPG - Browse Abandonment <code>SsEfTC</code></td><td class="num">117</td><td class="num green">42.74%</td><td class="num">1.71%</td><td class="num green">$66.79</td></tr>
+<tr><td>2</td><td>MPG - Thank You Flow <code>R3WTZW</code></td><td class="num">365</td><td class="num green">43.41%</td><td class="num green">6.04%</td><td class="num green">$41.87</td></tr>
+<tr><td>3</td><td>MPG - Abandoned Add to Cart <code>Y5vBpn</code></td><td class="num">68</td><td class="num">30.88%</td><td class="num">2.94%</td><td class="num green">$32.89</td></tr>
+<tr><td>4</td><td>MPG - Shipping: Out for delivery <code>Uut24L</code></td><td class="num">79</td><td class="num green">46.84%</td><td class="num green">8.86%</td><td class="num red">$0</td></tr>
+<tr><td>5</td><td>MPG - Shipping: In transit <code>VnrPLi</code></td><td class="num">101</td><td class="num green">47.52%</td><td class="num green">17.82%</td><td class="num red">$0</td></tr>
+</table>
+<p><b>Tổng flow revenue 7d = $141.55</b> — y hệt run trước (3 flow top không đổi).</p>
+
+<h3>Flow có vấn đề</h3>
+<table>
+<tr><th>Flow</th><th class="num">Rec</th><th class="num">Open</th><th class="num">Click</th><th class="num">Rev</th><th>Vấn đề</th></tr>
+<tr><td>MPG - Welcome Series <code>Sy4yQ7</code></td><td class="num">1,430</td><td class="num">33.97%</td><td class="num red">0.64%</td><td class="num red">$0</td><td>Volume lớn nhất, $0 rev, click dở. Chưa audit.</td></tr>
+<tr><td>Fulfilled <code>UcQjaE</code></td><td class="num">201</td><td class="num green">47.76%</td><td class="num">7.46% ↓</td><td class="num red">$0</td><td>Click <b>GIẢM</b> 8.99% → 7.46% (-17%)</td></tr>
+<tr><td>MPG - Shipping: Delivered <code>WHzVmj</code></td><td class="num">168</td><td class="num">35.12%</td><td class="num red">0%</td><td class="num red">$0</td><td>Không có link clickable</td></tr>
+<tr><td>MPG - Abandoned Checkout <code>SpCgkC</code></td><td class="num">122</td><td class="num red">23.77%</td><td class="num">1.64%</td><td class="num red">$0</td><td>Open dưới 30%</td></tr>
+<tr><td>Customer Winback <code>Uheh2Y</code></td><td class="num">40</td><td class="num green">35% ↑</td><td class="num green">2.5% ↑</td><td class="num">$0</td><td>HỒI PHỤC signal (prior 27.27% / 0%)</td></tr>
+<tr><td>FD - Sunset Flow <code>XZjRWL</code></td><td class="num">10</td><td class="num">20%</td><td class="num">0%</td><td class="num">$0</td><td>Flow mới, volume chưa đủ</td></tr>
+</table>
+
+<h3>Campaigns last 7d</h3>
+<table>
+<tr><th>Campaign</th><th>Status</th><th>Send Time</th><th>Notes</th></tr>
+<tr><td>FD - Mother's Day 2026 - Email 2 - Gift Guide</td><td><span class="pill g">Sent</span></td><td>2026-04-17 17:03 UTC</td><td>A/B test; rev ~$238 (est)</td></tr>
+<tr><td>FD - Mother's Day 2026 - Email 3 (Shipping Cutoff)</td><td><span class="pill y">Draft</span></td><td>—</td><td>Cần send ~May 1</td></tr>
+<tr><td>FD - Mother's Day 2026 - Email 4 (Last Call)</td><td><span class="pill y">Draft</span></td><td>—</td><td>Cần send ~May 9</td></tr>
+<tr><td>Summer Collection 2026 Launch (x2)</td><td><span class="pill y">Draft</span></td><td>—</td><td>Tạo Apr 11, chưa schedule</td></tr>
+</table>
+<p class="green">✅ 1 campaign Sent trong 7d — điều kiện thỏa mãn.</p>
+
+<h2>4. Alerts</h2>
+<ul>
+<li><span class="pill r">RED</span> <b>FB pipeline stale 10 ngày</b> — ROAS/CAC/MER không tính được.</li>
+<li><span class="pill r">RED</span> <b>Flow revenue $141.55/7d</b> — extrapolate $607/tháng = 20% target $3,000.</li>
+<li><span class="pill r">RED</span> <b>Welcome Series Sy4yQ7</b> — 1,430 rec / $0 rev / click 0.64%.</li>
+<li><span class="pill r">RED</span> <b>Fulfilled flow click GIẢM</b> 8.99% → 7.46% (-17%).</li>
+<li><span class="pill r">RED</span> <b>ROAS ước 1.27x</b> (window Apr 4-10) vs target 2.30x.</li>
+<li><span class="pill y">YELLOW</span> Email 3 & 4 Mother's Day vẫn Draft — shipping cutoff sắp tới.</li>
+<li><span class="pill y">YELLOW</span> Winback open 35% (threshold met!) — có signal nhưng $0 rev.</li>
+<li><span class="pill g">GREEN</span> Revenue 7d +45.5% WoW — đà tăng tiếp nối.</li>
+<li><span class="pill g">GREEN</span> Browse Abandonment rev/recipient $0.57 — flow ROI top.</li>
+<li><span class="pill g">GREEN</span> Thank You Flow click 6.04% — vượt benchmark.</li>
+</ul>
+
+<h2>5. Action Items</h2>
+<h3>🟢 Green Zone (thuộc hạ tự làm)</h3>
+<ol>
+<li>Audit MPG - Welcome Series (Sy4yQ7) — draft copy mới + countdown 72h; verify: click ≥ 2% hoặc conversion_value > 0.</li>
+<li>Ship cross-sell block cho Fulfilled + Shipping:Delivered — click GIẢM 17%, cần hành động gấp; verify: Fulfilled rev > 0 hoặc click ≥ 10%.</li>
+<li>Soạn copy Winback v2 — đã có signal (open 35%), cần offer 15% để convert.</li>
+</ol>
+<h3>🟡 Yellow Zone (cần đại vương)</h3>
+<ol>
+<li>Fix Supabase <code>facebook_ad_spend</code> pipeline (carry-over lần 4).</li>
+<li>Schedule Mother's Day Email 3 (Shipping Cutoff trước May 1) & Email 4 (Last Call ~May 9).</li>
+<li>Rescale/tắt FB campaign "Best Sellers" (CPC $0.65, +44% vs benchmark).</li>
+</ol>
+
+<h2>6. Auto-check Action Items từ run trước</h2>
+<p>Prior run: <code>FD_Report_2026-04-18_PM_1902.md</code></p>
+<table>
+<tr><th>#</th><th>Item</th><th>Prior</th><th>Mới</th><th>Evidence</th></tr>
+<tr><td>1</td><td>fix-fb-pipeline</td><td>🔴</td><td>🔴 not_started</td><td>MAX(date)=2026-04-10 unchanged</td></tr>
+<tr><td>2</td><td>audit-welcome-series</td><td>🔴</td><td>🔴 not_started</td><td>click 0.64% < 2% threshold; $0 rev</td></tr>
+<tr><td>3</td><td>cross-sell-fulfilled-shipping</td><td>🟡</td><td>🔴 regressed</td><td>Fulfilled click 8.99%→7.46%; Shipping:Delivered click 0%</td></tr>
+<tr><td>4</td><td>refresh-winback</td><td>🔴</td><td>🟡 in_progress</td><td>Open 27.27% → <b>35%</b> (threshold met); click 0% → 2.5%</td></tr>
+<tr><td>5</td><td>rescale-best-sellers</td><td>⚪</td><td>⚪ cannot_verify</td><td>FB pipeline stale</td></tr>
+<tr><td>6</td><td>mothers-day-email-3-4-schedule</td><td>🔴</td><td>🔴 not_started</td><td>Cả 2 draft scheduledAt=null</td></tr>
+</table>
+
+<h2>7. Nguồn dữ liệu</h2>
+<ul>
+<li><b>[Supabase]</b> project <code>zcmvvpizoipxehximabk</code>, table <code>facebook_ad_spend</code></li>
+<li><b>[Klaviyo API]</b> MCP — flow_report, query_metric_aggregates (XaHPrt), campaigns, lists</li>
+<li><b>[Estimated]</b> Campaign rev = email rev − flow rev; ROAS = rev / spend Apr 4-10</li>
+</ul>
+
+<p class="gray">Báo cáo này + snapshot JSON được lưu tại <code>FD_Reports/</code>. Dashboard tổng: <code>FD_Reports/index.html</code>.</p>
+
+</body></html>

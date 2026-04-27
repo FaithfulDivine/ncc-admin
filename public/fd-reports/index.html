@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="vi"><head><meta charset="UTF-8"><title>FaithfulDivine Dashboard</title>
+<style>
+body{font-family:-apple-system,Segoe UI,Roboto,sans-serif;max-width:1100px;margin:24px auto;padding:0 16px;color:#1f2937;line-height:1.55}
+h1{border-bottom:2px solid #d97706;padding-bottom:6px;margin-bottom:4px}
+h2{margin-top:32px;border-left:4px solid #d97706;padding-left:10px;font-size:18px}
+.timestamp{color:#6b7280;font-size:13px;margin-bottom:18px}
+.banner{background:#fee2e2;color:#991b1b;padding:12px 16px;border-radius:6px;margin:14px 0;font-weight:600;border:1px solid #fca5a5}
+table{border-collapse:collapse;width:100%;margin:10px 0;font-size:13px}
+th,td{border:1px solid #d1d5db;padding:7px 10px;text-align:left;vertical-align:top}
+th{background:#f3f4f6}
+tr:nth-child(even){background:#fafafa}
+.kpi-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:10px;margin:14px 0}
+.kpi{background:#f9fafb;border:1px solid #e5e7eb;padding:12px;border-radius:6px;position:relative}
+.kpi .v{font-size:22px;font-weight:700;margin:4px 0}
+.kpi .l{font-size:11px;color:#6b7280;text-transform:uppercase;letter-spacing:.4px}
+.kpi .sub{font-size:12px;color:#6b7280}
+.pill{display:inline-block;padding:2px 8px;border-radius:10px;font-size:11px;font-weight:700;margin-left:4px}
+.pill.red{background:#fee2e2;color:#991b1b}
+.pill.yellow{background:#fef3c7;color:#92400e}
+.pill.green{background:#d1fae5;color:#065f46}
+.pill.gray{background:#e5e7eb;color:#374151}
+.alert{padding:8px 12px;border-radius:5px;margin:6px 0;font-size:13px}
+.alert.red{background:#fee2e2;color:#991b1b;border-left:3px solid #991b1b}
+.alert.yellow{background:#fef3c7;color:#92400e;border-left:3px solid #d97706}
+.alert.green{background:#d1fae5;color:#065f46;border-left:3px solid #065f46}
+ul.history{font-size:13px;columns:2;column-gap:24px;list-style:none;padding:0}
+ul.history li{padding:3px 0;break-inside:avoid}
+ul.history a{color:#2563eb;text-decoration:none}
+ul.history a:hover{text-decoration:underline}
+small{color:#6b7280}
+.trend-up{color:#991b1b;font-weight:600}
+.trend-down{color:#065f46;font-weight:600}
+.trend-flat{color:#6b7280}
+</style></head><body>
+
+<h1>FaithfulDivine — Dashboard CEO</h1>
+<p class="timestamp">⏱ Cập nhật gần nhất: <strong>2026-04-27 19:38 ICT</strong> · run <code>2026-04-27_PM_1938</code> · prev <code>2026-04-27_AM_0745</code></p>
+
+<div class="banner">
+🚨 Run thứ 10 liên tiếp dashboard chỉ thấy 1 nửa cơ thể FD. FB pipeline gap 7d, Klaviyo MCP unauth. Cả 5 việc Yellow Zone đều NOT_STARTED.
+</div>
+
+<h2>1. KPI 7 ngày</h2>
+<div class="kpi-grid">
+<div class="kpi"><div class="l">Doanh thu 7d</div><div class="v">N/A <span class="pill gray">unknown</span></div><div class="sub">[Klaviyo] UNAUTH run #10</div></div>
+<div class="kpi"><div class="l">Spend 7d</div><div class="v">$578.35 <span class="pill yellow">1 ngày</span></div><div class="sub">target n/a · [Supabase]</div></div>
+<div class="kpi"><div class="l">ROAS</div><div class="v">N/A <span class="pill gray">unknown</span></div><div class="sub">target 2.30x · revenue mất</div></div>
+<div class="kpi"><div class="l">Flow revenue 7d</div><div class="v">N/A <span class="pill gray">unknown</span></div><div class="sub">target ~$700/wk · [Klaviyo]</div></div>
+<div class="kpi"><div class="l">Campaign revenue 7d</div><div class="v">N/A <span class="pill gray">unknown</span></div><div class="sub">target ~$580/wk · [Klaviyo]</div></div>
+<div class="kpi"><div class="l">CPC 7d</div><div class="v">$0.53 <span class="pill yellow">+18%</span></div><div class="sub">bench $0.45</div></div>
+<div class="kpi"><div class="l">CPM 7d</div><div class="v">$19.39 <span class="pill yellow">+15%</span></div><div class="sub">bench $13.48–16.80</div></div>
+<div class="kpi"><div class="l">CTR 7d</div><div class="v">3.67% <span class="pill green">+22%</span></div><div class="sub">bench 2–3% (ecom)</div></div>
+<div class="kpi"><div class="l">FB pipeline gap</div><div class="v">7 ngày <span class="pill red">run #10</span></div><div class="sub">MAX(date)=2026-04-20</div></div>
+<div class="kpi"><div class="l">Klaviyo connector</div><div class="v">UNAUTH <span class="pill red">run #10</span></div><div class="sub">deferred list 0 matches</div></div>
+</div>
+
+<h2>2. Trend so với run trước (07:45 sáng nay)</h2>
+<table><tr><th>Chỉ số</th><th>Run trước (AM 07:45)</th><th>Run này (PM 19:38)</th><th>Trend</th></tr>
+<tr><td>Spend 7d</td><td>$578.35</td><td>$578.35</td><td><span class="trend-flat">flat</span></td></tr>
+<tr><td>CPC 7d</td><td>$0.53</td><td>$0.53</td><td><span class="trend-flat">flat</span></td></tr>
+<tr><td>CPM 7d</td><td>$19.39</td><td>$19.39</td><td><span class="trend-flat">flat</span></td></tr>
+<tr><td>CTR 7d</td><td>3.67%</td><td>3.67%</td><td><span class="trend-flat">flat</span></td></tr>
+<tr><td>FB pipeline gap</td><td>7d</td><td>7d</td><td><span class="trend-flat">flat (run #10)</span></td></tr>
+<tr><td>Klaviyo</td><td>UNAUTH</td><td>UNAUTH</td><td><span class="trend-flat">flat (run #10)</span></td></tr>
+<tr><td>Testing daily $/day</td><td>$157.02</td><td>$157.02</td><td><span class="trend-flat">flat (rescale FAILED)</span></td></tr>
+</table>
+
+<h2>3. Alerts live</h2>
+<div class="alert red">🔴 FB pipeline gap 7 ngày — run #10 không sửa. MAX(date)=2026-04-20.</div>
+<div class="alert red">🔴 Klaviyo MCP UNAUTHENTICATED — run #10. Deferred tool list 0 matches.</div>
+<div class="alert red">🔴 Summer Collection deadline 04-27 đã rơi trong ngày — không verify được (Klaviyo down).</div>
+<div class="alert yellow">🟡 Testing campaign rescale FAILED — daily $157.02 (+17% so prev_7d $134.57).</div>
+<div class="alert yellow">🟡 Best Sellers (cũ) CPC $0.80 — daily chỉ giảm 5%, vẫn chạy.</div>
+<div class="alert yellow">🟡 CPC 7d $0.53 vượt bench +17.8%; CPM $19.39 vượt bench +15.4%.</div>
+<div class="alert green">🟢 CTR 7d 3.67% vẫn vượt bench ecom (+22%).</div>
+
+<h2>4. Action Item Tracker</h2>
+
+<h3>Owner: Đại vương (Yellow Zone)</h3>
+<table><tr><th>Item</th><th>Owner</th><th>Zone</th><th>Status</th><th>Evidence</th><th>Last checked</th></tr>
+<tr><td>Fix FB ads pipeline (gap 7d)</td><td>Đại vương</td><td>🟡</td><td><span class="pill red">NOT_STARTED #10</span></td><td>MAX(date)=2026-04-20, today=2026-04-27</td><td>2026-04-27 19:38</td></tr>
+<tr><td>Reconnect Klaviyo MCP</td><td>Đại vương</td><td>🟡</td><td><span class="pill red">NOT_STARTED #10</span></td><td>deferred list grep klaviyo → 0</td><td>2026-04-27 19:38</td></tr>
+<tr><td>Quyết Testing campaign</td><td>Đại vương</td><td>🟡</td><td><span class="pill red">NOT_STARTED</span></td><td>daily $/day +17% vs prev_7d</td><td>2026-04-27 19:38</td></tr>
+<tr><td>Schedule Summer Collection (deadline 04-27)</td><td>Đại vương</td><td>🟡</td><td><span class="pill gray">CANNOT_VERIFY</span></td><td>Klaviyo down — kính xin đại vương check Klaviyo UI</td><td>2026-04-27 19:38</td></tr>
+<tr><td>Pause Best Sellers (cũ)</td><td>Đại vương</td><td>🟡</td><td><span class="pill red">NOT_STARTED</span></td><td>last_7d $/day=$47.15, CPC $0.80</td><td>2026-04-27 19:38</td></tr>
+</table>
+
+<h3>Owner: AI (Green Zone — bị chặn vì Klaviyo unauth)</h3>
+<table><tr><th>Item</th><th>Owner</th><th>Zone</th><th>Status</th><th>Evidence</th><th>Last checked</th></tr>
+<tr><td>Redraft Welcome W8UjR5</td><td>AI</td><td>🟢</td><td><span class="pill gray">CANNOT_VERIFY</span></td><td>Klaviyo unauth (run #10)</td><td>2026-04-27 19:38</td></tr>
+<tr><td>Cross-sell Fulfilled UcQjaE + Shipping WHzVmj</td><td>AI</td><td>🟢</td><td><span class="pill gray">CANNOT_VERIFY</span></td><td>Klaviyo unauth (run #10)</td><td>2026-04-27 19:38</td></tr>
+<tr><td>Rescue Abandoned Checkout SpCgkC</td><td>AI</td><td>🟢</td><td><span class="pill gray">CANNOT_VERIFY</span></td><td>Klaviyo unauth (run #10)</td><td>2026-04-27 19:38</td></tr>
+<tr><td>Scale AddToCart XsuyLK → WPtwa8/XYSm3Y</td><td>AI</td><td>🟢</td><td><span class="pill gray">CANNOT_VERIFY</span></td><td>Klaviyo unauth (run #10)</td><td>2026-04-27 19:38</td></tr>
+<tr><td>Redesign Browse Abandonment SsEfTC</td><td>AI</td><td>🟢</td><td><span class="pill gray">CANNOT_VERIFY</span></td><td>Klaviyo unauth (run #10)</td><td>2026-04-27 19:38</td></tr>
+<tr><td>Draft Summer Collection Teaser</td><td>AI</td><td>🟢</td><td><span class="pill gray">CANNOT_VERIFY</span></td><td>Klaviyo unauth (run #10)</td><td>2026-04-27 19:38</td></tr>
+<tr><td>Refresh Winback Uheh2Y</td><td>AI</td><td>🟡</td><td><span class="pill gray">CANNOT_VERIFY</span></td><td>Klaviyo unauth (run #10)</td><td>2026-04-27 19:38</td></tr>
+<tr><td>Boost flow revenue → $500/7d</td><td>AI</td><td>🟢</td><td><span class="pill gray">CANNOT_VERIFY</span></td><td>Klaviyo unauth (run #10)</td><td>2026-04-27 19:38</td></tr>
+<tr><td>Monitor Mother's Day Email 4 v4</td><td>AI</td><td>🟡</td><td><span class="pill gray">CANNOT_VERIFY</span></td><td>Klaviyo unauth (run #10)</td><td>2026-04-27 19:38</td></tr>
+</table>
+
+<h2>5. Lịch sử run</h2>
+<ul class="history">
+<li><a href="FD_Report_2026-04-27_PM_1938.md">FD_Report_2026-04-27_PM_1938</a> · <a href="FD_Report_2026-04-27_PM_1938.html">html</a></li>
+<li><a href="FD_Report_2026-04-27_AM_0745.md">FD_Report_2026-04-27_AM_0745</a> · <a href="FD_Report_2026-04-27_AM_0745.html">html</a></li>
+<li><a href="FD_Report_2026-04-26_PM_1903.md">FD_Report_2026-04-26_PM_1903</a> · <a href="FD_Report_2026-04-26_PM_1903.html">html</a></li>
+<li><a href="FD_Report_2026-04-26_AM_0002.md">FD_Report_2026-04-26_AM_0002</a> · <a href="FD_Report_2026-04-26_AM_0002.html">html</a></li>
+<li><a href="FD_Report_2026-04-25_PM_1907.md">FD_Report_2026-04-25_PM_1907</a> · <a href="FD_Report_2026-04-25_PM_1907.html">html</a></li>
+<li><a href="FD_Report_2026-04-25_AM_0842.md">FD_Report_2026-04-25_AM_0842</a> · <a href="FD_Report_2026-04-25_AM_0842.html">html</a></li>
+<li><a href="FD_Report_2026-04-24_PM_1906.md">FD_Report_2026-04-24_PM_1906</a> · <a href="FD_Report_2026-04-24_PM_1906.html">html</a></li>
+<li><a href="FD_Report_2026-04-24_AM_0922.md">FD_Report_2026-04-24_AM_0922</a> · <a href="FD_Report_2026-04-24_AM_0922.html">html</a></li>
+<li><a href="FD_Report_2026-04-23_AM_0827.md">FD_Report_2026-04-23_AM_0827</a> · <a href="FD_Report_2026-04-23_AM_0827.html">html</a></li>
+<li><a href="FD_Report_2026-04-22_PM_1906.md">FD_Report_2026-04-22_PM_1906</a> · <a href="FD_Report_2026-04-22_PM_1906.html">html</a></li>
+<li><a href="FD_Report_2026-04-21_PM_1903.md">FD_Report_2026-04-21_PM_1903</a> · <a href="FD_Report_2026-04-21_PM_1903.html">html</a></li>
+<li><a href="FD_Report_2026-04-21_AM_0706.md">FD_Report_2026-04-21_AM_0706</a> · <a href="FD_Report_2026-04-21_AM_0706.html">html</a></li>
+<li><a href="FD_Report_2026-04-20_AM_0703.md">FD_Report_2026-04-20_AM_0703</a> · <a href="FD_Report_2026-04-20_AM_0703.html">html</a></li>
+<li><a href="FD_Report_2026-04-18_PM_1902.md">FD_Report_2026-04-18_PM_1902</a> · <a href="FD_Report_2026-04-18_PM_1902.html">html</a></li>
+<li><a href="FD_Report_2026-04-18_AM_0705.md">FD_Report_2026-04-18_AM_0705</a> · <a href="FD_Report_2026-04-18_AM_0705.html">html</a></li>
+<li><a href="FD_Report_2026-04-16_AM_0709.md">FD_Report_2026-04-16_AM_0709</a> · <a href="FD_Report_2026-04-16_AM_0709.html">html</a></li>
+<li><a href="FD_Report_2026-04-12_AM_0705.md">FD_Report_2026-04-12_AM_0705</a> · <a href="FD_Report_2026-04-12_AM_0705.html">html</a></li>
+<li><a href="FD_Report_2026-04-12_AM_0254.md">FD_Report_2026-04-12_AM_0254</a> · <a href="FD_Report_2026-04-12_AM_0254.html">html</a></li>
+<li><a href="FD_Report_2026-04-12_AM_0236.md">FD_Report_2026-04-12_AM_0236</a> · <a href="FD_Report_2026-04-12_AM_0236.html">html</a></li>
+
+</ul>
+
+<hr><p><small>Sources: [Supabase] facebook_ad_spend (project zcmvvpizoipxehximabk) · [Klaviyo API] UNAUTH run #10 · Snapshot: <a href="_action_items.json">_action_items.json</a> · Báo cáo chi tiết: <a href="FD_Report_2026-04-27_PM_1938.md">FD_Report_2026-04-27_PM_1938.md</a> · <a href="FD_Report_2026-04-27_PM_1938.html">html</a></small></p>
+</body></html>

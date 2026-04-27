@@ -1,8 +1,6 @@
 -- Migration: Create Shopify Orders Cache Table
 -- Purpose: Store orders locally to avoid repeated API calls
 -- Strategy: Fetch from Shopify once, cache in DB, use cache for COGS analysis
--- Fixed 2026-04-20: PostgreSQL không hỗ trợ INDEX inside CREATE TABLE (MySQL-only).
---                  Tách INDEX ra statement CREATE INDEX riêng.
 
 -- Table to store cached Shopify orders
 CREATE TABLE IF NOT EXISTS shopify_orders_cache (
@@ -13,15 +11,12 @@ CREATE TABLE IF NOT EXISTS shopify_orders_cache (
   items_count INT NOT NULL DEFAULT 0,
   total_price DECIMAL(12, 2),
   created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
-  updated_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
-);
+  updated_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
 
-CREATE INDEX IF NOT EXISTS idx_shopify_orders_cache_order_date
-  ON shopify_orders_cache (order_date DESC);
-CREATE INDEX IF NOT EXISTS idx_shopify_orders_cache_shopify_order_id
-  ON shopify_orders_cache (shopify_order_id);
-CREATE INDEX IF NOT EXISTS idx_shopify_orders_cache_created_at
-  ON shopify_orders_cache (created_at DESC);
+  INDEX idx_order_date (order_date DESC),
+  INDEX idx_shopify_order_id (shopify_order_id),
+  INDEX idx_created_at (created_at DESC)
+);
 
 -- Table to store individual order line items for easier querying
 CREATE TABLE IF NOT EXISTS shopify_order_items (
@@ -37,17 +32,13 @@ CREATE TABLE IF NOT EXISTS shopify_order_items (
   quantity INT NOT NULL DEFAULT 1,
   price DECIMAL(10, 2),
 
-  created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
-);
+  created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
 
-CREATE INDEX IF NOT EXISTS idx_shopify_order_items_order_cache_id
-  ON shopify_order_items (order_cache_id);
-CREATE INDEX IF NOT EXISTS idx_shopify_order_items_order_date
-  ON shopify_order_items (order_date DESC);
-CREATE INDEX IF NOT EXISTS idx_shopify_order_items_sku
-  ON shopify_order_items (sku);
-CREATE INDEX IF NOT EXISTS idx_shopify_order_items_title
-  ON shopify_order_items (title);
+  INDEX idx_order_cache_id (order_cache_id),
+  INDEX idx_order_date (order_date DESC),
+  INDEX idx_sku (sku),
+  INDEX idx_title (title)
+);
 
 -- Table to track sync status
 CREATE TABLE IF NOT EXISTS shopify_sync_status (
@@ -63,10 +54,10 @@ CREATE TABLE IF NOT EXISTS shopify_sync_status (
   updated_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
 );
 
--- Insert initial sync status (chỉ 1 row nếu chưa có)
+-- Insert initial sync status
 INSERT INTO shopify_sync_status (status, sync_from_date)
-SELECT 'pending', '2020-01-01'
-WHERE NOT EXISTS (SELECT 1 FROM shopify_sync_status);
+VALUES ('pending', '2020-01-01')
+ON CONFLICT DO NOTHING;
 
 -- Table for sync schedule settings
 CREATE TABLE IF NOT EXISTS shopify_sync_settings (
@@ -93,7 +84,7 @@ ALTER TABLE shopify_order_items ENABLE ROW LEVEL SECURITY;
 ALTER TABLE shopify_sync_status ENABLE ROW LEVEL SECURITY;
 ALTER TABLE shopify_sync_settings ENABLE ROW LEVEL SECURITY;
 
--- RLS Policies - Allow read access (anon + authenticated)
+-- RLS Policies - Allow read access
 CREATE POLICY "shopify_orders_cache_read" ON shopify_orders_cache
   FOR SELECT USING (TRUE);
 
@@ -106,7 +97,7 @@ CREATE POLICY "shopify_sync_status_read" ON shopify_sync_status
 CREATE POLICY "shopify_sync_settings_read" ON shopify_sync_settings
   FOR SELECT USING (TRUE);
 
--- RLS Policies - Allow insert/update (for server side sync job)
+-- RLS Policies - Allow insert/update
 CREATE POLICY "shopify_orders_cache_write" ON shopify_orders_cache
   FOR INSERT WITH CHECK (TRUE);
 

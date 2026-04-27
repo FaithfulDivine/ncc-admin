@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<title>FD Report 2026-04-23 AM 08:27</title>
+<style>
+  body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background:#f8f7f4; color:#1f2937; max-width:1040px; margin:24px auto; padding:24px; }
+  h1 { color:#7c3aed; border-bottom: 3px solid #7c3aed; padding-bottom:8px; }
+  h2 { color:#6d28d9; margin-top:28px; }
+  h3 { color:#4c1d95; }
+  table { width:100%; border-collapse: collapse; margin:12px 0; font-size:14px; }
+  th, td { padding:8px 10px; border:1px solid #e5e7eb; text-align:left; }
+  th { background:#ede9fe; color:#4c1d95; }
+  .kpi-grid { display:grid; grid-template-columns: repeat(auto-fit, minmax(220px,1fr)); gap:12px; margin:16px 0; }
+  .kpi { background:white; border:1px solid #e5e7eb; border-radius:10px; padding:14px; }
+  .kpi .label { font-size:12px; color:#6b7280; text-transform:uppercase; letter-spacing:0.04em; }
+  .kpi .value { font-size:24px; font-weight:700; color:#111827; margin:4px 0; }
+  .kpi .delta { font-size:13px; }
+  .pill { display:inline-block; padding:2px 10px; border-radius:999px; font-size:12px; font-weight:600; }
+  .green { background:#dcfce7; color:#166534; }
+  .yellow { background:#fef9c3; color:#854d0e; }
+  .red { background:#fee2e2; color:#991b1b; }
+  .alert { border-left:4px solid; padding:10px 14px; margin:8px 0; border-radius:4px; background:white; }
+  .alert.red { border-color:#dc2626; }
+  .alert.yellow { border-color:#eab308; }
+  .alert.green { border-color:#16a34a; }
+  blockquote { border-left:4px solid #7c3aed; padding:8px 16px; color:#4b5563; background:white; border-radius:4px; }
+  code { background:#f3e8ff; padding:2px 6px; border-radius:4px; font-size:13px; }
+</style>
+</head>
+<body>
+
+<h1>FaithfulDivine — Báo cáo 12h</h1>
+<p><strong>Run ID:</strong> 2026-04-23_AM_0827 &nbsp;|&nbsp; <strong>Generated:</strong> 2026-04-23 08:27 ICT &nbsp;|&nbsp; <strong>Prior:</strong> FD_Report_2026-04-22_PM_1906.md</p>
+<blockquote>Thưa đại vương, bẩm báo tổng quan 12h vừa qua — doanh thu 7d bứt phá +49.4% nhưng 3 vấn đề đỏ cần xử: FB pipeline gap 3 ngày, W8UjR5 unsub 4.70% stuck, Mother's Day Email 3 FAIL verification.</blockquote>
+
+<h2>1. KPI Dashboard</h2>
+<div class="kpi-grid">
+  <div class="kpi"><div class="label">Revenue 7d</div><div class="value">$8,654</div><div class="delta"><span class="pill green">+49.4% WoW</span></div></div>
+  <div class="kpi"><div class="label">Orders 7d</div><div class="value">153</div><div class="delta"><span class="pill green">+44.3% WoW</span></div></div>
+  <div class="kpi"><div class="label">AOV</div><div class="value">$56.56</div><div class="delta">+3.5%</div></div>
+  <div class="kpi"><div class="label">Ad Spend 7d</div><div class="value">$2,960</div><div class="delta"><span class="pill yellow">5/7 ngày</span></div></div>
+  <div class="kpi"><div class="label">ROAS headline</div><div class="value">2.92x</div><div class="delta"><span class="pill green">&gt; 2.30 target</span></div></div>
+  <div class="kpi"><div class="label">ROAS aligned-5d</div><div class="value">1.83x</div><div class="delta"><span class="pill yellow">&lt; target</span></div></div>
+  <div class="kpi"><div class="label">Flow revenue</div><div class="value">$423.52</div><div class="delta"><span class="pill green">+24.6% WoW</span></div></div>
+  <div class="kpi"><div class="label">Campaign revenue</div><div class="value">$272.17</div><div class="delta"><span class="pill green">+498% vs prior</span></div></div>
+  <div class="kpi"><div class="label">CPC 7d</div><div class="value">$0.485</div><div class="delta"><span class="pill yellow">&gt; $0.45</span></div></div>
+  <div class="kpi"><div class="label">CTR 7d</div><div class="value">3.80%</div><div class="delta"><span class="pill green">&gt; bench</span></div></div>
+</div>
+
+<h2>2. Alerts Live</h2>
+<div class="alert red"><strong>🔴 FB pipeline gap 3 ngày</strong> — MAX(date)=2026-04-20, today=2026-04-23. Worsening từ 2d. [Supabase]</div>
+<div class="alert red"><strong>🔴 Mother's Day Email 3 $0 sau 48h</strong> — 2,360 rec, click 0.55%, rev $0. Rule verification FAILED.</div>
+<div class="alert red"><strong>🔴 Welcome Series W8UjR5 unsub 4.70%</strong> — stuck 3 run liên tiếp (4.94 → 4.72 → 4.70%). Bench × 5.9x.</div>
+<div class="alert red"><strong>🔴 Abandoned Checkout open 25.85%</strong> — dưới bench 40% tận -35%.</div>
+<div class="alert yellow"><strong>🟡 ROAS aligned 1.83x</strong> &lt; 2.30 target (nhưng +2.2% vs prior 1.79).</div>
+<div class="alert yellow"><strong>🟡 Summer Collection 2 drafts tồn 12 ngày</strong> — deadline 2026-04-27 còn 4 ngày.</div>
+<div class="alert green"><strong>🟢 Revenue +49.4% WoW</strong> — tuần tốt nhất T4/2026.</div>
+<div class="alert green"><strong>🟢 Email 2 Mother's Day</strong> — rev $272, AOV $90.72 (×1.6 AOV shop). Replicate Proverbs 31:25 hook.</div>
+<div class="alert green"><strong>🟢 AddToCart S5cUfi NEW convert $43.67</strong> — format scale work.</div>
+
+<h2>3. FB Ads Campaign Performance (7d)</h2>
+<table>
+  <tr><th>Campaign</th><th>Spend</th><th>Prior</th><th>WoW</th><th>CPC</th><th>CTR</th></tr>
+  <tr><td>All US Shirt Product link (20/03)</td><td>$1,060.17</td><td>$1,294.43</td><td>-18.1%</td><td>$0.48</td><td>3.55%</td></tr>
+  <tr><td>Testing <span class="pill yellow">⚠️ rename?</span></td><td>$836.46</td><td>$593.83</td><td><strong>+40.9%</strong></td><td>$0.49</td><td>3.98%</td></tr>
+  <tr><td>Best Sellers Catalog <span class="pill green">⭐ winner</span></td><td>$831.85</td><td>$734.10</td><td>+13.3%</td><td>$0.51</td><td><strong>4.03%</strong></td></tr>
+  <tr><td>Best Sellers</td><td>$231.88</td><td>$360.70</td><td>-35.7%</td><td>$0.42</td><td>3.66%</td></tr>
+</table>
+
+<h2>4. Email Performance 7d</h2>
+<h3>Top 5 Flows theo Revenue</h3>
+<table>
+  <tr><th>#</th><th>Flow</th><th>Rev</th><th>Open</th><th>Click</th><th>Note</th></tr>
+  <tr><td>1</td><td>Abandoned Add to Cart (Y5vBpn)</td><td><strong>$193.54</strong></td><td>34.78%</td><td>5.80%</td><td>S5cUfi NEW convert ⭐</td></tr>
+  <tr><td>2</td><td>Shipping In-transit (VnrPLi)</td><td>$77.65</td><td><strong>46.62%</strong></td><td><strong>17.57%</strong></td><td>Best-in-class template</td></tr>
+  <tr><td>3</td><td>Welcome Series (Sy4yQ7)</td><td>$73.37</td><td>34.30%</td><td>0.62%</td><td>Nhưng W8UjR5 unsub 4.7% 🔴</td></tr>
+  <tr><td>4</td><td>Review Request (YhBhYm)</td><td>$39.98</td><td>39.33%</td><td>0.67%</td><td>Steady</td></tr>
+  <tr><td>5</td><td>Thank You (R3WTZW)</td><td>$38.98</td><td>41.45%</td><td>6.99%</td><td>2 run liên rev signal</td></tr>
+  <tr><td colspan="2"><strong>TOTAL</strong></td><td><strong>$423.52</strong></td><td colspan="3">Trajectory $1,815/mo = 61% target $3,000</td></tr>
+</table>
+
+<h3>Mother's Day Campaign Series Audit</h3>
+<table>
+  <tr><th>#</th><th>Campaign</th><th>Sent</th><th>Rec</th><th>Open</th><th>Click</th><th>Unsub</th><th>Rev</th><th>AOV</th></tr>
+  <tr><td>1</td><td>Warm Up</td><td>4/12</td><td>2,049</td><td>35.88%</td><td>0.34%</td><td><span class="pill red">1.43%</span></td><td>$45.47</td><td>$45.47</td></tr>
+  <tr><td>2</td><td><strong>Gift Guide ⭐</strong></td><td>4/17</td><td>2,179</td><td><strong>36.44%</strong></td><td>0.74%</td><td>0.79%</td><td><strong>$272.17</strong></td><td><strong>$90.72</strong></td></tr>
+  <tr><td>3</td><td>Shipping Cutoff</td><td>4/21</td><td>2,360</td><td>34.06%</td><td>0.55%</td><td>0.51%</td><td><span class="pill red">$0</span></td><td>—</td></tr>
+  <tr><td>4</td><td>Last Call + Gift Card</td><td><span class="pill green">Scheduled 4/24</span></td><td>—</td><td colspan="5">Sẵn sàng bắn</td></tr>
+</table>
+
+<h2>5. Action Item Auto-Verify (Prior run)</h2>
+<table>
+  <tr><th>Prior Item</th><th>Rule</th><th>Data thực</th><th>Status</th></tr>
+  <tr><td>redraft-welcome-w8ujr5</td><td>unsub &lt; 2%</td><td>4.70% (prior 4.72%)</td><td><span class="pill red">NOT STARTED</span></td></tr>
+  <tr><td>cross-sell-fulfilled-shipping</td><td>click≥10% OR rev&gt;0</td><td>Fulfilled 5.37%/$0; Delivered 0.47%</td><td><span class="pill red">NOT STARTED</span></td></tr>
+  <tr><td>rescue-abandoned-checkout</td><td>open ≥ 35%</td><td>25.85%</td><td><span class="pill red">NOT STARTED</span></td></tr>
+  <tr><td>monitor-mothers-day-email-3</td><td>conv_val &gt; 0 trong 48h</td><td>$0 sau 48h</td><td><span class="pill red">RULE FAILED</span></td></tr>
+  <tr><td>scale-addtocart-msg-format</td><td>Y5vBpn conv_val ≥ $200</td><td>$193.54 ($6 thiếu)</td><td><span class="pill yellow">IN PROGRESS</span></td></tr>
+  <tr><td>fix-fb-pipeline-gap</td><td>MAX(date) ≥ today-1</td><td>gap 3d (WORSE)</td><td><span class="pill red">WORSENING</span></td></tr>
+  <tr><td>draft-summer-collection</td><td>Schedule trước 4/27</td><td>Vẫn 2 Draft</td><td><span class="pill red">NOT STARTED</span></td></tr>
+  <tr><td>refresh-winback</td><td>open ≥ 35% AND rev&gt;0</td><td>open 40%, rev $0</td><td><span class="pill yellow">IN PROGRESS</span></td></tr>
+  <tr><td>decide-testing-campaign</td><td>Đại vương confirm</td><td>Chưa quyết</td><td><span class="pill red">NOT STARTED</span></td></tr>
+  <tr><td>boost-flow-revenue</td><td>flow_rev ≥ $500</td><td>$423.52</td><td><span class="pill yellow">IN PROGRESS</span></td></tr>
+</table>
+
+<h2>6. Action Items mới (trước run PM hôm nay)</h2>
+
+<h3>🟢 Green Zone — thuộc hạ tự làm</h3>
+<ul>
+  <li><strong>G1.</strong> Redraft W8UjR5 warmer tone — verify: unsub_rate &lt; 2%</li>
+  <li><strong>G2.</strong> Ship cross-sell block cho Fulfilled + Shipping:Delivered (clone VnrPLi template)</li>
+  <li><strong>G3.</strong> Rescue Abandoned Checkout với personalized subject + free-ship nudge</li>
+  <li><strong>G4.</strong> Scale AddToCart msg format — clone XsuyLK sang WPtwa8, XYSm3Y</li>
+  <li><strong>G5.</strong> Redesign Browse Abandonment (4/4 msg $0)</li>
+  <li><strong>G6.</strong> Replicate Email 2 Proverbs 31:25 hook cho Summer Collection copy</li>
+</ul>
+
+<h3>🟡 Yellow Zone — cần đại vương approve</h3>
+<ul>
+  <li><strong>Y1.</strong> Fix FB pipeline — check Supabase sync + Meta API credentials (gap 3d, tệ hơn)</li>
+  <li><strong>Y2.</strong> Schedule Summer Collection — deadline 4/27 (4 ngày). Teaser 4/27 + Launch 4/30</li>
+  <li><strong>Y3.</strong> Quyết định "Testing" campaign — keep/rename/cap</li>
+  <li><strong>Y4.</strong> Confirm Winback offer 15% OFF + miễn ship</li>
+</ul>
+
+<h2>7. Tóm tắt 3 dòng</h2>
+<ol>
+  <li><strong>Revenue 7d +49.4% lên $8,654 (153 orders), ROAS headline 2.92x vượt target</strong> — Mother's Day Email 2 dẫn dắt AOV $90.72.</li>
+  <li><strong>3 vấn đề đỏ:</strong> FB pipeline gap 3 ngày (worsening), W8UjR5 unsub 4.70% stuck, Email 3 fail 48h ($0 rev).</li>
+  <li><strong>Trước run kế tiếp:</strong> thuộc hạ sẽ redraft W8UjR5 + cross-sell Fulfilled/Delivered + rescue Abandoned Checkout. Đại vương quyết Summer Collection + fix Supabase.</li>
+</ol>
+
+<p style="color:#6b7280; font-size:12px; margin-top:32px;">
+Sources: [Supabase] <code>facebook_ad_spend</code> (project zcmvvpizoipxehximabk) · [Klaviyo API] flow-values-report, campaign-values-report, metric-aggregates (XaHPrt), lists
+</p>
+</body>
+</html>

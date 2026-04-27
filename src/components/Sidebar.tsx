@@ -13,6 +13,7 @@ import {
   Megaphone,
   Truck,
   Sparkles,
+  FileText,
 } from 'lucide-react'
 import { cn } from '@/lib/utils'
 
@@ -28,6 +29,7 @@ const navItems = [
   { to: '/fb-curator', label: 'FB Best Seller', icon: Sparkles },
   { to: '/analytics/ads', label: 'Phân tích Design', icon: Activity },
   { to: '/analytics', label: 'Analytics', icon: BarChart3 },
+  { to: '/fd-reports', label: 'FD Reports', icon: FileText },
   { to: '/org', label: 'Org Chart', icon: Users },
   { to: '/settings', label: 'Settings', icon: Settings },
 ]

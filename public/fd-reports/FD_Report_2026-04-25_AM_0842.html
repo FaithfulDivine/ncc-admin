@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="vi"><head><meta charset="utf-8">
+<title>FD Report — 2026-04-25 AM</title>
+<style>
+body{font-family:-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;max-width:980px;margin:24px auto;padding:0 20px;color:#1a1a1a;line-height:1.6;background:#fafafa}
+h1{border-bottom:3px solid #4a5568;padding-bottom:8px}
+h2{border-bottom:1px solid #cbd5e0;padding-bottom:4px;margin-top:32px;color:#2d3748}
+h3{color:#4a5568;margin-top:24px}
+table{border-collapse:collapse;width:100%;margin:12px 0;font-size:14px;background:#fff}
+th,td{border:1px solid #e2e8f0;padding:8px 10px;text-align:left;vertical-align:top}
+th{background:#edf2f7;font-weight:600}
+tr:nth-child(even) td{background:#f7fafc}
+code{background:#edf2f7;padding:2px 5px;border-radius:3px;font-size:0.9em}
+blockquote{border-left:4px solid #4299e1;background:#ebf8ff;padding:8px 16px;margin:12px 0;color:#2c5282}
+hr{border:0;border-top:1px solid #cbd5e0;margin:24px 0}
+strong{color:#1a202c}
+.kpi-good{color:#22543d;background:#c6f6d5;padding:1px 6px;border-radius:3px}
+.kpi-warn{color:#7c2d12;background:#fefcbf;padding:1px 6px;border-radius:3px}
+.kpi-bad{color:#742a2a;background:#fed7d7;padding:1px 6px;border-radius:3px}
+</style></head><body>
+<h1>FaithfulDivine — Báo cáo 12h (Run AM, 2026-04-25 08:42 ICT)</h1>
+<p><strong>Run ID:</strong> <code>2026-04-25_AM_0842</code> · <strong>Prior run:</strong> <code>2026-04-24_PM_1906</code> (~13h trước) <strong>Tác giả:</strong> Thuộc hạ AI · <strong>Đích:</strong> đại vương Dinh Trong Trang</p>
+<hr>
+<h2>1. TỔNG QUAN NHANH (Bẩm đại vương)</h2>
+<table><thead><tr><th>Chỉ số</th><th>Giá trị 7d</th><th>WoW</th><th>Mục tiêu</th><th>Trạng thái</th></tr></thead><tbody>
+<tr><td><strong>Revenue 7d</strong> (04-18..04-24) [Klaviyo API]</td><td><strong>$8,932.95</strong></td><td>+30.0% vs $6,869.41</td><td>—</td><td>🟢 record T4/2026</td></tr>
+<tr><td><strong>Orders 7d</strong></td><td><strong>165</strong></td><td>+38.7% vs 119</td><td>—</td><td>🟢</td></tr>
+<tr><td><strong>AOV 7d</strong></td><td><strong>$54.14</strong></td><td>−6.3% vs $57.73</td><td>$55+</td><td>🟡 sát target</td></tr>
+<tr><td><strong>Spend 7d</strong> (chỉ 4d 04-17..04-20) [Supabase]</td><td><strong>$2,542.54</strong></td><td>—</td><td>—</td><td>🔴 pipeline gap 5d</td></tr>
+<tr><td><strong>ROAS headline</strong> (Rev/Spend)</td><td><strong>3.51x</strong></td><td>flat</td><td>2.30x</td><td>🟢 nhưng méo cửa sổ</td></tr>
+<tr><td><strong>ROAS aligned 4d</strong> (Rev 04-17..04-20 / Spend 04-17..04-20)</td><td><strong>1.75x</strong></td><td>−9% vs 1.92</td><td>2.30x</td><td>🟡 dưới target</td></tr>
+<tr><td><strong>Flow revenue 7d</strong></td><td><strong>$547.09</strong></td><td>+16.8% vs $468.48</td><td>$500/7d</td><td>✅ ĐẠT</td></tr>
+<tr><td><strong>Campaign revenue 7d</strong></td><td><strong>$407.08</strong></td><td>+49.6% vs $272.17</td><td>$577/7d (=2500/mo)</td><td>🟡 71% target</td></tr>
+<tr><td><strong>Email rev total 7d</strong></td><td><strong>$954.17</strong></td><td>+28.8% vs $740.65</td><td>—</td><td>🟢</td></tr>
+<tr><td><strong>CPC 7d</strong></td><td>$0.481</td><td>flat</td><td>$0.45</td><td>🟡</td></tr>
+<tr><td><strong>CPM 7d</strong></td><td>$18.27</td><td>flat</td><td>$13.48–16.80</td><td>🔴 vượt 8.8%</td></tr>
+<tr><td><strong>CTR 7d</strong></td><td>3.80%</td><td>flat</td><td>2.0–3.0%</td><td>🟢</td></tr>
+</tbody></table>
+<blockquote><strong>Tường trình quan trọng:</strong> Mother's Day Email 4 v4 (ID <code>01KPXRWVRXV2TM6K3Q7B11XMW7</code>) đã GỬI lúc 04-24 17:03 UTC (~00:03 ICT 04-25), sau ~7h tracking đã thu <strong>$93.95 conversion</strong> (1 đơn, AOV $93.95) — phá lời nguyền $0 của Mother's Day series. ✅ Action item #12 <strong>DONE</strong>.</blockquote>
+<hr>
+<h2>2. FB ADS PERFORMANCE [Supabase]</h2>
+<h3>2.1 Cảnh báo pipeline (CRITICAL — RUN THỨ 6 LIÊN)</h3>
+<ul><li><strong>MAX(date) = <code>2026-04-20</code></strong> trên bảng <code>facebook_ad_spend</code>. Hôm nay <code>2026-04-25</code> → <strong>gap 5 ngày, sang ngày thứ 6</strong>.</li><li>30d totals tăng nhẹ ($12,067.34 → $11,579.68 — kỳ trượt mới 26 ngày), trung bình $445/d.</li><li>Spend 7d "thực" chỉ phủ 04-17..04-20 (4 ngày), còn 04-21..04-25 vẫn thiếu data.</li><li>Nguyên nhân nhiều khả năng: Supabase/Airbyte sync lỗi từ 04-21 hoặc Meta Ads API token hết hạn.</li></ul>
+<h3>2.2 Daily breakdown (4 ngày sẵn có)</h3>
+<table><thead><tr><th>Date</th><th>Spend</th><th>Imp</th><th>Clicks</th><th>CPC</th><th>CPM</th><th>CTR</th></tr></thead><tbody>
+<tr><td>2026-04-17</td><td>$718.59</td><td>35,841</td><td>1,336</td><td>$0.54</td><td>$20.05</td><td>3.73%</td></tr>
+<tr><td>2026-04-18</td><td>$526.42</td><td>31,641</td><td>1,337</td><td>$0.39</td><td>$16.64</td><td>4.23%</td></tr>
+<tr><td>2026-04-19</td><td>$719.18</td><td>41,852</td><td>1,518</td><td>$0.47</td><td>$17.18</td><td>3.63%</td></tr>
+<tr><td>2026-04-20</td><td>$578.35</td><td>29,830</td><td>1,095</td><td>$0.53</td><td>$19.39</td><td>3.67%</td></tr>
+<tr><td><strong>Total 4d</strong></td><td><strong>$2,542.54</strong></td><td>139,164</td><td>5,286</td><td><strong>$0.48</strong></td><td><strong>$18.27</strong></td><td><strong>3.80%</strong></td></tr>
+</tbody></table>
+<h3>2.3 Campaign breakdown (4 ngày)</h3>
+<table><thead><tr><th>Campaign</th><th>Spend</th><th>Clicks</th><th>CPC</th><th>CTR</th><th>Note</th></tr></thead><tbody>
+<tr><td>All US Shirt — link tăng spend (20/03)</td><td>$882.96</td><td>1,848</td><td>$0.48</td><td>3.55%</td><td>🟢 mainstay</td></tr>
+<tr><td>Testing</td><td>$751.49</td><td>1,560</td><td>$0.48</td><td>3.98%</td><td>🟡 vẫn chiếm 30% spend</td></tr>
+<tr><td>Best Sellers Catalog</td><td>$722.47</td><td>1,416</td><td>$0.51</td><td>3.97%</td><td>🟢</td></tr>
+<tr><td>Best Sellers</td><td>$185.62</td><td>462</td><td>$0.40</td><td>3.75%</td><td>🟢 best CPC</td></tr>
+</tbody></table>
+<p>So với benchmark apparel/ecom: CPC sát target ($0.45), CTR vượt mạnh (3.80% vs 2–3%), nhưng <strong>CPM $18.27 vẫn vượt $16.80</strong> (~8.8%) — auction-cost cao tiếp diễn.</p>
+<hr>
+<h2>3. EMAIL PERFORMANCE [Klaviyo API]</h2>
+<h3>3.1 Top flows theo revenue 7d</h3>
+<table><thead><tr><th>#</th><th>Flow</th><th>Recipients</th><th>Open</th><th>Click</th><th>Rev</th><th>Note</th></tr></thead><tbody>
+<tr><td>1</td><td><strong>Y5vBpn</strong> Abandoned Add to Cart</td><td>70</td><td>37.1%</td><td>5.7%</td><td><strong>$193.54</strong></td><td>Stuck = run trước (XsuyLK $149.87, S5cUfi $43.67)</td></tr>
+<tr><td>2</td><td><strong>Sy4yQ7</strong> Welcome Series</td><td>1,813</td><td>33.6%</td><td>0.78%</td><td><strong>$107.16</strong></td><td>Vol cao, conv kém</td></tr>
+<tr><td>3</td><td><strong>WHzVmj</strong> Shipping Delivered</td><td>210</td><td>39.1%</td><td>1.43%</td><td><strong>$87.78</strong></td><td>🟢 +$87.78 vs prior $0</td></tr>
+<tr><td>4</td><td><strong>VnrPLi</strong> Shipping In transit</td><td>147</td><td>53.4%</td><td>20.5%</td><td><strong>$79.65</strong></td><td>Template vàng (giảm 10% vs prior)</td></tr>
+<tr><td>5</td><td><strong>YhBhYm</strong> Review request</td><td>170</td><td>38.2%</td><td>1.18%</td><td><strong>$39.98</strong></td><td></td></tr>
+<tr><td>6</td><td><strong>R3WTZW</strong> Thank You</td><td>442</td><td>42.9%</td><td>6.58%</td><td><strong>$38.98</strong></td><td></td></tr>
+<tr><td><strong>Tổng top 6</strong></td><td></td><td></td><td></td><td></td><td><strong>$547.09</strong></td><td>✅ Đạt mốc $500/7d</td></tr>
+</tbody></table>
+<h3>3.2 Flows có vấn đề</h3>
+<ul><li><strong>SsEfTC Browse Abandonment:</strong> rev $0 tuần thứ N. Msg <code>RcCaEn</code> unsub 9.30% (prior 10.00%) — cải thiện chút nhưng vẫn cao gấp ~12 lần benchmark.</li><li><strong>SpCgkC Abandoned Checkout:</strong> 4 messages, tổng 160 recipients, <strong>rev $0</strong>. Open trung bình 27.04% (prior 28.57% — <strong>WORSE</strong>). Action #3 regress.</li><li><strong>Uheh2Y Customer Winback:</strong> 38 recipients, open 31.58% (prior 34.48% — <strong>WORSE</strong>), rev $0 run thứ 6. Action #11 regress.</li><li><strong>UU8cbf Welcome Flow (T2.26):</strong> 185 recipients, <strong>rev $0</strong>, open 28.8% — yếu hơn series cũ Sy4yQ7.</li><li><strong>UcQjaE Fulfilled:</strong> 290 recipients, click 4.83%, <strong>rev $0</strong>.</li><li><strong>XZjRWL Sunset Flow:</strong> 137 recipients, open 10.95% — chuẩn cho dạng sunset (đang lọc list).</li></ul>
+<h3>3.3 Đốt list cảnh báo</h3>
+<ul><li><strong>W8UjR5 (Welcome Email 1):</strong> unsub_rate <strong>5.74%</strong> — prior 5.05% → <strong>WORSE run thứ 6 liên tiếp</strong>, gấp ~7.2x benchmark 0.8%. Tuần này 24 unsub trên 433 recipient. Cần redraft GẤP.</li><li>Welcome series tổng cộng 38 unsub / 1,784 delivered = 2.13%.</li></ul>
+<h3>3.4 Campaign performance 7d [Klaviyo API]</h3>
+<table><thead><tr><th>Campaign</th><th>Send</th><th>Recipients</th><th>Open</th><th>Click</th><th>Conv</th><th>Rev</th><th>AOV</th></tr></thead><tbody>
+<tr><td>Email 2 Gift Guide</td><td>04-17</td><td>2,179</td><td>36.7%</td><td>0.74%</td><td>3</td><td><strong>$272.17</strong></td><td>$90.72</td></tr>
+<tr><td>Email 3 Shipping Cutoff</td><td>04-21</td><td>2,368</td><td>35.8%</td><td>0.60%</td><td>1</td><td><strong>$40.96</strong></td><td>$40.96</td></tr>
+<tr><td><strong>Email 4 v4 Last Call</strong></td><td>04-24</td><td>2,427</td><td>20.86%</td><td>0.37%</td><td>1</td><td><strong>$93.95</strong></td><td>$93.95</td></tr>
+<tr><td><strong>Tổng 7d</strong></td><td></td><td></td><td></td><td></td><td><strong>5</strong></td><td><strong>$407.08</strong></td><td></td></tr>
+</tbody></table>
+<blockquote>Email 4 v4 mới gửi ~7h, open 20.86% còn rất sớm (chưa đủ 24h). Đã có 1 đơn $93.95 — <strong>PHÁ LỜI NGUYỀN $0</strong> của Mother's Day series.</blockquote>
+<h3>3.5 Lists & subscriber growth</h3>
+<p>7 lists hoạt động. Subcriber List (UdxzRE) là list chính, audience cho campaign 7d ~2,179–2,427 (tăng nhẹ tuần này — Email 4 audience +59 vs Email 3, +248 vs Email 2). 🟢</p>
+<hr>
+<h2>4. AUTO-CHECK ACTION ITEMS từ run 04-24 PM</h2>
+<p>Thuộc hạ tự xác minh từng item, không hỏi đại vương:</p>
+<table><thead><tr><th>#</th><th>Item</th><th>Verification</th><th>Status mới</th></tr></thead><tbody>
+<tr><td>1</td><td>Redraft Welcome W8UjR5</td><td>unsub 5.05%→<strong>5.74% (WORSE run 6)</strong></td><td>🔴 NOT STARTED</td></tr>
+<tr><td>2</td><td>Cross-sell Fulfilled+Delivered (clone VnrPLi)</td><td>UcQjaE rev $0 click 4.83%; WHzVmj <strong>rev $87.78 (+$87.78)</strong> click 1.43%</td><td>🟡 IN PROGRESS (Delivered có rev)</td></tr>
+<tr><td>3</td><td>Rescue Abandoned Checkout SpCgkC</td><td>open 28.57%→<strong>27.04% (WORSE)</strong>, rev $0</td><td>🔴 NOT STARTED (regress)</td></tr>
+<tr><td>4</td><td>Scale AddToCart Y5vBpn → ≥$200</td><td>conv_value $193.54 → <strong>$193.54 STUCK</strong></td><td>🟡 IN PROGRESS (thiếu $6.46)</td></tr>
+<tr><td>5</td><td>Redesign Browse Abandonment</td><td>SsEfTC rev $0; RcCaEn unsub 10%→9.30% (cải thiện)</td><td>🟡 IN PROGRESS (signal nhưng chưa rev)</td></tr>
+<tr><td>6</td><td>Draft Summer Collection Teaser</td><td>Vẫn 2 drafts cũ (created 04-11, 14d stale), <strong>không có draft mới</strong></td><td>🔴 NOT STARTED</td></tr>
+<tr><td>7</td><td>Boost flow rev → $500/7d</td><td>$468.48 → <strong>$547.09</strong> (+$78.61)</td><td>✅ <strong>DONE</strong></td></tr>
+<tr><td>8</td><td>Fix FB pipeline gap</td><td>MAX=04-20, gap <strong>5d (WORSE: 4d → 5d)</strong></td><td>🔴 NOT STARTED (đại vương cần escalate)</td></tr>
+<tr><td>9</td><td>Schedule Summer (deadline 04-27, còn 2d)</td><td>Không có Summer campaign Scheduled hoặc Sent</td><td>🔴 NOT STARTED</td></tr>
+<tr><td>10</td><td>Decide Testing campaign</td><td>Testing spend $751 (4d), không thay đổi (pipeline gap hạn chế verify)</td><td>⚪ CANNOT VERIFY</td></tr>
+<tr><td>11</td><td>Refresh Winback Uheh2Y</td><td>open 34.48%→<strong>31.58% (WORSE)</strong>, rev $0 run 6</td><td>🔴 NOT STARTED (regress)</td></tr>
+<tr><td>12</td><td>Monitor Mother's Day Email 4 v4</td><td><strong>Sent 04-24 17:03 UTC, conv_value $93.95 trong 7h</strong></td><td>✅ <strong>DONE</strong></td></tr>
+</tbody></table>
+<p><strong>Tổng kết auto-check:</strong> 2 ✅ DONE · 3 🟡 IN PROGRESS · 6 🔴 NOT STARTED · 1 ⚪ CANNOT VERIFY.</p>
+<p>Đáng chú ý: <strong>3 item REGRESS (worse than prior run)</strong> — W8UjR5, SpCgkC, Uheh2Y. Action item Welcome+Winback chưa execute đang để list "chảy máu".</p>
+<hr>
+<h2>5. ALERTS & ANOMALIES</h2>
+<h3>🔴 RED (cần xử lý 24–48h)</h3>
+<ol><li><strong>FB pipeline gap 5d</strong> — sang ngày thứ 6, đại vương cần escalate Supabase/Airbyte hoặc check Meta token. Mọi quyết định scale FB đều mù dữ liệu.</li><li><strong>W8UjR5 unsub 5.74%</strong> — WORSE run 6. Gấp 7.2x benchmark. Welcome Email 1 đang đốt list newsubs.</li><li><strong>SpCgkC open 27.04%</strong> — WORSE. Abandoned Checkout 4 messages = $0 rev, 160 recipients.</li><li><strong>Uheh2Y Winback open 31.58%</strong> — WORSE. Rev $0 run 6.</li><li><strong>Browse Abandonment SsEfTC rev $0</strong> — message RcCaEn unsub 9.30% vẫn cao 11.6x bench.</li></ol>
+<h3>🟡 YELLOW</h3>
+<ol><li><strong>ROAS aligned 4d 1.75x</strong> — dưới target 2.30x (gap 24%). Không cải thiện do pipeline gap không cho verify ngày mới.</li><li><strong>CPM $18.27</strong> — vượt bench $16.80 ~8.8%.</li><li><strong>Summer Collection 2 drafts tồn 14 ngày, deadline 04-27 còn 2 ngày</strong> — risk miss launch window.</li><li><strong>Campaign rev tăng nhưng vẫn 71% mục tiêu monthly</strong> ($1,745/mo trajectory vs $2,500 target).</li><li><strong>AOV $54.14 giảm −6.3% WoW</strong> — có thể do Email 3 ($40.96 AOV) và Y5vBpn AOV thấp.</li></ol>
+<h3>🟢 GREEN</h3>
+<ol><li><strong>Revenue 7d $8,932.95 (+30.0% WoW)</strong> — record T4/2026 tiếp diễn.</li><li><strong>Orders 165 (+38.7% WoW)</strong>.</li><li><strong>Flow rev $547.09 (+16.8% WoW)</strong> — vượt mốc $500/7d, đà tăng 4 run liên.</li><li><strong>Mother's Day Email 4 v4 SENT + thu $93.95 trong 7h</strong> — phá lời nguyền $0 của series.</li><li><strong>WHzVmj Shipping Delivered: $0 → $87.78</strong> — bắt đầu mở revenue cho post-purchase chain.</li><li><strong>VnrPLi In transit: click 20.5%, open 53.4%</strong> — tiếp tục là template vàng.</li><li><strong>CTR 3.80% vượt mạnh benchmark ecom</strong> (2–3%).</li></ol>
+<hr>
+<h2>6. ACTION ITEMS cho run kế tiếp (04-25 PM, ~12h tới)</h2>
+<h3>🟢 GREEN ZONE — thuộc hạ tự xử lý</h3>
+<ol><li><strong>Redraft Welcome Email 1 (W8UjR5)</strong> — value-first, hook Proverbs 31:25, delay +12h sau opt-in. Verify: unsub_rate < 0.02 trong 7d.</li><li><strong>Refresh Winback Uheh2Y subject</strong> — clone CTA pattern VnrPLi. Verify: open_rate ≥ 0.35 hoặc rev > 0.</li><li><strong>Rescue Abandoned Checkout SpCgkC</strong> — personalized subject + free-ship + countdown. Verify: open ≥ 0.35.</li><li><strong>Scale Y5vBpn XsuyLK format → WPtwa8, XYSm3Y</strong> — mở thêm $6.46 đạt rule $200. Verify: conv_value ≥ 200.</li><li><strong>Cross-sell block cho UcQjaE Fulfilled</strong> — clone VnrPLi cross-sell. Verify: Fulfilled rev > 0.</li><li><strong>Mute Browse Abandonment msg RcCaEn (unsub 9.30%)</strong> — clone VnrPLi CTA. Verify: SsEfTC rev > 0.</li></ol>
+<h3>🟡 YELLOW ZONE — đại vương quyết định</h3>
+<ol><li><strong>Fix FB pipeline gap (URGENT, 5d)</strong> — đại vương vui lòng check Supabase/Airbyte connector hoặc Meta Ads API token. <strong>CHẶN MỌI QUYẾT ĐỊNH SCALE FB.</strong></li><li><strong>Summer Collection — deadline 04-27 còn 2 ngày</strong>: thuộc hạ chuẩn bị draft Email 1 Teaser hôm nay; xin đại vương duyệt schedule (Teaser 04-26 06:00 UTC, Launch 04-30 14:00 UTC, Reminder 05-02).</li><li><strong>Decide fate of Testing campaign</strong> — đang chiếm 30% spend ($751/4d) — đại vương quyết: kill, rescale −50%, hay học tested-creative pattern.</li><li><strong>Approve schedule Email 4 v4 follow-up</strong> — Email 4 mở $93.95 trong 7h, đại vương có muốn scale Last Call lên Last 24h reminder vào 05-09 không?</li></ol>
+<hr>
+<h2>7. KPI BENCHMARK SCORECARD</h2>
+<table><thead><tr><th>KPI</th><th>FD hiện tại</th><th>Benchmark</th><th>Score</th></tr></thead><tbody>
+<tr><td>CPC</td><td>$0.48</td><td>$0.45</td><td>🟡 −7%</td></tr>
+<tr><td>CPM</td><td>$18.27</td><td>$13.48–16.80</td><td>🔴 +9%</td></tr>
+<tr><td>CTR</td><td>3.80%</td><td>2.0–3.0%</td><td>🟢 +27%</td></tr>
+<tr><td>ROAS aligned</td><td>1.75x</td><td>2.30x</td><td>🟡 −24%</td></tr>
+<tr><td>Email flow open</td><td>33–53%</td><td>40%+</td><td>🟡 mixed</td></tr>
+<tr><td>Email flow click</td><td>0.78–20.5%</td><td>3–5%</td><td>🟡 mixed</td></tr>
+<tr><td>Flow rev/mo trajectory</td><td>~$2,345</td><td>$3,000</td><td>🟡 78%</td></tr>
+<tr><td>Campaign rev/mo trajectory</td><td>~$1,745</td><td>$2,500</td><td>🟡 70%</td></tr>
+<tr><td>Unsub rate cao nhất (W8UjR5)</td><td>5.74%</td><td>< 0.5%</td><td>🔴</td></tr>
+</tbody></table>
+<hr>
+<h2>8. SUMMARY (3 dòng)</h2>
+<ol><li><strong>Doanh thu 7d $8,932.95 (+30%) — tuần kỷ lục T4/2026</strong>, flow rev $547 vượt target, Email 4 v4 đã thu $93.95 chỉ 7h sau send (phá $0 streak).</li><li><strong>3 action item REGRESS</strong> (Welcome W8UjR5, Abandoned Checkout SpCgkC, Winback Uheh2Y) + FB pipeline gap sang ngày 6 — đốt list không phanh ở welcome flow.</li><li><strong>Đại vương ưu tiên:</strong> (a) escalate Supabase/Airbyte fix pipeline, (b) duyệt Summer schedule trước 04-27, (c) còn lại thuộc hạ tự execute green-zone items.</li></ol>
+<hr>
+<p><em>Sources: [Supabase] zcmvvpizoipxehximabk/facebook_ad_spend; [Klaviyo API] flow-values-report, campaign-values-report, metric-aggregates XaHPrt, lists. Generated by automated 12h scheduled task.</em></p>
+</body></html>

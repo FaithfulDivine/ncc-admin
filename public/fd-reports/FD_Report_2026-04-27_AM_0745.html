@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="vi"><head><meta charset="UTF-8"><title>FD Report 2026-04-27_AM_0745</title>
+<style>
+*{box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Helvetica,Arial,sans-serif;max-width:1000px;margin:0 auto;padding:24px;color:#1a1a1a;background:#f5f5f7}
+h1{color:#1a1a1a} h2{color:#4338ca;border-bottom:2px solid #c7d2fe;padding-bottom:6px;margin-top:30px}
+h3{color:#312e81}
+table{border-collapse:collapse;width:100%;background:#fff;margin:10px 0;font-size:13px}
+th,td{border:1px solid #e5e7eb;padding:8px 10px;text-align:left}
+th{background:#eef2ff;color:#312e81;font-weight:600}
+.banner{background:#fee2e2;color:#991b1b;padding:14px;border-radius:8px;border-left:4px solid #dc2626;margin:14px 0}
+.alert.red{background:#fee2e2;color:#991b1b;border-left:4px solid #dc2626;padding:10px;border-radius:6px;margin:6px 0}
+.alert.yellow{background:#fef3c7;color:#854d0e;border-left:4px solid #d97706;padding:10px;border-radius:6px;margin:6px 0}
+.alert.green{background:#dcfce7;color:#166534;border-left:4px solid #16a34a;padding:10px;border-radius:6px;margin:6px 0}
+code{background:#f3f4f6;padding:1px 5px;border-radius:3px;font-size:12px}
+.back{display:inline-block;margin-bottom:14px;color:#4338ca;text-decoration:none;font-weight:600}
+.back:hover{text-decoration:underline}
+</style></head><body>
+
+<a href="index.html" class="back">← Quay lại Dashboard</a>
+<h1>FD Report — 2026-04-27 07:45 VN</h1>
+<div class="banner"><b>🔴 Run thứ 9 liên tiếp Klaviyo UNAUTH + FB pipeline gap 7 ngày (xấu thêm 1).</b><br>
+Summer Collection deadline rơi vào HÔM NAY — không verify được vì Klaviyo down.</div>
+
+<h2>1. Tổng quan nhanh</h2>
+<table>
+<tr><th>Chỉ số</th><th>Giá trị</th><th>Mục tiêu</th><th>Nguồn</th></tr>
+<tr><td>Doanh thu 7d</td><td><b>N/A</b></td><td>—</td><td>[Klaviyo] UNAUTH</td></tr>
+<tr><td>Chi quảng cáo 7d</td><td><b>$578.35</b> (1 ngày actual)</td><td>—</td><td>[Supabase]</td></tr>
+<tr><td>ROAS</td><td><b>N/A</b></td><td>2.30x</td><td>không tính được</td></tr>
+<tr><td>Flow revenue 7d</td><td><b>N/A</b></td><td>~$700/wk</td><td>[Klaviyo] UNAUTH</td></tr>
+<tr><td>Campaign revenue 7d</td><td><b>N/A</b></td><td>~$580/wk</td><td>[Klaviyo] UNAUTH</td></tr>
+<tr><td>CPC 7d</td><td><b>$0.53</b></td><td>$0.45 (+17.8% 🟡)</td><td>[Supabase]</td></tr>
+<tr><td>CPM 7d</td><td><b>$19.39</b></td><td>$13.48–16.80 (+15.4% 🟡)</td><td>[Supabase]</td></tr>
+<tr><td>CTR 7d</td><td><b>3.67%</b></td><td>2–3% (+22% 🟢)</td><td>[Supabase]</td></tr>
+</table>
+
+<h2>2. FB Ads Performance</h2>
+<h3>Daily breakdown</h3>
+<table>
+<tr><th>Ngày</th><th>Spend</th><th>Imp</th><th>Clicks</th><th>CPC</th><th>CPM</th><th>CTR</th></tr>
+<tr><td>2026-04-20</td><td>$578.35</td><td>29,830</td><td>1,095</td><td>$0.53</td><td>$19.39</td><td>3.67%</td></tr>
+<tr><td>04-21 → 04-27</td><td colspan="6"><i>missing — pipeline gap 7d</i></td></tr>
+</table>
+
+<h3>Campaign breakdown (cửa sổ 7d, tất cả từ 04-20)</h3>
+<table>
+<tr><th>Campaign</th><th>Spend</th><th>Imp</th><th>Clicks</th><th>CPC</th><th>CTR</th><th>Đánh giá</th></tr>
+<tr><td>All US Shirt … 20/03</td><td>$196.13</td><td>11,488</td><td>386</td><td>$0.51</td><td>3.36%</td><td>🟡 CPC +13%</td></tr>
+<tr><td>Best Sellers Catalog</td><td>$178.05</td><td>9,358</td><td>358</td><td>$0.50</td><td>3.83%</td><td>🟢 CTR mạnh</td></tr>
+<tr><td><b>Testing</b></td><td><b>$157.02</b></td><td>6,761</td><td>292</td><td>$0.54</td><td>4.32%</td><td>🔴 chưa rescale</td></tr>
+<tr><td>Best Sellers (cũ)</td><td>$47.15</td><td>2,223</td><td>59</td><td><b>$0.80</b></td><td>2.65%</td><td>🔴 CPC +78% bench</td></tr>
+</table>
+
+<h2>3. Email Performance</h2>
+<div class="alert red"><b>🔴 Klaviyo MCP UNAUTHENTICATED — run thứ 9.</b><br>
+Verification: deferred tools list grep <code>klaviyo</code> → 0 matches. Không pull được flow_report / campaigns / metric_aggregates / lists.</div>
+
+<h2>4. Alerts</h2>
+<div class="alert red">🔴 FB pipeline gap 7 ngày (xấu thêm 1 vs run trước)</div>
+<div class="alert red">🔴 Klaviyo MCP UNAUTH — run #9</div>
+<div class="alert red">🔴 Summer Collection deadline HÔM NAY — không verify được</div>
+<div class="alert yellow">🟡 CPM 7d $19.39 vượt bench ~15.4%</div>
+<div class="alert yellow">🟡 CPC 7d $0.53 vượt bench ~17.8%</div>
+<div class="alert yellow">🟡 Testing campaign rescale FAILED</div>
+<div class="alert yellow">🟡 Best Sellers (cũ) CPC $0.80 (+78% bench) — mới phát hiện</div>
+<div class="alert green">🟢 CTR 7d 3.67% vẫn vượt bench ~22%</div>
+
+<h2>5. Action Items</h2>
+<h3>Owner: Đại vương (Yellow Zone)</h3>
+<ol>
+<li><b>🔴 Fix FB pipeline (gap 7d)</b> — NOT_STARTED, run #9, xấu thêm 1 ngày.</li>
+<li><b>🔴 Reconnect Klaviyo MCP</b> — NOT_STARTED, run #9 chặn 8 green-zone item.</li>
+<li><b>🔴 Quyết Testing campaign</b> — verification rescale FAILED.</li>
+<li><b>🔴 Schedule Summer Collection</b> — deadline hôm nay, cannot_verify.</li>
+<li><b>🔴 Pause Best Sellers (cũ)</b> — CPC $0.80 quá đắt, mới phát hiện.</li>
+</ol>
+<h3>Owner: AI (Green Zone — đợi Klaviyo)</h3>
+<p>8 mục Welcome / Cross-sell / Abandoned Checkout / AddToCart / Browse / Summer draft / Winback / MotherDay đều ⚪ CANNOT_VERIFY.</p>
+
+<p><i>Generated 2026-04-27 07:45 VN · run_id <code>2026-04-27_AM_0745</code></i></p>
+</body></html>

@@ -16,6 +16,7 @@ import FBCuratorRunDetail from './pages/fb-curator/FBCuratorRunDetail'
 import FBCuratorConfig from './pages/fb-curator/FBCuratorConfig'
 import FBCuratorDesignBacklog from './pages/fb-curator/FBCuratorDesignBacklog'
 import AnalyticsAds from './pages/analytics/AnalyticsAds'
+import FDReports from './pages/FDReports'
 
 export default function App() {
   return (
@@ -35,6 +36,7 @@ export default function App() {
         <Route path="fb-curator/runs/:runId" element={<FBCuratorRunDetail />} />
         <Route path="analytics" element={<Analytics />} />
         <Route path="analytics/ads" element={<AnalyticsAds />} />
+        <Route path="fd-reports" element={<FDReports />} />
         <Route path="org" element={<OrgChart />} />
         <Route path="settings" element={<SettingsPage />} />
       </Route>
