@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="vi"><head><meta charset="utf-8">
+<title>FD Report 2026-04-28 AM 0339</title>
+<style>
+body{font-family:-apple-system,'Segoe UI',sans-serif;max-width:1100px;margin:30px auto;padding:0 20px;color:#222;line-height:1.55}
+h1{color:#5B2A6E;border-bottom:3px solid #5B2A6E;padding-bottom:8px}
+h2{color:#5B2A6E;margin-top:32px;border-left:5px solid #C9A961;padding-left:12px}
+h3{color:#444}
+table{border-collapse:collapse;width:100%;margin:14px 0;font-size:14px}
+th,td{border:1px solid #ddd;padding:8px 10px;text-align:left}
+th{background:#f3eef7;color:#5B2A6E}
+tr:nth-child(even){background:#fafafa}
+code{background:#f4f4f4;padding:2px 5px;border-radius:3px;font-size:13px}
+blockquote{border-left:4px solid #C9A961;padding:8px 16px;margin:16px 0;background:#fdfbf6;color:#555}
+.kpi-red{color:#c0392b;font-weight:bold}
+.kpi-yellow{color:#d68910;font-weight:bold}
+.kpi-green{color:#2e7d32;font-weight:bold}
+</style></head><body>
+<pre style="white-space:pre-wrap;font-family:inherit"># 📊 FD Report — Bẩm đại vương (2026-04-28 · AM · 0339)
+
+&gt; **Run ID:** `2026-04-28_AM_0339` · **Cadence:** Morning Briefing v2 (Phase 1)
+&gt; **Nguồn:** [Supabase] FB ads + [Klaviyo API] flows/campaigns/metric/lists — đầy đủ ✅
+
+---
+
+## 1. TỔNG QUAN NHANH
+
+| KPI | 7d | Mục tiêu | Trạng thái |
+|---|---|---|---|
+| **Revenue (Placed Order)** | $10,793.60 | — | 204 orders, AOV $52.91 |
+| **FB Ad Spend** | $5,931.53 | — | 7d full window |
+| **ROAS (Revenue / Spend)** | **1.82x** | 2.30x | 🔴 dưới target −21% |
+| **Email Flow Revenue** | $651.41 | $500 (sticky) | 🟢 DONE |
+| **Campaigns Sent 7d** | 2 (MD Email 3 + Email 4) | ≥1 | 🟢 |
+| **FB Pipeline Gap** | 1 ngày | ≤1 ngày | 🟢 FRESH (7 phiên ổn) |
+| **Klaviyo Connector** | OK | OK | 🟢 |
+
+**Ngữ cảnh:** Spend tăng vọt tuần này — Best Sellers Catalog +112% WoW ($1041 → $2208), nhưng ROAS chỉ 1.82x, thấp hơn target 21%. Thuộc hạ bẩm: tăng spend chưa đẻ ra ROAS tương xứng — ngấp nghé vùng &quot;scale lỗ&quot;, cần đại vương xem lại tỷ lệ scale từng campaign.
+
+---
+
+## 2. FB ADS PERFORMANCE [Supabase]
+
+### 2.1 Daily 7d (2026-04-21 → 2026-04-27)
+| Date | Spend | Imp | Clicks | CPC | CPM | CTR |
+|---|---|---|---|---|---|---|
+| 04-21 | $589.71 | 28,374 | 1,094 | $0.54 | $20.78 | 3.86% |
+| 04-22 | $664.22 | 31,751 | 1,175 | $0.57 | $20.92 | 3.70% |
+| 04-23 | $623.73 | 30,115 | 1,123 | $0.56 | $20.71 | 3.73% |
+| 04-24 | $1,144.57 | 56,631 | 2,331 | $0.49 | $20.21 | 4.12% |
+| 04-25 | $822.10 | 42,806 | 1,917 | $0.43 | $19.21 | 4.48% |
+| 04-26 | $1,133.91 | 58,155 | 2,564 | $0.44 | $19.50 | 4.41% |
+| 04-27 | $953.29 | 42,800 | 1,826 | $0.52 | $22.27 | 4.27% |
+| **Tổng/Avg** | **$5,931.53** | 290,632 | 12,030 | **$0.49** | **$20.51** | **4.07%** |
+
+**vs Benchmark (apparel):** CPC $0.49 vs $0.45 (+9%, hơi cao); CPM $20.51 vs $13.48–16.80 (+22% so với mức cao nhất, hơi cao); CTR 4.07% vs 1.24% (gấp 3.3x — rất tốt 🟢).
+
+### 2.2 Campaign Breakdown 7d (vs Prev 7d)
+| Campaign | 7d Spend | Prev 7d | WoW Δ | CPC | CTR | Verdict |
+|---|---|---|---|---|---|---|
+| Best Sellers Catalog | $2,208.09 | $1,041.35 | **+112%** | $0.48 | 4.40% | 🟡 scale mạnh, ROAS chưa đo riêng |
+| All US Shirt 20/03 | $1,740.50 | $1,442.94 | +21% | $0.49 | 3.65% | 🟢 ổn định |
+| **Testing** | **$1,554.09** | $1,013.49 | **+53%** | $0.47 | 4.61% | 🔴 chưa có verdict (item open) |
+| **Best Sellers (cũ)** | **$412.44** | $334.02 | +23% | **$0.68** | 3.48% | 🔴 CPC vượt benchmark 51%, pause overdue |
+| Tote Bag Testing | $16.41 | — | NEW | $0.55 | 2.89% | 🟡 micro-test mới |
+
+**30d total:** Spend $16,320.92 / 30 days · $544/day TB · CPC $0.49 · CPM $19.00 · CTR 3.84%.
+
+---
+
+## 3. EMAIL PERFORMANCE [Klaviyo API]
+
+### 3.1 Top 6 Flows by Revenue 7d
+| Flow | ID | Recipients | Open | Click | Conv $ | RPR | Note |
+|---|---|---|---|---|---|---|---|
+| MPG - Welcome Series | Sy4yQ7 | 2,261 | 32.8% | 0.9% | **$204.66** | $0.09 | 🔴 W8UjR5 unsub 4.35% |
+| MPG - Abandoned AddToCart | Y5vBpn | 64 | 45.3% | 10.9% | **$193.54** | $3.02 | 🟢 XsuyLK $149.87 dẫn đầu |
+| MPG - Shipping: Delivered | WHzVmj | 273 | 41.0% | 1.8% | $87.78 | $0.32 | 🟢 cross-sell có conversion |
+| MPG - Loyalty Onboarding | VVAHB7 | 47 | 47.8% | 6.5% | $84.49 | $1.84 | 🟢 ROI cao |
+| MPG - Abandoned Checkout | SpCgkC | 175 | 28.7% | 1.7% | $40.96 | $0.23 | 🟢 đã có conversion (FROM $0) |
+| MPG - Review Request | YhBhYm | 238 | 43.7% | 1.3% | $39.98 | $0.17 | 🟢 ổn |
+| **TỔNG** | | | | | **$651.41** | | ≥ $500 target (sticky DONE) |
+
+### 3.2 Flows Cảnh Báo
+| Flow | Issue | Số liệu |
+|---|---|---|
+| **Welcome W8UjR5** | unsub 4.35% gấp 5x ngưỡng | 597 recip, 25 unsubs, click 0.87% |
+| **Browse Abandonment SsEfTC** | unsub 3.29% + revenue $0 | 152 recip, 5 unsubs, last update 2026-03-02 |
+| **Customer Winback Uheh2Y** | open 21–26% (target ≥35%), $0 | 38 recip, last update **2025-01-14** |
+| **Sunset Flow XZjRWL Wmdv3h** | open 8.6% (rất thấp) | 164 recip — bình thường vì nhắm unengaged |
+| **Welcome Flow UU8cbf WGy5FJ** | unsub 5.26% | 40 recip — small sample nhưng cao |
+
+### 3.3 Campaigns
+- **Sent 7d (2):**
+  - 04-24 17:03 UTC — Mother&#x27;s Day Email 4 v4 (Psalm 46:5, A/B variants)
+  - 04-21 17:03 UTC — Mother&#x27;s Day Email 3 (Shipping Cutoff)
+- **Drafts pending (3):**
+  - &quot;Last Call (Ship by May 1) [REWRITE]&quot; — created 04-23, không schedule
+  - 2 Summer Collection Launch drafts — created 04-11, **đã rơi deadline 04-27**
+- **Lists:** 7 lists active, không có suy giảm bất thường.
+
+---
+
+## 4. ALERTS &amp; ANOMALIES
+
+| # | Severity | Alert |
+|---|---|---|
+| 1 | 🔴 RED | **ROAS 1.82x** dưới target 2.30x (−21%). Spend tăng nhưng return chưa kịp. |
+| 2 | 🔴 RED | **Welcome W8UjR5 unsub 4.35%** (5.4x ngưỡng 0.8%) — P0 redraft đang trễ |
+| 3 | 🔴 RED | **Browse Abandonment SsEfTC unsub 3.29%** + revenue $0 — phải redesign |
+| 4 | 🟡 YEL | **Testing campaign +53% WoW** ($1013→$1554) — chưa có verdict scale/kill |
+| 5 | 🟡 YEL | **Best Sellers (cũ) CPC $0.68** (+51% bench), spend +23% — pause overdue |
+| 6 | 🟡 YEL | **Summer Collection drafts rơi deadline 04-27** — cần schedule |
+| 7 | 🟡 YEL | **Winback subject overdue** từ 2025-01-14 (15+ tháng không refresh) |
+| 8 | 🟢 GR | FB pipeline FRESH 7 phiên liên tục (gap ≤1d) |
+| 9 | 🟢 GR | Klaviyo connector OK — token rotated 2026-04-27 vẫn hoạt động |
+| 10 | 🟢 GR | Flow revenue $651.41 ≥ $500 target — sticky DONE |
+
+---
+
+## 5. ACTION ITEMS
+
+### 5.1 Auto-Verified (run này)
+| Item | Status | Evidence |
+|---|---|---|
+| Reconnect Klaviyo MCP | ✅ DONE (FROM not_started) | klaviyo_* tools detected &amp; data returned |
+| Draft Summer Collection Teaser | ✅ DONE (FROM not_started) | 2 drafts khớp pattern đã tồn tại từ 04-11 |
+| Rescue Abandoned Checkout | ✅ DONE (FROM in_progress) | SpCgkC revenue $40.96 (&gt;$0), 1 conv |
+| Boost flow revenue $500/7d | ✅ DONE (sticky) | $651.41 |
+| Monitor Mother&#x27;s Day Email 4 | ✅ DONE (sticky) | Sent 04-24 — chuyển deep-dive sang Weekly |
+| Fix FB pipeline gap | ✅ DONE (sticky) | gap 1d ≤ 1 |
+
+### 5.2 Top 3 cần làm trước phiên kế tiếp (PM 28/04)
+
+**🟡 YELLOW ZONE — cần đại vương duyệt:**
+
+1. **PAUSE Best Sellers (cũ)** — Spend $412 7d, CPC $0.68 (+51% bench), spend WoW +23% (đáng lẽ phải giảm). Decision: pause hoặc giảm budget −70%. *Đại vương chốt 1 trong 2.*
+
+2. **DECISION Testing campaign** — Spend +53% WoW lên $1,554, CPC $0.47 ổn nhưng chưa có ROAS riêng. 3 lựa chọn: (a) keep spend hiện tại (b) scale tiếp +30% nếu CTR ≥4% (c) cap $1000/tuần đến khi đo được ROAS. *Đại vương chốt.*
+
+3. **SCHEDULE Summer Collection** — 2 drafts từ 04-11 đã rơi deadline 04-27 1 ngày. Đại vương duyệt: gửi nguyên 1 trong 2 drafts vào ngày nào? (đề xuất 04-30 09:00 ET, sau Mother&#x27;s Day window)
+
+**🟢 GREEN ZONE — thuộc hạ tự xử trước phiên PM:**
+
+4. **Redraft Welcome W8UjR5** — unsub 4.35% là P0; thuộc hạ sẽ chuẩn bị draft v2 với (a) preview text mềm hơn (b) CTA giảm aggressive (c) opt-down link thay opt-out trước CTA chính.
+
+5. **Redesign Browse Abandonment SsEfTC** — bỏ frequency cao, viết lại Email 1 với hook nhẹ hơn (faith-first, không hard sell), thêm 24h delay trước Email 2.
+
+6. **Refresh Winback Uheh2Y** — viết 3 subject line mới (test A/B/C) thay subject 15 tháng tuổi.
+
+---
+
+## 6. SCE — Scale Decision (Layer 3 — Light)
+
+**Scenario A — Aggressive Scale tiếp:** giữ Best Sellers Catalog +112%, scale Testing thêm 30%. Pros: data window dày hơn để judge winners. Cons: ROAS đã 1.82x, scale tiếp = đốt cash flow nếu không cải thiện attribution. *Risk: −10% margin tháng tới.*
+
+**Scenario B — Sustainable Scale (AI Recommendation, theo Path B):**
+- Hold Best Sellers Catalog tại level hiện tại 1 tuần để đo ROAS thực
+- Pause Best Sellers (cũ) — CPC $0.68 không cứu được
+- Cap Testing $200/day (giảm 33%) đến khi có ≥3 winning ads creative
+- Schedule Summer Collection 04-30 để bồi thêm revenue email-driven
+- Sửa 3 flow problem (Welcome / Browse / Winback) — đẩy flow revenue $650 → $1,000+
+
+**Scenario C — Defensive Pullback:** giảm spend −30% tuần tới chờ ROAS ổn. Pros: bảo toàn cash. Cons: lỡ cơ hội Mother&#x27;s Day demand window.
+
+→ **AI Recommend Scenario B** (cite Path B &quot;sustainable scale&quot;, ROAS gap −21% chưa quá xấu nhưng không nên đè spend thêm).
+
+---
+
+## 7. DECISIONS NEEDED (Layer 4)
+
+| # | Decision | Owner | Deadline | Default nếu im lặng |
+|---|---|---|---|---|
+| D1 | Pause Best Sellers (cũ) hay giảm budget? | Đại vương | PM 28/04 | Thuộc hạ giữ nguyên (item rolling forward) |
+| D2 | Testing campaign: keep / scale / cap? | Đại vương | PM 28/04 | Cap $200/day theo Scenario B |
+| D3 | Schedule Summer Collection ngày nào? | Đại vương | 29/04 sáng | Đề xuất 04-30 09:00 ET |
+| D4 | Phê duyệt thuộc hạ tự sửa Welcome/Browse/Winback content? | Đại vương | PM 28/04 | Mặc định: tự làm + báo Weekly |
+
+---
+
+**Bẩm đại vương:** dashboard tổng tại `index.html`, snapshot máy đọc tại `_action_items.json`, KPI history tại `FD_Agent/memory/_kpi_history.json` đã cập nhật. Thuộc hạ chờ duyệt 4 decisions trên.
+</pre>
+</body></html>

@@ -1,180 +1,158 @@
 <!DOCTYPE html>
-<html lang="vi"><head><meta charset="UTF-8"><title>FaithfulDivine — FD Agent v2 Dashboard</title>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<title>FaithfulDivine — AI Executive Dashboard</title>
 <style>
-body{font-family:-apple-system,Segoe UI,Roboto,sans-serif;max-width:1180px;margin:24px auto;padding:0 16px;color:#1f2937;line-height:1.55;background:#fafbfc}
-h1{border-bottom:2px solid #d97706;padding-bottom:6px;margin-bottom:4px}
-h2{margin-top:32px;border-left:4px solid #d97706;padding-left:10px;font-size:18px}
-h3{font-size:15px;margin-top:18px;color:#374151}
-.timestamp{color:#6b7280;font-size:13px;margin-bottom:18px}
-.banner{padding:14px 18px;border-radius:8px;margin:14px 0;font-weight:600}
-.banner.red{background:#fee2e2;color:#991b1b;border:1px solid #fca5a5}
-.banner.green{background:#d1fae5;color:#065f46;border:1px solid #6ee7b7}
-.banner.blue{background:#dbeafe;color:#1e40af;border:1px solid #93c5fd}
-table{border-collapse:collapse;width:100%;margin:10px 0;font-size:13px;background:#fff}
-th,td{border:1px solid #e5e7eb;padding:8px 10px;text-align:left;vertical-align:top}
-th{background:#f3f4f6}
-tr:nth-child(even){background:#fafafa}
-.kpi-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px;margin:14px 0}
-.kpi{background:#fff;border:1px solid #e5e7eb;padding:14px;border-radius:8px;box-shadow:0 1px 2px rgba(0,0,0,0.04)}
-.kpi .v{font-size:24px;font-weight:700;margin:6px 0;color:#111827}
-.kpi .l{font-size:11px;color:#6b7280;text-transform:uppercase;letter-spacing:.4px}
-.kpi .sub{font-size:12px;color:#6b7280;margin-top:4px}
-.pill{display:inline-block;padding:2px 8px;border-radius:10px;font-size:11px;font-weight:700;margin-left:4px}
-.pill.red{background:#fee2e2;color:#991b1b}.pill.yellow{background:#fef3c7;color:#92400e}
-.pill.green{background:#d1fae5;color:#065f46}.pill.gray{background:#e5e7eb;color:#374151}
-.pill.blue{background:#dbeafe;color:#1e40af}
-.alert{padding:9px 13px;border-radius:5px;margin:6px 0;font-size:13px}
-.alert.red{background:#fee2e2;color:#991b1b;border-left:3px solid #991b1b}
-.alert.yellow{background:#fef3c7;color:#92400e;border-left:3px solid #d97706}
-.alert.green{background:#d1fae5;color:#065f46;border-left:3px solid #065f46}
-.score-bar{height:18px;background:#e5e7eb;border-radius:9px;overflow:hidden;margin:6px 0}
-.score-fill{height:100%;background:linear-gradient(90deg,#dc2626 0%,#f59e0b 50%,#10b981 100%);transition:width .4s}
-.tabs{display:flex;gap:8px;margin:14px 0;flex-wrap:wrap}
-.tab{padding:8px 14px;background:#fff;border:1px solid #e5e7eb;border-radius:6px;text-decoration:none;color:#374151;font-size:13px;font-weight:500}
-.tab:hover{background:#f3f4f6}
-.tab.active{background:#1e40af;color:#fff;border-color:#1e40af}
-ul.history{font-size:13px;columns:2;column-gap:24px;list-style:none;padding:0}
-ul.history li{padding:3px 0;break-inside:avoid}
-ul.history a{color:#2563eb;text-decoration:none}
-ul.history a:hover{text-decoration:underline}
-small{color:#6b7280}
-.badge{display:inline-block;padding:1px 6px;background:#1e40af;color:#fff;font-size:10px;font-weight:700;border-radius:4px;margin-left:6px}
-</style></head><body>
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; max-width: 1180px; margin: 24px auto; padding: 0 16px; color: #1e293b; line-height: 1.5; background: #f8fafc; }
+  h1 { color: #1e3a8a; border-bottom: 3px solid #1e3a8a; padding-bottom: 6px; margin-bottom: 4px; }
+  h2 { color: #1e40af; margin-top: 30px; border-left: 4px solid #1e40af; padding-left: 12px; }
+  h3 { color: #2563eb; margin-top: 22px; }
+  .banner { background: linear-gradient(135deg, #1e3a8a, #2563eb); color: white; padding: 14px 18px; border-radius: 10px; margin: 12px 0 22px; }
+  .banner-meta { font-size: 13px; opacity: 0.85; margin-top: 4px; }
+  .kpi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px,1fr)); gap: 12px; }
+  .kpi-card { padding: 14px 16px; background: white; border-radius: 10px; border-left: 4px solid #16a34a; box-shadow: 0 1px 3px rgba(0,0,0,0.06); }
+  .kpi-card.bad { border-left-color: #dc2626; }
+  .kpi-label { font-size: 11px; color: #64748b; text-transform: uppercase; letter-spacing: 0.5px; }
+  .kpi-value { font-size: 24px; font-weight: 700; color: #1e3a8a; margin: 3px 0; }
+  .kpi-target { font-size: 11px; color: #94a3b8; }
+  .kpi-sub { font-size: 12px; color: #64748b; margin-top: 4px; }
+  .alert-red { background: #fef2f2; border-left: 4px solid #dc2626; padding: 8px 12px; margin: 6px 0; border-radius: 4px; font-size: 13.5px; }
+  .alert-yellow { background: #fffbeb; border-left: 4px solid #f59e0b; padding: 8px 12px; margin: 6px 0; border-radius: 4px; font-size: 13.5px; }
+  .alert-green { background: #f0fdf4; border-left: 4px solid #16a34a; padding: 8px 12px; margin: 6px 0; border-radius: 4px; font-size: 13.5px; }
+  table { width: 100%; border-collapse: collapse; margin: 8px 0; font-size: 13px; background: white; border-radius: 6px; overflow: hidden; }
+  th { background: #1e3a8a; color: white; padding: 8px 10px; text-align: left; font-size: 12px; }
+  td { padding: 7px 10px; border-bottom: 1px solid #e2e8f0; vertical-align: top; }
+  tr:nth-child(even) td { background: #f8fafc; }
+  .pill { display: inline-block; padding: 2px 8px; border-radius: 12px; font-size: 11px; font-weight: 600; }
+  .pill.green { background: #dcfce7; color: #166534; }
+  .pill.yellow { background: #fef3c7; color: #92400e; }
+  .pill.done { background: #dcfce7; color: #166534; }
+  .pill.prog { background: #fef3c7; color: #92400e; }
+  .pill.miss { background: #fee2e2; color: #991b1b; }
+  code { background: #f1f5f9; padding: 1px 6px; border-radius: 4px; font-size: 12px; }
+  .trend ul { margin: 6px 0 0 18px; }
+  .trend li { margin-bottom: 3px; font-size: 14px; }
+  details { background: white; border-radius: 6px; padding: 8px 12px; margin: 6px 0; }
+  details summary { cursor: pointer; font-weight: 600; color: #1e40af; }
+  .footer { margin-top: 40px; padding-top: 14px; border-top: 1px solid #cbd5e1; font-size: 12px; color: #64748b; text-align: center; }
+  .quicklinks { display: flex; gap: 8px; flex-wrap: wrap; margin: 14px 0 6px; }
+  .quicklinks a { padding: 7px 13px; background: white; border: 1px solid #e2e8f0; border-radius: 6px; text-decoration: none; color: #1e40af; font-size: 13px; font-weight: 500; transition: all .15s; }
+  .quicklinks a:hover { background: #eff6ff; border-color: #93c5fd; }
+</style>
+</head>
+<body>
+<h1>📊 FaithfulDivine — AI Executive Dashboard</h1>
+<div class="banner">
+  <div><strong>Cập nhật gần nhất:</strong> Tuesday, 2026-04-28 19:07 VN (UTC+7) · Run <code>2026-04-28_PM_1907</code></div>
+  <div class="banner-meta">Phase 2 — FD Agent v2 cadence reporting · Auto-verified 17 action items · 2 status flips logged</div>
 
-<h1>FaithfulDivine Dashboard <span class="badge">FD AGENT v2</span></h1>
-<p class="timestamp">⏱ Cập nhật gần nhất: <strong>2026-04-27 20:55 ICT</strong> · run <code>FD_Pulse_2026-04-27_PM_2055</code> (PM Pulse đầu tiên theo Agent v2 spec)</p>
-
-<div class="banner blue">
-🎉 <strong>FD Agent v2 đã hoạt động.</strong> Tất cả Phase 1-5 hoàn thành trong 1 phiên này. Đại vương chỉ cần làm 2 việc Human (H1+H2) để unblock toàn bộ AI workflow.
+<div class="quicklinks">
+  <a href="/fd-reports/memory/_roadmap.md">🗺 Roadmap Q2</a>
+  <a href="/fd-reports/memory/_okrs.md">🎯 OKRs</a>
+  <a href="/fd-reports/memory/_decisions.json">📜 Decisions Log</a>
+  <a href="/fd-reports/memory/_lessons.json">💡 Lessons</a>
+  <a href="/fd-reports/memory/_kpi_history.json">📈 KPI History</a>
+  <a href="/fd-reports/_action_items.json">📋 Action Items JSON</a>
+</div>
 </div>
 
-<div class="tabs">
-  <a class="tab active" href="#overview">📊 Overview</a>
-  <a class="tab" href="memory/_roadmap.md">🗺 Roadmap Q2</a>
-  <a class="tab" href="memory/_okrs.md">🎯 OKRs</a>
-  <a class="tab" href="memory/_decisions.json">📜 Decisions Log</a>
-  <a class="tab" href="memory/_lessons.json">💡 Lessons</a>
-  <a class="tab" href="memory/_kpi_history.json">📈 KPI History</a>
-  <a class="tab" href="FD_Pulse_2026-04-27_PM_2055.md">📝 Latest report</a>
+<h2>🎯 KPI Overview (7-day rolling)</h2>
+<div class="kpi-grid"><div class="kpi-card good"><div class="kpi-label">Revenue 7d</div><div class="kpi-value">$10,793.60</div><div class='kpi-sub'>204 orders · AOV $52.91</div></div>
+<div class="kpi-card good"><div class="kpi-label">Spend 7d</div><div class="kpi-value">$6,000.54</div><div class='kpi-sub'>Pipeline gap 1d ✅</div></div>
+<div class="kpi-card bad"><div class="kpi-label">ROAS 7d</div><div class="kpi-value">1.8x</div><div class='kpi-target'>target 2.30x</div><div class='kpi-sub'>🔴 −22% gap</div></div>
+<div class="kpi-card bad"><div class="kpi-label">Flow Rev 7d</div><div class="kpi-value">$461.56</div><div class='kpi-target'>target $500</div><div class='kpi-sub'>🟡 −29% vs AM</div></div>
+<div class="kpi-card good"><div class="kpi-label">Campaigns Sent 7d</div><div class="kpi-value">2</div><div class='kpi-target'>target 1+/tuần</div><div class='kpi-sub'>✅ 2 MD campaigns</div></div>
+<div class="kpi-card good"><div class="kpi-label">CPC / CTR 7d</div><div class="kpi-value">$0.49 / 4.14%</div><div class='kpi-sub'>bench $0.45 / 1.24%</div></div></div>
+
+<h2>📈 Trend vs Run trước</h2>
+<div class="trend">Prior run <code>2026-04-28_AM_0336</code><ul><li>ROAS: <strong>1.8x</strong> (vs 1.859x prior run, Δ-0.06x)</li><li>Flow rev 7d: <strong>$461.56</strong> (vs $651.41 prior run, Δ$-189.85 / -29.1%)</li><li>Spend 7d: <strong>$6,000.54</strong></li><li>Revenue 7d: <strong>$10,793.60</strong> (204 orders)</li></ul></div>
+
+<h2>🚨 Live Alerts</h2>
+<div class="alert-red">ROAS 7d 1.8x dưới target 2.30x (−22%) — Best Sellers Catalog top spender 37% nhưng ROAS attribution chưa rõ</div>
+<div class="alert-red">Welcome Series W8UjR5 unsub 3.59% (improved từ 4.35% AM, vẫn 4.5x ngưỡng 0.8%) — P0 redraft</div>
+<div class="alert-red">Browse Abandonment SsEfTC unsub 3.82% (xấu đi từ 3.29% AM); message RcCaEn cá biệt 15.6% — pause khẩn</div>
+<div class="alert-yellow">Flow rev $461.56 < $500 target (drop −29% từ AM $651.41 do attribution window xoay). Lần FAIL #1 — fail tiếp run kế → BLOCKED</div>
+<div class="alert-yellow">Testing campaign $1,570.88 (+1.1% từ AM $1,553) — verdict scale/kill chưa có</div>
+<div class="alert-yellow">Best Sellers (cũ) $415.81 spend, CPC $0.68 (+51% benchmark) — pause overdue</div>
+<div class="alert-yellow">Summer Collection 0 drafts (corrected) — deadline 04-27 rơi 2 ngày</div>
+<div class="alert-yellow">Winback Uheh2Y open 27.8% < 35% target, $0 revenue 7d</div>
+<div class="alert-green">FB pipeline FRESH — gap 1 ngày, 8 phiên liên tục</div>
+<div class="alert-green">Klaviyo connector OK — 4 endpoints pull thành công</div>
+
+<h2>📋 Action Item Tracker — auto-verified</h2>
+<table>
+  <thead><tr><th>ID</th><th>Title</th><th>Owner</th><th>Zone</th><th>Status</th><th>Evidence</th><th>Last checked</th></tr></thead>
+  <tbody><tr><td><code>fix-fb-pipeline-gap</code></td><td>Fix FB ads pipeline — gap 7d, run #10 không sửa.</td><td>Đại vương</td><td><span class="pill yellow">🟡</span></td><td><span class="pill done">✅ DONE</span></td><td>MAX(date)=2026-04-27, today=2026-04-28, gap=1d ≤ 1 ✅ (sticky)</td><td>2026-04-28 19:07</td></tr>
+<tr><td><code>reconnect-klaviyo-mcp</code></td><td>P0: Reconnect Klaviyo MCP — toàn bộ tool email báo unauth (run #10)</td><td>Đại vương</td><td><span class="pill yellow">🟡</span></td><td><span class="pill done">✅ DONE</span></td><td>Klaviyo flow_report + campaigns + metric_aggregates + lists tất cả pull 200 OK ✅ (sticky)</td><td>2026-04-28 19:07</td></tr>
+<tr><td><code>decide-testing-campaign</code></td><td>Quyết Testing campaign — verification rescale FAILED.</td><td>Đại vương</td><td><span class="pill yellow">🟡</span></td><td><span class="pill miss">🔴 NOT STARTED</span></td><td>Testing 7d spend $1570.88 (vs AM run $1553.61, +1.1%) — verification rule FAIL, đại vương chưa quyết</td><td>2026-04-28 19:07</td></tr>
+<tr><td><code>schedule-summer-collection</code></td><td>Schedule Summer Collection — deadline 04-27 đã rơi</td><td>Đại vương</td><td><span class="pill yellow">🟡</span></td><td><span class="pill miss">🔴 NOT STARTED</span></td><td>0 campaign Summer Collection scheduled/sent — deadline 04-27 đã rơi 2 ngày</td><td>2026-04-28 19:07</td></tr>
+<tr><td><code>pause-best-sellers-old</code></td><td>Pause Best Sellers (cũ) — CPC $0.80 (+78% bench)</td><td>Đại vương</td><td><span class="pill yellow">🟡</span></td><td><span class="pill miss">🔴 NOT STARTED</span></td><td>Best Sellers (cũ) 7d spend $415.81 (vs AM $412.44), CPC $0.68 vẫn vượt benchmark 51%</td><td>2026-04-28 19:07</td></tr>
+<tr><td><code>redraft-welcome-w8ujr5</code></td><td>Redraft Welcome Series Email 1 (W8UjR5)</td><td>AI</td><td><span class="pill green">🟢</span></td><td><span class="pill prog">🟡 IN PROGRESS</span></td><td>W8UjR5: unsub 3.59% (improved từ 4.35%, nhưng vẫn 4.5x ngưỡng 0.8%); open 38.9%, click 1.0%; updated 2026-03-02 — chưa redraft</td><td>2026-04-28 19:07</td></tr>
+<tr><td><code>cross-sell-fulfilled-shipping</code></td><td>Ship cross-sell block cho Fulfilled (UcQjaE) + Shipping:Delivered (WHzVmj)</td><td>AI</td><td><span class="pill green">🟢</span></td><td><span class="pill prog">🟡 IN PROGRESS</span></td><td>Delivered WHzVmj rev $87.78 (sticky DONE phần Delivered ✅). Fulfilled UcQjaE: rev $0, click 5.50%, open 48.0% — block cross-sell vẫn chưa kích</td><td>2026-04-28 19:07</td></tr>
+<tr><td><code>rescue-abandoned-checkout</code></td><td>Rescue Abandoned Checkout (SpCgkC)</td><td>AI</td><td><span class="pill green">🟢</span></td><td><span class="pill done">✅ DONE</span></td><td>SpCgkC: rev $40.96, conv 1, open 31.4% (rule ≥35% FAIL lần 1 — giữ sticky DONE; nếu fail tiếp run kế → BLOCKED)</td><td>2026-04-28 19:07</td></tr>
+<tr><td><code>scale-addtocart-msg-format</code></td><td>Scale AddToCart XsuyLK format → WPtwa8, XYSm3Y</td><td>AI</td><td><span class="pill green">🟢</span></td><td><span class="pill prog">🟡 IN PROGRESS</span></td><td>Y5vBpn agg rev 7d = $43.67 (&lt; $200 target). XsuyLK $0 (giảm từ $149.87 AM), WPtwa8 $0, XYSm3Y $0, S5cUfi $43.67 (mới có conv) — format scale chưa thành công</td><td>2026-04-28 19:07</td></tr>
+<tr><td><code>redesign-browse-abandonment</code></td><td>Redesign Browse Abandonment (SsEfTC)</td><td>AI</td><td><span class="pill green">🟢</span></td><td><span class="pill miss">🔴 NOT STARTED</span></td><td>SsEfTC: rev $0, open 34.4%, unsub 3.82% (msg RcCaEn cá biệt 15.6% — extreme!), updated 2026-03-02 — chưa redesign</td><td>2026-04-28 19:07</td></tr>
+<tr><td><code>draft-summer-collection-teaser</code></td><td>Draft Summer Collection Email 1 (Teaser)</td><td>AI</td><td><span class="pill green">🟢</span></td><td><span class="pill miss">🔴 NOT STARTED</span></td><td>0 Summer Collection draft trong Klaviyo (corrected: AM run match nhầm Mother's Day pattern). Cần thuộc hạ tự draft trong run kế</td><td>2026-04-28 19:07</td></tr>
+<tr><td><code>refresh-winback</code></td><td>Refresh Winback Uheh2Y subject</td><td>AI</td><td><span class="pill yellow">🟡</span></td><td><span class="pill miss">🔴 NOT STARTED</span></td><td>Uheh2Y: open 27.8% (T3cbMJ 22.2% / W5Eaxt 33.3%), click 0%, rev $0, updated 2025-01-14 — subject chưa refresh</td><td>2026-04-28 19:07</td></tr>
+<tr><td><code>boost-flow-revenue</code></td><td>Boost flow revenue → $500/7d</td><td>AI</td><td><span class="pill green">🟢</span></td><td><span class="pill prog">🟡 IN PROGRESS</span></td><td>Flow rev 7d = $461.56 &lt; $500 target (drop −29% từ AM $651.41). Y5vBpn XsuyLK $149.87 → $0, YhBhYm $39.98 → $0 (attribution rolled out của 7d window). 1st rule FAIL — downgrade DONE→IN_PROGRESS</td><td>2026-04-28 19:07</td></tr>
+<tr><td><code>monitor-motherday-email4</code></td><td>Monitor Mother's Day Email 4 v4</td><td>AI</td><td><span class="pill yellow">🟡</span></td><td><span class="pill done">✅ DONE</span></td><td>Mother's Day Email 4 v4 (Psalm 46:5) Sent 2026-04-24 17:03 UTC ✅ (sticky); deep dive performance → Weekly Review</td><td>2026-04-28 19:07</td></tr>
+<tr><td><code>rescale-roas-below-target</code></td><td>ROAS 7d = 1.82x dưới target 2.30x — cần review scale strategy</td><td>Đại vương</td><td><span class="pill yellow">🟡</span></td><td><span class="pill miss">🔴 NOT STARTED</span></td><td>Spend 7d $6000.54, Revenue 7d $10793.60 → ROAS 1.8x (target 2.30x, gap −22%). Best Sellers Catalog $2,241 (37% spend) → cần ROAS attribution detail. Đại vương chưa quyết rescale strategy</td><td>2026-04-28 19:07</td></tr>
+<tr><td><code>fix-welcome-w8ujr5-unsub-spike</code></td><td>Welcome W8UjR5 unsub 4.35% (5x ngưỡng) — escalate redraft P0</td><td>AI</td><td><span class="pill green">🟢</span></td><td><span class="pill prog">🟡 IN PROGRESS</span></td><td>Tied to #6 redraft-welcome-w8ujr5; W8UjR5 unsub 3.59% (cải thiện 0.76pp), nhưng vẫn 4.5x ngưỡng → chờ redraft & test</td><td>2026-04-28 19:07</td></tr>
+<tr><td><code>fix-browse-abandonment-unsub-spike</code></td><td>Browse Abandonment SsEfTC unsub 3.29% — redesign content + frequency</td><td>AI</td><td><span class="pill green">🟢</span></td><td><span class="pill miss">🔴 NOT STARTED</span></td><td>SsEfTC unsub 3.82% (xấu đi từ 3.29% AM, message RcCaEn riêng 15.6%); 5 unsubs / 131 recipients — vẫn 4.8x ngưỡng</td><td>2026-04-28 19:07</td></tr></tbody>
+</table>
+
+<h2>🧾 FB Ads — Campaign Breakdown 7d</h2>
+<table>
+  <thead><tr><th>Campaign</th><th>Spend</th><th>CPC</th><th>CTR</th></tr></thead>
+  <tbody><tr><td>Best Sellers Catalog</td><td>$2,241.22</td><td>$0.49</td><td>4.40%</td></tr>
+<tr><td>All US Shirt Product link tăng Spend Campain 20/03</td><td>$1,756.09</td><td>$0.49</td><td>3.65%</td></tr>
+<tr><td>Testing</td><td>$1,570.88</td><td>$0.47</td><td>4.62%</td></tr>
+<tr><td>Best Sellers</td><td>$415.81</td><td>$0.68</td><td>3.47%</td></tr>
+<tr><td>Tote Bag Testing</td><td>$16.54</td><td>$0.55</td><td>2.84%</td></tr></tbody>
+</table>
+
+<h2>📧 Email Flows — Top by Revenue 7d</h2>
+<table>
+  <thead><tr><th>Flow</th><th>Recipients</th><th>Open</th><th>Click</th><th>Conv</th><th>Revenue</th></tr></thead>
+  <tbody><tr><td>Welcome Series <code>Sy4yQ7</code></td><td>2032</td><td>33.2%</td><td>0.9%</td><td>4</td><td>$204.66</td></tr>
+<tr><td>Delivered <code>WHzVmj</code></td><td>218</td><td>44.0%</td><td>1.8%</td><td>2</td><td>$87.78</td></tr>
+<tr><td>Loyalty Onboarding <code>VVAHB7</code></td><td>45</td><td>50.0%</td><td>6.8%</td><td>1</td><td>$84.49</td></tr>
+<tr><td>Abandoned Add to Cart <code>Y5vBpn</code></td><td>57</td><td>45.6%</td><td>10.5%</td><td>1</td><td>$43.67</td></tr>
+<tr><td>Abandoned Checkout <code>SpCgkC</code></td><td>157</td><td>31.4%</td><td>1.9%</td><td>1</td><td>$40.96</td></tr>
+<tr><td>In Transit <code>VnrPLi</code></td><td>134</td><td>57.9%</td><td>22.6%</td><td>0</td><td>$0.00</td></tr>
+<tr><td>Sunset Flow <code>XZjRWL</code></td><td>344</td><td>12.6%</td><td>0.3%</td><td>0</td><td>$0.00</td></tr>
+<tr><td>Browse Abandonment <code>SsEfTC</code></td><td>131</td><td>34.4%</td><td>3.8%</td><td>1</td><td>$0.00</td></tr></tbody>
+</table>
+
+<h2>🗓 Lịch sử run</h2>
+<details><summary>Toàn bộ FD_Report files (21)</summary>
+<table><thead><tr><th>Markdown</th><th>HTML</th></tr></thead><tbody><tr><td><a href='FD_Report_2026-04-28_PM_1907.md'>FD_Report_2026-04-28_PM_1907.md</a></td><td><a href='FD_Report_2026-04-28_PM_1907.html'>html</a></td></tr>
+<tr><td><a href='FD_Report_2026-04-28_AM_0339.md'>FD_Report_2026-04-28_AM_0339.md</a></td><td><a href='FD_Report_2026-04-28_AM_0339.html'>html</a></td></tr>
+<tr><td><a href='FD_Report_2026-04-27_PM_1938.md'>FD_Report_2026-04-27_PM_1938.md</a></td><td><a href='FD_Report_2026-04-27_PM_1938.html'>html</a></td></tr>
+<tr><td><a href='FD_Report_2026-04-27_AM_0745.md'>FD_Report_2026-04-27_AM_0745.md</a></td><td><a href='FD_Report_2026-04-27_AM_0745.html'>html</a></td></tr>
+<tr><td><a href='FD_Report_2026-04-26_PM_1903.md'>FD_Report_2026-04-26_PM_1903.md</a></td><td><a href='FD_Report_2026-04-26_PM_1903.html'>html</a></td></tr>
+<tr><td><a href='FD_Report_2026-04-26_AM_0002.md'>FD_Report_2026-04-26_AM_0002.md</a></td><td><a href='FD_Report_2026-04-26_AM_0002.html'>html</a></td></tr>
+<tr><td><a href='FD_Report_2026-04-25_PM_1907.md'>FD_Report_2026-04-25_PM_1907.md</a></td><td><a href='FD_Report_2026-04-25_PM_1907.html'>html</a></td></tr>
+<tr><td><a href='FD_Report_2026-04-25_AM_0842.md'>FD_Report_2026-04-25_AM_0842.md</a></td><td><a href='FD_Report_2026-04-25_AM_0842.html'>html</a></td></tr>
+<tr><td><a href='FD_Report_2026-04-24_PM_1906.md'>FD_Report_2026-04-24_PM_1906.md</a></td><td><a href='FD_Report_2026-04-24_PM_1906.html'>html</a></td></tr>
+<tr><td><a href='FD_Report_2026-04-24_AM_0922.md'>FD_Report_2026-04-24_AM_0922.md</a></td><td><a href='FD_Report_2026-04-24_AM_0922.html'>html</a></td></tr>
+<tr><td><a href='FD_Report_2026-04-23_AM_0827.md'>FD_Report_2026-04-23_AM_0827.md</a></td><td><a href='FD_Report_2026-04-23_AM_0827.html'>html</a></td></tr>
+<tr><td><a href='FD_Report_2026-04-22_PM_1906.md'>FD_Report_2026-04-22_PM_1906.md</a></td><td><a href='FD_Report_2026-04-22_PM_1906.html'>html</a></td></tr>
+<tr><td><a href='FD_Report_2026-04-21_PM_1903.md'>FD_Report_2026-04-21_PM_1903.md</a></td><td><a href='FD_Report_2026-04-21_PM_1903.html'>html</a></td></tr>
+<tr><td><a href='FD_Report_2026-04-21_AM_0706.md'>FD_Report_2026-04-21_AM_0706.md</a></td><td><a href='FD_Report_2026-04-21_AM_0706.html'>html</a></td></tr>
+<tr><td><a href='FD_Report_2026-04-20_AM_0703.md'>FD_Report_2026-04-20_AM_0703.md</a></td><td><a href='FD_Report_2026-04-20_AM_0703.html'>html</a></td></tr>
+<tr><td><a href='FD_Report_2026-04-18_PM_1902.md'>FD_Report_2026-04-18_PM_1902.md</a></td><td><a href='FD_Report_2026-04-18_PM_1902.html'>html</a></td></tr>
+<tr><td><a href='FD_Report_2026-04-18_AM_0705.md'>FD_Report_2026-04-18_AM_0705.md</a></td><td><a href='FD_Report_2026-04-18_AM_0705.html'>html</a></td></tr>
+<tr><td><a href='FD_Report_2026-04-16_AM_0709.md'>FD_Report_2026-04-16_AM_0709.md</a></td><td>—</td></tr>
+<tr><td><a href='FD_Report_2026-04-12_AM_0705.md'>FD_Report_2026-04-12_AM_0705.md</a></td><td>—</td></tr>
+<tr><td><a href='FD_Report_2026-04-12_AM_0254.md'>FD_Report_2026-04-12_AM_0254.md</a></td><td>—</td></tr>
+<tr><td><a href='FD_Report_2026-04-12_AM_0236.md'>FD_Report_2026-04-12_AM_0236.md</a></td><td>—</td></tr></tbody></table>
+</details>
+
+<div class="footer">
+  Generated by FD Agent v2 (Phase 2 — Cadence) · Auto-verified · 2026-04-28 19:07 VN <br>
+  Sources: [Supabase facebook_ad_spend] · [Klaviyo flow_report XaHPrt] · [Klaviyo campaigns email] · [Klaviyo metric_aggregate] · [Klaviyo lists]
 </div>
-
-<h2 id="overview">1. KPI 7d (đã sửa: anchored MAX(date)=2026-04-20)</h2>
-<div class="kpi-grid">
-<div class="kpi"><div class="l">Spend 7d</div><div class="v">$3,829 <span class="pill green">+9% bench</span></div><div class="sub">7 ngày Apr 14-20 · target $3,500</div></div>
-<div class="kpi"><div class="l">CPC 7d</div><div class="v">$0.474 <span class="pill green">+5%</span></div><div class="sub">bench $0.45 · run #10 đã sai báo +18%</div></div>
-<div class="kpi"><div class="l">CPM 7d</div><div class="v">$17.87 <span class="pill yellow">+6%</span></div><div class="sub">bench $13.48-16.80</div></div>
-<div class="kpi"><div class="l">CTR 7d</div><div class="v">3.77% <span class="pill green">+26%</span></div><div class="sub">bench 2-3% ecom</div></div>
-<div class="kpi"><div class="l">FB pipeline gap</div><div class="v" style="color:#991b1b">7d <span class="pill red">run #10</span></div><div class="sub">đợi đại vương fix OAuth (H1)</div></div>
-<div class="kpi"><div class="l">Klaviyo MCP</div><div class="v" style="color:#991b1b">UNAUTH <span class="pill red">run #10</span></div><div class="sub">đợi đại vương Authenticate (H2)</div></div>
-<div class="kpi"><div class="l">Shopify MCP</div><div class="v" style="color:#92400e">— <span class="pill yellow">chưa connect</span></div><div class="sub">cần cho LTV:CAC (H3)</div></div>
-<div class="kpi"><div class="l">Spend 30d (window 04-20)</div><div class="v">$13,650 <span class="pill green">healthy</span></div><div class="sub">CPC $0.51 · CTR 3.69%</div></div>
-</div>
-
-<h2>2. 🎯 Scale Readiness Score: 19/100 — NOT_READY</h2>
-<div class="score-bar"><div class="score-fill" style="width:19%"></div></div>
-<p><strong>Verdict:</strong> 🔴 NOT_READY — focus stability, KHÔNG tăng spend Q2 đến khi score ≥ 55. Path B unlock scale tại ≥ 70.</p>
-<table><tr><th>#</th><th>Dimension</th><th>Score</th><th>Weight</th><th>Evidence</th></tr>
-<tr><td>1</td><td>Data infra reliable</td><td>0/10</td><td>1.0</td><td>FB gap 7d, Klaviyo UNAUTH, Shopify NOT_CONNECTED</td></tr>
-<tr><td>2</td><td>ROAS ≥ 2.0x sustained</td><td>5/10</td><td>1.0</td><td>tuần Apr 13-19 ~1.99x</td></tr>
-<tr><td>3</td><td>CPC ≤ $0.50</td><td>8/10</td><td>0.8</td><td>$0.474 — gần bench</td></tr>
-<tr><td>4</td><td>Email contribution ≥ 12%</td><td>3/10</td><td>0.8</td><td>~6%</td></tr>
-<tr><td>5</td><td>LTV:CAC ≥ 3:1</td><td>0/10</td><td>1.0</td><td>chưa có cohort (cần Shopify)</td></tr>
-<tr><td>6</td><td>Inventory > 14 ngày</td><td>n/a</td><td>0.6</td><td>chưa có Shopify data</td></tr>
-<tr><td>7</td><td>Refund rate < 5%</td><td>n/a</td><td>0.6</td><td>chưa có Shopify data</td></tr>
-<tr><td>8</td><td>Brand voice consistent</td><td>n/a</td><td>0.5</td><td>chưa có review process</td></tr>
-<tr><td>9</td><td>Operational discipline ≥70%</td><td>2/10</td><td>0.7</td><td>cadence Agent v2 chưa chạy 1 tuần</td></tr>
-<tr><td>10</td><td>Cash runway > 8 tuần</td><td>n/a</td><td>1.0</td><td>đại vương cập nhật manual</td></tr>
-</table>
-
-<h2>3. OKRs Q2 — Weekly check-in</h2>
-<table><tr><th>KR</th><th>Score (0-1.0)</th><th>Target Q2</th><th>Risk</th></tr>
-<tr><td>KR1.1 — FB pipeline gap < 1d trong 30d</td><td>0.0</td><td>flat</td><td>🔴</td></tr>
-<tr><td>KR1.2 — Klaviyo MCP authenticated 30d</td><td>0.0</td><td>flat</td><td>🔴</td></tr>
-<tr><td>KR1.3 — Shopify MCP + LTV cohort baseline tháng 6</td><td>0.0</td><td>—</td><td>🟡</td></tr>
-<tr><td>KR1.5 — Đại vương open AM Briefing ≥ 70% ngày</td><td>n/a</td><td>—</td><td>⚪</td></tr>
-<tr><td>KR2.1 — Blended ROAS ≥ 2.0x trong 4/8 tuần</td><td>0.5 (est.)</td><td>up</td><td>🟡</td></tr>
-<tr><td>KR2.2 — CPC tháng ≤ $0.50</td><td>0.95</td><td>flat</td><td>🟢</td></tr>
-<tr><td>KR2.3 — Spend +25% với CPC ≤ $0.52</td><td>n/a</td><td>—</td><td>⚪</td></tr>
-<tr><td>KR2.4 — LTV:CAC baseline tháng 6, 3:1 Q3-end</td><td>0.0</td><td>—</td><td>🔴</td></tr>
-<tr><td>KR3.1 — Flow rev ≥ $400/tuần</td><td>0.35</td><td>flat</td><td>🔴</td></tr>
-<tr><td>KR3.2 — Campaign rev ≥ $580/tuần</td><td>0.55</td><td>flat</td><td>🟡</td></tr>
-<tr><td>KR3.3 — Email ≥ 12% Q2-end</td><td>0.5</td><td>flat</td><td>🟡</td></tr>
-</table>
-
-<h2>4. 🚦 Việc đại vương phải làm (chỉ 2 việc — 15-25 phút)</h2>
-<div class="banner red">
-<strong>H1 + H2 là blocker duy nhất.</strong> Hoàn thành 2 việc này, AI làm xong tất cả 12 task còn lại trong 1 phiên kế tiếp.
-</div>
-<table><tr><th>#</th><th>Việc</th><th>Action cụ thể</th><th>Ước tính</th><th>Deadline</th></tr>
-<tr><td>H1</td><td>Fix FB OAuth token</td><td>Meta Business Manager → reset token → paste vào Supabase Edge Function env</td><td>5-10 phút</td><td><strong>Tối nay 23:00</strong></td></tr>
-<tr><td>H2</td><td>Reconnect Klaviyo MCP</td><td>Cowork → Settings → Connectors → Klaviyo → Authenticate</td><td>2-3 phút</td><td><strong>Tối nay 23:00</strong></td></tr>
-<tr><td>H3</td><td>(optional) Connect Shopify MCP</td><td>Cowork → Settings → Connectors → Shopify → Authenticate</td><td>2-3 phút</td><td>Tuần này</td></tr>
-<tr><td>H5</td><td>Pause Best Sellers (cũ)</td><td>Sau khi pipeline back, AI confirm CPC trước khi click</td><td>2 phút</td><td>Sau H1</td></tr>
-<tr><td>H6</td><td>Quyết Testing campaign</td><td>Sau khi AI có 7d data thật, propose SCE riêng</td><td>2 phút</td><td>Sau H1</td></tr>
-</table>
-
-<h2>5. Alerts live</h2>
-<div class="alert red">🔴 FB pipeline gap 7d — đợi H1. Báo cáo run #10 báo CPC +18% là sai (do query 1 row); sau H1, AI tự backfill.</div>
-<div class="alert red">🔴 Klaviyo unauth — đợi H2. 10 task email-dependent đang CANNOT_VERIFY.</div>
-<div class="alert yellow">🟡 Welcome flow W8UjR5: 1430 recipients $0 doanh thu — biggest leak. AI sẽ ship redraft ngay sau H2.</div>
-<div class="alert green">🟢 CTR 7d 3.77% (+26% bench) · CPC $0.474 (+5% bench) — efficiency thực tốt hơn run #10 báo cáo.</div>
-
-<h2>6. 🤖 Auto-Task-Verification — engine v1 chạy run này</h2>
-<table><tr><th>Item</th><th>Status</th><th>Evidence</th><th>Last checked</th></tr>
-<tr><td>fix-fb-pipeline-gap</td><td><span class="pill red">NOT_STARTED</span></td><td>MAX=2026-04-20, today=2026-04-27, gap 7d</td><td>20:55</td></tr>
-<tr><td>reconnect-klaviyo-mcp</td><td><span class="pill red">NOT_STARTED</span></td><td>klaviyo_* tools không trong deferred list</td><td>20:55</td></tr>
-<tr><td>decide-testing-campaign</td><td><span class="pill red">NOT_STARTED</span></td><td>Testing $/day +17% so prev_7d</td><td>20:55</td></tr>
-<tr><td>pause-best-sellers-old</td><td><span class="pill red">NOT_STARTED</span></td><td>spend $47.15, CPC $0.80</td><td>20:55</td></tr>
-<tr><td>10 task Klaviyo dependent</td><td><span class="pill gray">CANNOT_VERIFY</span></td><td>chờ H2</td><td>20:55</td></tr>
-</table>
-<p><small>Tự động flip → DONE khi rule pass. Decision log auto-append vào <code>_decisions.json</code>. 14 rule registered. Phase 2 sẽ thêm rule Klaviyo + Gmail + Notion khi connector về.</small></p>
-
-<h2>7. 📁 Folder layout sau Agent v2</h2>
-<pre style="background:#f3f4f6;padding:12px;border-radius:6px;font-size:12px;line-height:1.4;overflow-x:auto">D:\Cong viec\CODE\Tráng CEO\
-├── CLAUDE.md                       (Section 5: Agent v2 spec)
-├── FD_Agent/                       ← MỚI Agent v2
-│   ├── memory/
-│   │   ├── _kpi_history.json       (84d backfill + rolling)
-│   │   ├── _decisions.json         (auto-append every flip → DONE)
-│   │   ├── _lessons.json           (auto-extract pattern)
-│   │   ├── _roadmap.md             (Q2 v2: 3 đợt thay vì timeline AI)
-│   │   └── _okrs.md                (3 Obj × 11 KR đã hạ target)
-│   ├── scripts/
-│   │   ├── verify_action_items.py  (engine v1, 14 rules)
-│   │   ├── sce_generator.py        (Layer 3 generator)
-│   │   ├── scale_readiness.py      (10 dimensions /100)
-│   │   ├── cohort_metrics.py       (LTV:CAC framework)
-│   │   ├── lessons_extractor.py    (auto-pattern)
-│   │   └── run_agent.py            (universal runner)
-│   └── templates/
-│       ├── AM_briefing_template.md
-│       ├── PM_pulse_template.md
-│       ├── weekly_sce_template.md
-│       ├── monthly_strategic_template.md
-│       └── quarterly_roadmap_template.md
-└── FD_Reports/                     (output cadence runs)
-    ├── index.html                  (dashboard này)
-    ├── _action_items.json          (snapshot run mới nhất)
-    ├── FD_Pulse_*.md               (PM Pulse format mới)
-    ├── FD_Briefing_*.md            (AM Briefing format mới)
-    ├── FD_Weekly_Review_*.md
-    ├── FD_Monthly_*.md
-    └── FD_Quarterly_*.md
-</pre>
-
-<h2>8. Lịch sử run</h2>
-<ul class="history">
-  <li><a href="FD_Pulse_2026-04-27_PM_2055.md">FD_Pulse_2026-04-27_PM_2055</a> · <span class="badge">v2 NEW</span></li>
-  <li><a href="FD_Report_2026-04-27_PM_1938.md">FD_Report_2026-04-27_PM_1938</a> (v1)</li>
-  <li><a href="FD_Report_2026-04-27_AM_0745.md">FD_Report_2026-04-27_AM_0745</a> (v1)</li>
-  <li><a href="FD_Weekly_Review_2026-04-27.md">FD_Weekly_Review_2026-04-27</a></li>
-  <li><a href="FD_Report_2026-04-26_PM_1903.md">FD_Report_2026-04-26_PM_1903</a></li>
-  <li><a href="FD_Report_2026-04-26_AM_0002.md">FD_Report_2026-04-26_AM_0002</a></li>
-  <li><a href="FD_Report_2026-04-25_PM_1907.md">FD_Report_2026-04-25_PM_1907</a></li>
-  <li><a href="FD_Report_2026-04-25_AM_0842.md">FD_Report_2026-04-25_AM_0842</a></li>
-  <li><a href="FD_Report_2026-04-24_PM_1906.md">FD_Report_2026-04-24_PM_1906</a></li>
-  <li><a href="FD_Report_2026-04-24_AM_0922.md">FD_Report_2026-04-24_AM_0922</a></li>
-</ul>
-
-<hr><p><small>Generator: FD Agent v2 · Sources: [Supabase] facebook_ad_spend (project zcmvvpizoipxehximabk) · [Klaviyo API] UNAUTH run #10 · 84d KPI backfill · Snapshot: <a href="_action_items.json">_action_items.json</a> · Decision log: <a href="memory/_decisions.json">_decisions.json</a></small></p>
-</body></html>
+</body>
+</html>

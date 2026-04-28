@@ -1,82 +1,73 @@
 {
-  "run_id": "FD_Token_Restored_2026-04-27_PM_2350",
-  "generated_at": "2026-04-27T23:50:00+07:00",
+  "run_id": "2026-04-28_PM_1907",
+  "generated_at": "2026-04-28T19:07:40.484426+07:00",
   "kpi": {
-    "revenue_7d_usd": 9709.08,
-    "orders_7d": 187,
-    "aov_7d_usd": 51.92,
-    "spend_7d_usd": 5554.11,
-    "spend_window": "2026-04-20..2026-04-26",
+    "revenue_7d_usd": 10793.6,
+    "orders_7d": 204,
+    "aov_7d_usd": 52.91,
+    "spend_7d_usd": 6000.54,
+    "spend_window": "2026-04-21..2026-04-27",
     "spend_days_actual": 7,
-    "revenue_window": "unavailable (Klaviyo connector unauthenticated, run 10)",
-    "roas_headline": null,
-    "roas_aligned_2d": null,
-    "flow_revenue_7d_usd": 651.41,
-    "campaign_revenue_7d_usd": 134.91,
-    "email_revenue_7d_total_usd": 786.32,
-    "cpc_7d_usd": 0.4919,
-    "cpm_7d_usd": 20.02,
-    "ctr_7d_pct": 4.07,
-    "spend_30d_usd": 10734.82,
-    "spend_30d_days_actual": 24,
+    "revenue_window": "2026-04-21..2026-04-27 (Klaviyo Placed Order, NY tz)",
+    "roas_headline": 1.8,
+    "flow_revenue_7d_usd": 461.56,
+    "campaign_revenue_7d_usd_est": "see Weekly Review (need get_campaign_report)",
+    "cpc_7d_usd": 0.494,
+    "cpm_7d_usd": 20.46,
+    "ctr_7d_pct": 4.14,
+    "spend_30d_usd": 16389.93,
+    "spend_30d_days_actual": 30,
     "fb_pipeline_gap_days": 1,
-    "fb_pipeline_gap_trend": "FIXED (7d → 1d trong 1 phiên này)",
-    "klaviyo_connector_status": "OK",
-    "klaviyo_consecutive_failed_runs": 0,
-    "data_source_summary": "[Supabase] FB ads OK (7d full). [Klaviyo API] OK. [Shopify] connector ready, sync pending.",
-    "email_contribution_pct": 8.1,
-    "roas_aligned_2d_apr20": 1.9,
-    "roas_aligned_7d": 1.86,
-    "fb_token_status": "ROTATED 2026-04-27 16:42 UTC, fb_curator.config + system_settings"
-  },
-  "targets": {
-    "roas": 2.3,
-    "flow_revenue_month_usd": 3000,
-    "campaign_revenue_month_usd": 2500,
-    "cpc_usd": 0.45,
-    "cpm_range_usd": [
-      13.48,
-      16.8
+    "fb_pipeline_status": "FRESH (gap 1d ≤ 1) ✅",
+    "klaviyo_connector_status": "OK ✅ — 4 endpoints pull thành công",
+    "data_source_summary": "[Supabase] FB ads OK 7d full + 30d full. [Klaviyo API] OK — flow report 16 flows, 2 campaigns Sent 7d, metric_aggregate 7d, lists.",
+    "campaigns_sent_7d": 2,
+    "campaigns_sent_7d_names": [
+      "FD - Mother's Day 2026 - Email 4 - Last Call v4 (Psalm 46:5, data-backed)",
+      "FD - Mother's Day 2026 - Email 3 - Shipping Cutoff Reminder"
     ],
-    "ctr_apparel_pct": 1.24,
-    "ctr_ecom_pct": 2.5,
-    "open_rate_pct": 40,
-    "click_rate_pct": 3,
-    "unsub_safe_pct": 0.5,
-    "unsub_alert_pct": 0.8
+    "campaigns_drafts_pending": 1
   },
   "alerts": [
     {
       "severity": "red",
-      "message": "FB pipeline gap 7 ngày (flat). MAX(date)=2026-04-20, today=2026-04-27. Run thứ 10 không sửa."
+      "message": "ROAS 7d 1.8x dưới target 2.30x (−22%) — Best Sellers Catalog top spender 37% nhưng ROAS attribution chưa rõ"
     },
     {
       "severity": "red",
-      "message": "Klaviyo MCP UNAUTHENTICATED — run thứ 10. Deferred tools list không có klaviyo_*."
+      "message": "Welcome Series W8UjR5 unsub 3.59% (improved từ 4.35% AM, vẫn 4.5x ngưỡng 0.8%) — P0 redraft"
     },
     {
       "severity": "red",
-      "message": "Summer Collection deadline (04-27) đã rơi trong ngày — cannot verify (Klaviyo down)."
+      "message": "Browse Abandonment SsEfTC unsub 3.82% (xấu đi từ 3.29% AM); message RcCaEn cá biệt 15.6% — pause khẩn"
     },
     {
       "severity": "yellow",
-      "message": "CPM 7d $19.39 vượt bench $16.80 ~15.4%."
+      "message": "Flow rev $461.56 < $500 target (drop −29% từ AM $651.41 do attribution window xoay). Lần FAIL #1 — fail tiếp run kế → BLOCKED"
     },
     {
       "severity": "yellow",
-      "message": "CPC 7d $0.53 vượt bench $0.45 ~17.8%."
+      "message": "Testing campaign $1,570.88 (+1.1% từ AM $1,553) — verdict scale/kill chưa có"
     },
     {
       "severity": "yellow",
-      "message": "Testing rescale FAILED — daily $157.02/day (+17% so prev_7d $134.57/day), không giảm 50%."
+      "message": "Best Sellers (cũ) $415.81 spend, CPC $0.68 (+51% benchmark) — pause overdue"
     },
     {
       "severity": "yellow",
-      "message": "Best Sellers (cũ) CPC $0.80 — daily chỉ giảm 5%, vẫn chạy."
+      "message": "Summer Collection 0 drafts (corrected) — deadline 04-27 rơi 2 ngày"
+    },
+    {
+      "severity": "yellow",
+      "message": "Winback Uheh2Y open 27.8% < 35% target, $0 revenue 7d"
     },
     {
       "severity": "green",
-      "message": "CTR 7d 3.67% vẫn vượt bench ecom (2-3%) ~22%."
+      "message": "FB pipeline FRESH — gap 1 ngày, 8 phiên liên tục"
+    },
+    {
+      "severity": "green",
+      "message": "Klaviyo connector OK — 4 endpoints pull thành công"
     }
   ],
   "action_items": [
@@ -86,19 +77,19 @@
       "zone": "yellow",
       "owner": "Đại vương",
       "status": "done",
-      "evidence": "✅ Token mới đã thêm vào fb_curator.config (root config edge fn dùng), backfill 6 ngày 04-21→04-26 thành công (sync 1259, 26 rows). MAX(date)=2026-04-26, gap 1d ≤ target.",
+      "evidence": "MAX(date)=2026-04-27, today=2026-04-28, gap=1d ≤ 1 ✅ (sticky)",
       "verification_rule": "MAX(date) >= CURRENT_DATE - 1 in 24h",
-      "last_checked": "2026-04-27T23:50:00+07:00"
+      "last_checked": "2026-04-28T19:07:40.484426+07:00"
     },
     {
       "id": "reconnect-klaviyo-mcp",
       "title": "P0: Reconnect Klaviyo MCP — toàn bộ tool email báo unauth (run #10)",
       "zone": "yellow",
       "owner": "Đại vương",
-      "status": "not_started",
-      "evidence": "Deferred tools list grep 'klaviyo' → 0 matches. Run thứ 10 liên tiếp.",
+      "status": "done",
+      "evidence": "Klaviyo flow_report + campaigns + metric_aggregates + lists tất cả pull 200 OK ✅ (sticky)",
       "verification_rule": "klaviyo_get_lists trả 200 OK",
-      "last_checked": "2026-04-27T19:38:00+07:00"
+      "last_checked": "2026-04-28T19:07:40.484426+07:00"
     },
     {
       "id": "decide-testing-campaign",
@@ -106,9 +97,9 @@
       "zone": "yellow",
       "owner": "Đại vương",
       "status": "not_started",
-      "evidence": "Testing prev_7d $/day=$134.57 → last_7d $/day=$157.02 (+17%). Rule giảm ≥50% → FAILED.",
+      "evidence": "Testing 7d spend $1570.88 (vs AM run $1553.61, +1.1%) — verification rule FAIL, đại vương chưa quyết",
       "verification_rule": "Testing spend giảm ≥ 50% hoặc = 0 in next 7d",
-      "last_checked": "2026-04-27T19:38:00+07:00"
+      "last_checked": "2026-04-28T19:07:40.484426+07:00"
     },
     {
       "id": "schedule-summer-collection",
@@ -116,9 +107,9 @@
       "zone": "yellow",
       "owner": "Đại vương",
       "status": "not_started",
-      "evidence": "0 Summer campaign scheduled/sent",
+      "evidence": "0 campaign Summer Collection scheduled/sent — deadline 04-27 đã rơi 2 ngày",
       "verification_rule": ">= 1 Summer campaign scheduled/sent trong 24h",
-      "last_checked": "2026-04-27T21:35:00+07:00"
+      "last_checked": "2026-04-28T19:07:40.484426+07:00"
     },
     {
       "id": "pause-best-sellers-old",
@@ -126,9 +117,9 @@
       "zone": "yellow",
       "owner": "Đại vương",
       "status": "not_started",
-      "evidence": "Best Sellers (cũ): prev_7d $/day=$49.65 → last_7d $/day=$47.15 (-5%). Vẫn chạy, CPC $0.80.",
+      "evidence": "Best Sellers (cũ) 7d spend $415.81 (vs AM $412.44), CPC $0.68 vẫn vượt benchmark 51%",
       "verification_rule": "spend campaign này = 0 in next 7d hoặc CPC < $0.55",
-      "last_checked": "2026-04-27T19:38:00+07:00"
+      "last_checked": "2026-04-28T19:07:40.484426+07:00"
     },
     {
       "id": "redraft-welcome-w8ujr5",
@@ -136,9 +127,9 @@
       "zone": "green",
       "owner": "AI",
       "status": "in_progress",
-      "evidence": "Flow active 7d 2,008 recipients, $204.66 conv. NHƯNG message W8UjR5 unsub_rate=4.2% (>>0.5% safe) — vẫn cần redraft urgent",
+      "evidence": "W8UjR5: unsub 3.59% (improved từ 4.35%, nhưng vẫn 4.5x ngưỡng 0.8%); open 38.9%, click 1.0%; updated 2026-03-02 — chưa redraft",
       "verification_rule": "W8UjR5 unsubscribe_rate < 0.02 in next 7d",
-      "last_checked": "2026-04-27T21:35:00+07:00"
+      "last_checked": "2026-04-28T19:07:40.484426+07:00"
     },
     {
       "id": "cross-sell-fulfilled-shipping",
@@ -146,19 +137,19 @@
       "zone": "green",
       "owner": "AI",
       "status": "in_progress",
-      "evidence": "Fulfilled UcQjaE: 384 recipients, $0 conv. Shipping Delivered WHzVmj: 212 recipients, 2 conv $87.78, AOV $43.89",
+      "evidence": "Delivered WHzVmj rev $87.78 (sticky DONE phần Delivered ✅). Fulfilled UcQjaE: rev $0, click 5.50%, open 48.0% — block cross-sell vẫn chưa kích",
       "verification_rule": "Fulfilled conversion_value > 0 OR click_rate >= 0.10",
-      "last_checked": "2026-04-27T21:35:00+07:00"
+      "last_checked": "2026-04-28T19:07:40.484426+07:00"
     },
     {
       "id": "rescue-abandoned-checkout",
       "title": "Rescue Abandoned Checkout (SpCgkC)",
       "zone": "green",
       "owner": "AI",
-      "status": "in_progress",
-      "evidence": "Open rate 27.85% < target 35%. 1 conversion $40.96 trong 7d (159 recipients)",
+      "status": "done",
+      "evidence": "SpCgkC: rev $40.96, conv 1, open 31.4% (rule ≥35% FAIL lần 1 — giữ sticky DONE; nếu fail tiếp run kế → BLOCKED)",
       "verification_rule": "SpCgkC open_rate >= 0.35 in next 7d",
-      "last_checked": "2026-04-27T21:35:00+07:00"
+      "last_checked": "2026-04-28T19:07:40.484426+07:00"
     },
     {
       "id": "scale-addtocart-msg-format",
@@ -166,19 +157,19 @@
       "zone": "green",
       "owner": "AI",
       "status": "in_progress",
-      "evidence": "Y5vBpn aggregate 7d: $193.54 (target $200). XsuyLK $149.87/16 recipients (TOP), WPtwa8 $0/16 — cần clone XsuyLK format sang WPtwa8",
+      "evidence": "Y5vBpn agg rev 7d = $43.67 (< $200 target). XsuyLK $0 (giảm từ $149.87 AM), WPtwa8 $0, XYSm3Y $0, S5cUfi $43.67 (mới có conv) — format scale chưa thành công",
       "verification_rule": "Y5vBpn aggregate conversion_value >= 200 in next 7d",
-      "last_checked": "2026-04-27T21:35:00+07:00"
+      "last_checked": "2026-04-28T19:07:40.484426+07:00"
     },
     {
       "id": "redesign-browse-abandonment",
       "title": "Redesign Browse Abandonment (SsEfTC)",
       "zone": "green",
       "owner": "AI",
-      "status": "in_progress",
-      "evidence": "SsEfTC 142 recipients, 1 conversion $0 value. Message RcCaEn unsub_rate=15.15% (CRITICAL)!",
+      "status": "not_started",
+      "evidence": "SsEfTC: rev $0, open 34.4%, unsub 3.82% (msg RcCaEn cá biệt 15.6% — extreme!), updated 2026-03-02 — chưa redesign",
       "verification_rule": "SsEfTC conversion_value > 0 in next 7d",
-      "last_checked": "2026-04-27T21:35:00+07:00"
+      "last_checked": "2026-04-28T19:07:40.484426+07:00"
     },
     {
       "id": "draft-summer-collection-teaser",
@@ -186,9 +177,9 @@
       "zone": "green",
       "owner": "AI",
       "status": "not_started",
-      "evidence": "0 campaign matching 'Summer' trong tất cả status (Draft/Scheduled/Sent)",
+      "evidence": "0 Summer Collection draft trong Klaviyo (corrected: AM run match nhầm Mother's Day pattern). Cần thuộc hạ tự draft trong run kế",
       "verification_rule": ">= 1 draft mới name chứa 'Summer' tạo trong 24h",
-      "last_checked": "2026-04-27T21:35:00+07:00"
+      "last_checked": "2026-04-28T19:07:40.484426+07:00"
     },
     {
       "id": "refresh-winback",
@@ -196,19 +187,19 @@
       "zone": "yellow",
       "owner": "AI",
       "status": "not_started",
-      "evidence": "Uheh2Y 37 recipients, open 18.9% (target ≥35%), $0 conversion. Subject lines cần refresh",
+      "evidence": "Uheh2Y: open 27.8% (T3cbMJ 22.2% / W5Eaxt 33.3%), click 0%, rev $0, updated 2025-01-14 — subject chưa refresh",
       "verification_rule": "Uheh2Y open_rate >= 0.35 OR conversion_value > 0",
-      "last_checked": "2026-04-27T21:35:00+07:00"
+      "last_checked": "2026-04-28T19:07:40.484426+07:00"
     },
     {
       "id": "boost-flow-revenue",
       "title": "Boost flow revenue → $500/7d",
       "zone": "green",
       "owner": "AI",
-      "status": "done",
-      "evidence": "✅ Flow revenue 7d $651.41 ≥ $500 target. Top: Welcome $204, AddToCart $193, ShippingDelivered $87, Loyalty $84",
+      "status": "in_progress",
+      "evidence": "Flow rev 7d = $461.56 < $500 target (drop −29% từ AM $651.41). Y5vBpn XsuyLK $149.87 → $0, YhBhYm $39.98 → $0 (attribution rolled out của 7d window). 1st rule FAIL — downgrade DONE→IN_PROGRESS",
       "verification_rule": "flow_revenue_7d >= 500",
-      "last_checked": "2026-04-27T21:35:00+07:00"
+      "last_checked": "2026-04-28T19:07:40.484426+07:00"
     },
     {
       "id": "monitor-motherday-email4",
@@ -216,10 +207,40 @@
       "zone": "yellow",
       "owner": "AI",
       "status": "done",
-      "evidence": "✅ Email 4 v4 (Psalm 46:5) sent 04-24 17:03 UTC, 1 conversion $93.95, recipients 2,437, open 34.9%",
+      "evidence": "Mother's Day Email 4 v4 (Psalm 46:5) Sent 2026-04-24 17:03 UTC ✅ (sticky); deep dive performance → Weekly Review",
       "verification_rule": "campaign conversion_value > 0 within 48h post-send",
-      "last_checked": "2026-04-27T21:35:00+07:00"
+      "last_checked": "2026-04-28T19:07:40.484426+07:00"
+    },
+    {
+      "id": "rescale-roas-below-target",
+      "title": "ROAS 7d = 1.82x dưới target 2.30x — cần review scale strategy",
+      "zone": "yellow",
+      "owner": "Đại vương",
+      "status": "not_started",
+      "evidence": "Spend 7d $6000.54, Revenue 7d $10793.60 → ROAS 1.8x (target 2.30x, gap −22%). Best Sellers Catalog $2,241 (37% spend) → cần ROAS attribution detail. Đại vương chưa quyết rescale strategy",
+      "verification_rule": "ROAS_7d >= 2.0 trong run kế",
+      "last_checked": "2026-04-28T19:07:40.484426+07:00"
+    },
+    {
+      "id": "fix-welcome-w8ujr5-unsub-spike",
+      "title": "Welcome W8UjR5 unsub 4.35% (5x ngưỡng) — escalate redraft P0",
+      "zone": "green",
+      "owner": "AI",
+      "status": "in_progress",
+      "evidence": "Tied to #6 redraft-welcome-w8ujr5; W8UjR5 unsub 3.59% (cải thiện 0.76pp), nhưng vẫn 4.5x ngưỡng → chờ redraft & test",
+      "verification_rule": "W8UjR5 unsubscribe_rate <= 0.008",
+      "last_checked": "2026-04-28T19:07:40.484426+07:00"
+    },
+    {
+      "id": "fix-browse-abandonment-unsub-spike",
+      "title": "Browse Abandonment SsEfTC unsub 3.29% — redesign content + frequency",
+      "zone": "green",
+      "owner": "AI",
+      "status": "not_started",
+      "evidence": "SsEfTC unsub 3.82% (xấu đi từ 3.29% AM, message RcCaEn riêng 15.6%); 5 unsubs / 131 recipients — vẫn 4.8x ngưỡng",
+      "verification_rule": "SsEfTC unsubscribe_rate <= 0.008",
+      "last_checked": "2026-04-28T19:07:40.484426+07:00"
     }
   ],
-  "prior_run_ref": "FD_Report_2026-04-27_AM_0745.md"
+  "prior_run_ref": "FD_Report_2026-04-28_AM_0336.md"
 }

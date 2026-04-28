@@ -908,6 +908,19 @@
         "cpc": 0.4427,
         "cpm": 19.5,
         "ctr_pct": 4.406
+      },
+      {
+        "date": "2026-04-27",
+        "spend": 1022.11,
+        "impressions": 45481,
+        "clicks": 1950,
+        "reach": 38734,
+        "cpc": 0.52,
+        "cpm": 22.47,
+        "ctr_pct": 4.29,
+        "captured_at": "2026-04-28T19:07:40.484426+07:00",
+        "run_id": "2026-04-28_PM_1907",
+        "source": "Supabase facebook_ad_spend"
       }
     ],
     "fb_ads_7d_rolling": [
@@ -1208,6 +1221,39 @@
           "Review Request YhBhYm": 39.98,
           "Loyalty Onboarding VVAHB7": 84.49
         }
+      },
+      {
+        "run_id": "2026-04-28_PM_1907",
+        "captured_at": "2026-04-28T19:07:40.484426+07:00",
+        "window": "2026-04-21..2026-04-27 (Klaviyo last_7_days)",
+        "revenue_usd": 461.56,
+        "top_flows": [
+          {
+            "flow_id": "Sy4yQ7",
+            "name": "Welcome Series",
+            "rev": 204.66
+          },
+          {
+            "flow_id": "WHzVmj",
+            "name": "Delivered",
+            "rev": 87.78
+          },
+          {
+            "flow_id": "VVAHB7",
+            "name": "Loyalty Onboarding",
+            "rev": 84.49
+          },
+          {
+            "flow_id": "Y5vBpn",
+            "name": "Abandoned Add to Cart",
+            "rev": 43.67
+          },
+          {
+            "flow_id": "SpCgkC",
+            "name": "Abandoned Checkout",
+            "rev": 40.96
+          }
+        ]
       }
     ],
     "klaviyo_campaign_revenue_7d": [
@@ -1219,6 +1265,18 @@
           "Mother's Day Email 3 (Shipping Cutoff) 04-21": 40.96,
           "Mother's Day Email 4 v4 (Psalm 46:5) 04-24": 93.95
         }
+      },
+      {
+        "run_id": "2026-04-28_PM_1907",
+        "captured_at": "2026-04-28T19:07:40.484426+07:00",
+        "campaigns_sent_7d": 2,
+        "campaign_names": [
+          "FD - Mother's Day 2026 - Email 4 - Last Call v4 (Psalm 46:5, data-backed)",
+          "FD - Mother's Day 2026 - Email 3 - Shipping Cutoff Reminder"
+        ],
+        "drafts_pending": 1,
+        "revenue_usd": null,
+        "note": "Cần get_campaign_report cho revenue cụ thể (Weekly Review handle)"
       }
     ],
     "blended_roas_7d": [
@@ -1235,6 +1293,15 @@
         "revenue_klaviyo": 10323.84,
         "spend_fb": 5554.11,
         "roas": 1.859
+      },
+      {
+        "run_id": "2026-04-28_PM_1907",
+        "captured_at": "2026-04-28T19:07:40.484426+07:00",
+        "spend_usd": 6000.54,
+        "revenue_usd": 10793.6,
+        "roas": 1.8,
+        "target": 2.3,
+        "gap_pct": -21.7
       }
     ],
     "scale_readiness_score_monthly": [],
@@ -2088,6 +2155,18 @@
         "cpc": 0.4919,
         "cpm": 20.02,
         "ctr_pct": 4.07
+      },
+      {
+        "run_id": "2026-04-28_PM_1907",
+        "captured_at": "2026-04-28T19:07:40.484426+07:00",
+        "window": "2026-04-21..2026-04-27",
+        "days_actual": 7,
+        "spend": 6000.54,
+        "clicks": 12154,
+        "impressions": 293316,
+        "cpc": 0.494,
+        "cpm": 20.46,
+        "ctr_pct": 4.14
       }
     ],
     "fb_ads_30d_rolling_supabase": [
@@ -2870,10 +2949,19 @@
         "cpc": 0.5058,
         "cpm": 18.6,
         "ctr_pct": 3.677
+      },
+      {
+        "run_id": "2026-04-28_PM_1907",
+        "captured_at": "2026-04-28T19:07:40.484426+07:00",
+        "spend": 16389.93,
+        "days_actual": 30,
+        "cpc": 0.5,
+        "cpm": 19.02,
+        "ctr_pct": 3.84
       }
     ]
   },
-  "last_updated": "2026-04-27T23:50:00+07:00",
+  "last_updated": "2026-04-28T19:07:40.484426+07:00",
   "notes": [
     "fb_ads_daily: 84 ngày từ Supabase (window 2026-01-27 → 2026-04-20)",
     "fb_ads_7d_rolling_supabase: 7d rolling computed từ daily, 84 entries",
@@ -2881,5 +2969,23 @@
     "fb_ads_7d_rolling: parsed từ FD_Reports/*.md (legacy, dùng cho audit)",
     "klaviyo_*: pending Klaviyo MCP reconnect (O1 KR1.2)",
     "blended_roas_7d: pending Klaviyo revenue + Shopify cohort"
+  ],
+  "snapshots": [
+    {
+      "run_id": "2026-04-28_AM_0336",
+      "captured_at": "2026-04-28T10:36:13.179066+07:00",
+      "fb_ads_7d_spend_usd": 5931.53,
+      "fb_ads_30d_spend_usd": 16320.92,
+      "fb_ads_7d_cpc": 0.5,
+      "fb_ads_7d_cpm": 20.51,
+      "fb_ads_7d_ctr_pct": 4.07,
+      "fb_ads_pipeline_gap_days": 1,
+      "klaviyo_revenue_7d_usd": 10793.6,
+      "klaviyo_orders_7d": 204,
+      "klaviyo_aov_7d_usd": 52.91,
+      "klaviyo_flow_revenue_7d_usd": 651.41,
+      "blended_roas_7d": 1.82,
+      "campaigns_sent_7d": 2
+    }
   ]
 }

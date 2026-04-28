@@ -192,6 +192,58 @@
       "previous_status": "n/a",
       "new_status": "discovered_pending_dvuong_clarification",
       "source_run": "FD_Token_Restored_2026-04-27_PM_2350"
+    },
+    {
+      "decision_id": "auto_done_reconnect-klaviyo-mcp_2026-04-28",
+      "decided_at": "2026-04-28T10:34:56.441007+07:00",
+      "decided_by": "Auto-verify (FD Agent v2)",
+      "context": "P0: Reconnect Klaviyo MCP — toàn bộ tool email báo unauth (run #10)",
+      "rationale": "klaviyo_* tools detected in MCP deferred list ✅",
+      "previous_status": "not_started",
+      "new_status": "done",
+      "source_run": "FD_Token_Restored_2026-04-27_PM_2350"
+    },
+    {
+      "decision_id": "auto_done_draft-summer-collection-teaser_2026-04-28",
+      "decided_at": "2026-04-28T10:34:56.441007+07:00",
+      "decided_by": "Auto-verify (FD Agent v2)",
+      "context": "Draft Summer Collection Email 1 (Teaser)",
+      "rationale": "2 campaign(s) Sent matching pattern ✅",
+      "previous_status": "not_started",
+      "new_status": "done",
+      "source_run": "FD_Token_Restored_2026-04-27_PM_2350"
+    },
+    {
+      "decision_id": "auto_done_rescue-abandoned-checkout_2026-04-28",
+      "decided_at": "2026-04-28T10:36:13.179066+07:00",
+      "decided_by": "Auto-verify (Klaviyo manual rule)",
+      "context": "Rescue Abandoned Checkout (SpCgkC)",
+      "rationale": "SpCgkC: revenue $40.96 (>$0), 1 conv 7d, click_rate 1.72% — đã có conversion ✅",
+      "previous_status": "in_progress",
+      "new_status": "done",
+      "source_run": "FD_Token_Restored_2026-04-27_PM_2350"
+    },
+    {
+      "decision_id": "downgrade-draft-summer-collection-teaser-2026-04-28_PM_1907",
+      "decided_at": "2026-04-28T19:07:40.484426+07:00",
+      "decided_by": "AI (auto-verified)",
+      "context": "0 Summer Collection draft trong Klaviyo (corrected: AM run match nhầm Mother's Day pattern). Cần thuộc hạ tự draft trong run kế",
+      "rationale": "Verification rule failed; was sticky DONE → not_started",
+      "source_run": "FD_Report_2026-04-28_PM_1907.md",
+      "action_item_id": "draft-summer-collection-teaser",
+      "from_status": "done",
+      "to_status": "not_started"
+    },
+    {
+      "decision_id": "downgrade-boost-flow-revenue-2026-04-28_PM_1907",
+      "decided_at": "2026-04-28T19:07:40.484426+07:00",
+      "decided_by": "AI (auto-verified)",
+      "context": "Flow rev 7d = $461.56 < $500 target (drop −29% từ AM $651.41). Y5vBpn XsuyLK $149.87 → $0, YhBhYm $39.98 → $0 (attribution rolled out của 7d window). 1st rule FAIL — downgrade DONE→IN_PROGRESS",
+      "rationale": "Verification rule failed; was sticky DONE → in_progress",
+      "source_run": "FD_Report_2026-04-28_PM_1907.md",
+      "action_item_id": "boost-flow-revenue",
+      "from_status": "done",
+      "to_status": "in_progress"
     }
   ]
 }

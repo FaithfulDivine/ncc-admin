@@ -17,6 +17,7 @@ import FBCuratorConfig from './pages/fb-curator/FBCuratorConfig'
 import FBCuratorDesignBacklog from './pages/fb-curator/FBCuratorDesignBacklog'
 import AnalyticsAds from './pages/analytics/AnalyticsAds'
 import FDReports from './pages/FDReports'
+import NotFound from './pages/NotFound'
 
 export default function App() {
   return (
@@ -39,6 +40,7 @@ export default function App() {
         <Route path="fd-reports" element={<FDReports />} />
         <Route path="org" element={<OrgChart />} />
         <Route path="settings" element={<SettingsPage />} />
+        <Route path="*" element={<NotFound />} />
       </Route>
     </Routes>
   )
