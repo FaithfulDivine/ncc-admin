@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<title>Roadmap — FaithfulDivine</title>
+<style>
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; max-width: 1180px; margin: 24px auto; padding: 0 16px; color: #1e293b; line-height: 1.55; background: #f8fafc; }
+h1 { color: #1e3a8a; border-bottom: 3px solid #1e3a8a; padding-bottom: 6px; margin-bottom: 4px; }
+h2 { color: #1e40af; margin-top: 28px; border-left: 4px solid #1e40af; padding-left: 12px; }
+h3 { color: #2563eb; margin-top: 20px; }
+table { width: 100%; border-collapse: collapse; margin: 10px 0; font-size: 13px; background: white; border-radius: 6px; overflow: hidden; box-shadow: 0 1px 3px rgba(0,0,0,0.05); }
+th { background: #1e3a8a; color: white; padding: 8px 10px; text-align: left; font-size: 12px; }
+td { padding: 7px 10px; border-bottom: 1px solid #e2e8f0; vertical-align: top; }
+tr:nth-child(even) td { background: #f8fafc; }
+code { background: #f1f5f9; padding: 1px 6px; border-radius: 4px; font-size: 12.5px; color: #0f172a; }
+pre { background: #0f172a; color: #e2e8f0; padding: 14px 16px; border-radius: 8px; overflow-x: auto; font-size: 12.5px; line-height: 1.5; }
+pre code { background: transparent; color: inherit; padding: 0; }
+blockquote { border-left: 4px solid #94a3b8; padding: 4px 14px; color: #475569; background: white; border-radius: 4px; margin: 10px 0; }
+ul, ol { padding-left: 22px; }
+li { margin: 3px 0; }
+hr { border: none; border-top: 1px solid #cbd5e1; margin: 22px 0; }
+a { color: #1e40af; text-decoration: none; }
+a:hover { text-decoration: underline; }
+.back-bar { background: linear-gradient(135deg, #1e3a8a, #2563eb); color: white; padding: 10px 16px; border-radius: 8px; margin-bottom: 18px; font-size: 14px; display: flex; justify-content: space-between; align-items: center; }
+.back-bar a { color: white; font-weight: 500; }
+.back-bar .meta { font-size: 12px; opacity: 0.85; }
+.footer { margin-top: 36px; padding-top: 12px; border-top: 1px solid #cbd5e1; font-size: 12px; color: #64748b; text-align: center; }
+</style>
+</head>
+<body>
+<div class="back-bar">
+  <a href="../">← Quay lại Dashboard</a>
+  <span class="meta">Source: <code>_roadmap.md</code> · Generated 2026-04-28 21:20 VN</span>
+</div>
+<h1>FD Agent v2 — Roadmap (v2, sửa 2026-04-27 PM)</h1>
+<blockquote>
+<p><strong>Đại vương đã chỉnh thuộc hạ:</strong> đừng tính timeline cho AI bằng tuần. Roadmap dưới đây tách rõ:<br />
+- <strong>Việc của Đại vương</strong> (chỉ đại vương có credential / brand authority — tính bằng phút khi đại vương click)<br />
+- <strong>Việc của AI</strong> (làm xong trong phiên — không cần lịch)<br />
+- <strong>Việc bottleneck phải đợi data sau auth</strong> (đợi → AI tự làm khi data đến)</p>
+</blockquote>
+<hr />
+<h2>🎯 Q2 2026 Strategic Bet — "Build the dashboard. Drive 3 needles. Earn the right to scale."</h2>
+<p><strong>3 needles cần đạt cuối Q2 (2026-06-30):</strong><br />
+1. ROAS blended 7d ≥ <strong>2.0x</strong> trong ≥ 4/8 tuần cuối Q2<br />
+2. Email contribution ≥ <strong>12% revenue</strong> (baseline ~6%)<br />
+3. FB pipeline gap <strong>&lt; 1 ngày</strong> trong ≥ 30 ngày liên tục</p>
+<p><strong>"Earn the right to scale":</strong> KHÔNG tăng FB spend &gt; 25% so Q1 trong Q2. Chỉ unlock Q3 scale-aggressive nếu cả 3 needle xong.</p>
+<p><strong>Path B alignment:</strong> master 1 channel before expanding. FB đã profitable nhưng efficiency trượt → tháng 5 ưu tiên BOFU (email), tháng 6 mới chạm FB scale.</p>
+<hr />
+<h2>🚦 Việc của Đại vương (Human bottleneck — tính bằng phút)</h2>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Việc</th>
+<th>Vì sao chỉ đại vương làm được</th>
+<th>Ước tính</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>H1</td>
+<td><strong>Fix FB OAuth token</strong> — Meta Business Manager → reset &amp; generate token mới → paste vào Supabase env</td>
+<td>Cần đăng nhập tài khoản Meta của đại vương</td>
+<td><strong>5-10 phút</strong></td>
+</tr>
+<tr>
+<td>H2</td>
+<td><strong>Reconnect Klaviyo MCP</strong> — Cowork → Settings → Connectors → Klaviyo → Authenticate</td>
+<td>OAuth flow yêu cầu đại vương click</td>
+<td><strong>2-3 phút</strong></td>
+</tr>
+<tr>
+<td>H3</td>
+<td><strong>Connect Shopify MCP</strong> (cho LTV:CAC) — Cowork → Settings → Connectors → Shopify → Authenticate</td>
+<td>Cùng lý do</td>
+<td><strong>2-3 phút</strong></td>
+</tr>
+<tr>
+<td>H4</td>
+<td><strong>Duyệt SCE Recommendations</strong> — đại vương mở mỗi báo cáo, click "Approve" cho scenario AI propose</td>
+<td>Brand/budget authority thuộc đại vương</td>
+<td>5-10 phút mỗi báo cáo</td>
+</tr>
+<tr>
+<td>H5</td>
+<td><strong>Pause Best Sellers (cũ) trong Meta Ads Manager</strong></td>
+<td>Brand/budget authority</td>
+<td>2 phút</td>
+</tr>
+<tr>
+<td>H6</td>
+<td><strong>Quyết Testing campaign</strong> (kill / scale / hold)</td>
+<td>Brand/budget authority</td>
+<td>2 phút</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Tổng thời gian Human:</strong> ~15-25 phút unblock + 5-10 phút mỗi báo cáo Yellow Zone.</p>
+<p>→ <strong>Sau khi đại vương xong H1+H2, AI tự backfill 7 ngày data thiếu, log decisions, generate Weekly SCE đầy đủ trong vài phút.</strong></p>
+<hr />
+<h2>🤖 Việc của AI (làm xong trong phiên này — Phase 2-5)</h2>
+<table>
+<thead>
+<tr>
+<th>Phase</th>
+<th>Deliverable</th>
+<th>Trạng thái</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Phase 1</td>
+<td>Memory layer + KPI backfill 84d + Roadmap/OKRs stub + verify engine v1 + decision log</td>
+<td>✅ Done 2026-04-27 19:55</td>
+</tr>
+<tr>
+<td>Phase 2</td>
+<td>5 template cadence (AM/PM/Weekly/Monthly/Quarterly) + Universal runner</td>
+<td>✅ done in this session</td>
+</tr>
+<tr>
+<td>Phase 3</td>
+<td>SCE generator (Layer 2-3-4 mọi report) + Decision auto-capture v2</td>
+<td>✅ done in this session</td>
+</tr>
+<tr>
+<td>Phase 4</td>
+<td>Scale Readiness Score (10 dimensions) + LTV:CAC framework (skeleton, đợi Shopify data) + Monthly P&amp;L logic</td>
+<td>✅ done in this session</td>
+</tr>
+<tr>
+<td>Phase 5</td>
+<td>Quarterly Roadmap revision logic + Lessons Learned auto-pattern (3+ decisions cùng pattern → auto-add lesson)</td>
+<td>✅ done in this session</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2>📅 Cadence dự kiến sau khi đại vương xong H1+H2</h2>
+<table>
+<thead>
+<tr>
+<th>Nhịp</th>
+<th>Output</th>
+<th>Trigger</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Daily AM 07:00</td>
+<td>Morning Briefing ≤500 chữ</td>
+<td>scheduled</td>
+</tr>
+<tr>
+<td>Daily PM 19:00</td>
+<td>Tactical Pulse ≤300 chữ</td>
+<td>scheduled</td>
+</tr>
+<tr>
+<td>Weekly Mon 08:00</td>
+<td>Weekly SCE Review (Layer 1-4 đầy đủ)</td>
+<td>scheduled</td>
+</tr>
+<tr>
+<td>Monthly 1st 08:00</td>
+<td>Strategic Review + Scale Readiness Score</td>
+<td>scheduled</td>
+</tr>
+<tr>
+<td>Quarterly 1st (Jan/Apr/Jul/Oct)</td>
+<td>Roadmap Revision + Lessons Learned export</td>
+<td>scheduled</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2>📌 Q2 Phân kỳ ưu tiên (theo nội dung, không theo timeline AI)</h2>
+<h3>Đợt 1 — Đại vương unblock (15-25 phút thực)</h3>
+<ul>
+<li>H1: Fix FB OAuth → AI auto-backfill 7d data thiếu</li>
+<li>H2: Reconnect Klaviyo → AI auto-pull flow + campaign reports</li>
+<li>H3: Connect Shopify → AI auto-build LTV:CAC baseline cohort</li>
+</ul>
+<h3>Đợt 2 — AI ship ngay sau Đợt 1 (cùng phiên đại vương unblock)</h3>
+<ul>
+<li>Fix Welcome W8UjR5 (1430 recipients $0 doanh thu — biggest leak)</li>
+<li>Ship Cross-sell Fulfilled (UcQjaE) + Shipping:Delivered (WHzVmj)</li>
+<li>Rescue Abandoned Checkout SpCgkC</li>
+<li>Refresh Winback Uheh2Y</li>
+<li>Draft Summer Collection arc 3 email</li>
+</ul>
+<h3>Đợt 3 — Đại vương duyệt SCE (5-10 phút mỗi cái)</h3>
+<ul>
+<li>H5: Pause Best Sellers cũ</li>
+<li>H6: Quyết Testing campaign</li>
+<li>Approve / reject email drafts AI ship Đợt 2</li>
+</ul>
+<h3>Đợt 4 — AI run cadence như đã design (sau khi Đợt 1-3 settle ~ vài giờ)</h3>
+<ul>
+<li>Daily AM/PM/Weekly từ ngày kế tiếp</li>
+<li>Monthly Strategic Review đầu tháng 5 + đầu tháng 6</li>
+<li>Quarterly Roadmap Revision đầu tháng 7</li>
+</ul>
+<hr />
+<h2>🔄 Q3 2026 (Jul-Sep) — Bet provisional (revise đầu Q3)</h2>
+<p>Provisional: "Diversify cẩn thận — TikTok hoặc YouTube Shorts pilot, expand affiliate community."<br />
+<em>Chỉ kích hoạt nếu Q2 KR đạt ≥ 60% (Google OKR sweet spot).</em></p>
+<hr />
+<h2>Operating Principles</h2>
+<ol>
+<li>Data over opinions — nhưng tôn trọng experience-based intuition của đại vương.</li>
+<li>Sustainable over fast — Path B unless explicitly told otherwise.</li>
+<li>Master 1 channel before expanding (Hormozi).</li>
+<li>Build institutional knowledge — log everything to memory.</li>
+<li><strong>Earn autonomy through results</strong> — AI ship Đợt 2 trước, đợi đại vương duyệt; sau khi đại vương thấy results, mở Green Zone rộng hơn.</li>
+</ol>
+<hr />
+<p><em>Updated: 2026-04-27 20:30 ICT (sau lệnh đại vương "đừng tính timeline AI bằng tuần").</em></p>
+<div class="footer">FD Agent v2 · auto-generated từ _roadmap.md</div>
+</body>
+</html>

@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<title>Okrs — FaithfulDivine</title>
+<style>
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; max-width: 1180px; margin: 24px auto; padding: 0 16px; color: #1e293b; line-height: 1.55; background: #f8fafc; }
+h1 { color: #1e3a8a; border-bottom: 3px solid #1e3a8a; padding-bottom: 6px; margin-bottom: 4px; }
+h2 { color: #1e40af; margin-top: 28px; border-left: 4px solid #1e40af; padding-left: 12px; }
+h3 { color: #2563eb; margin-top: 20px; }
+table { width: 100%; border-collapse: collapse; margin: 10px 0; font-size: 13px; background: white; border-radius: 6px; overflow: hidden; box-shadow: 0 1px 3px rgba(0,0,0,0.05); }
+th { background: #1e3a8a; color: white; padding: 8px 10px; text-align: left; font-size: 12px; }
+td { padding: 7px 10px; border-bottom: 1px solid #e2e8f0; vertical-align: top; }
+tr:nth-child(even) td { background: #f8fafc; }
+code { background: #f1f5f9; padding: 1px 6px; border-radius: 4px; font-size: 12.5px; color: #0f172a; }
+pre { background: #0f172a; color: #e2e8f0; padding: 14px 16px; border-radius: 8px; overflow-x: auto; font-size: 12.5px; line-height: 1.5; }
+pre code { background: transparent; color: inherit; padding: 0; }
+blockquote { border-left: 4px solid #94a3b8; padding: 4px 14px; color: #475569; background: white; border-radius: 4px; margin: 10px 0; }
+ul, ol { padding-left: 22px; }
+li { margin: 3px 0; }
+hr { border: none; border-top: 1px solid #cbd5e1; margin: 22px 0; }
+a { color: #1e40af; text-decoration: none; }
+a:hover { text-decoration: underline; }
+.back-bar { background: linear-gradient(135deg, #1e3a8a, #2563eb); color: white; padding: 10px 16px; border-radius: 8px; margin-bottom: 18px; font-size: 14px; display: flex; justify-content: space-between; align-items: center; }
+.back-bar a { color: white; font-weight: 500; }
+.back-bar .meta { font-size: 12px; opacity: 0.85; }
+.footer { margin-top: 36px; padding-top: 12px; border-top: 1px solid #cbd5e1; font-size: 12px; color: #64748b; text-align: center; }
+</style>
+</head>
+<body>
+<div class="back-bar">
+  <a href="../">← Quay lại Dashboard</a>
+  <span class="meta">Source: <code>_okrs.md</code> · Generated 2026-04-28 21:20 VN</span>
+</div>
+<h1>FD OKRs — Q2 2026 (v2, sửa 2026-04-27 PM)</h1>
+<blockquote>
+<p>Đại vương quyết: KHÔNG tính timeline AI bằng tuần. OKR scoring theo Google convention 0.0-1.0; sweet spot 0.6-0.7.<br />
+KR target dưới đây là <strong>realistic stretch</strong> dựa trên 84 ngày data + Hormozi Path B principle.</p>
+</blockquote>
+<hr />
+<h2>O1 — Khôi phục data infra 100% reliable</h2>
+<table>
+<thead>
+<tr>
+<th>KR</th>
+<th style="text-align: right;">Target</th>
+<th style="text-align: right;">Baseline</th>
+<th>Owner</th>
+<th>Source check</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>KR1.1</strong></td>
+<td style="text-align: right;">FB pipeline gap &lt; 1 ngày trong 30 ngày liên tục</td>
+<td style="text-align: right;">gap = 7d (run #10)</td>
+<td>Đại vương (H1)</td>
+<td><code>MAX(date) FROM facebook_ad_spend</code></td>
+</tr>
+<tr>
+<td><strong>KR1.2</strong></td>
+<td style="text-align: right;">Klaviyo MCP authenticated trong 30 ngày liên tục</td>
+<td style="text-align: right;">UNAUTH (run #10)</td>
+<td>Đại vương (H2)</td>
+<td>Tool health check</td>
+</tr>
+<tr>
+<td><strong>KR1.3</strong></td>
+<td style="text-align: right;">Shopify MCP connected + LTV cohort baseline đầu tiên ghi nhận tháng 6</td>
+<td style="text-align: right;">chưa có</td>
+<td>Đại vương (H3) + AI</td>
+<td>Shopify orders API</td>
+</tr>
+<tr>
+<td><strong>KR1.4</strong></td>
+<td style="text-align: right;">Reports SLA: ≥ 95% run có data đầy đủ trong tháng 6</td>
+<td style="text-align: right;">run #10 = 0% Klaviyo</td>
+<td>AI</td>
+<td><code>_kpi_history.json</code> audit</td>
+</tr>
+<tr>
+<td><strong>KR1.5</strong></td>
+<td style="text-align: right;">Đại vương open Morning Briefing trước 09:00 trong ≥ 70% ngày Q2 (sau khi cadence chạy)</td>
+<td style="text-align: right;">n/a</td>
+<td>Đại vương</td>
+<td>dashboard <code>last_opened_at</code> log</td>
+</tr>
+</tbody>
+</table>
+<p><em>Hạ KR1.5 từ 80% → 70% — realistic cho start, có thể stretch sau.</em></p>
+<hr />
+<h2>O2 — Scale FB ads efficiency theo Path B</h2>
+<table>
+<thead>
+<tr>
+<th>KR</th>
+<th style="text-align: right;">Target (v2)</th>
+<th style="text-align: right;">Baseline</th>
+<th>Owner</th>
+<th>Note</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>KR2.1</strong></td>
+<td style="text-align: right;">Blended ROAS 7d ≥ <strong>2.0x</strong> trong ≥ 4/8 tuần cuối Q2 (hạ từ 2.30x)</td>
+<td style="text-align: right;">~1.99x est.</td>
+<td>AI propose, Đại vương duyệt</td>
+<td>Bằng-bench đã là thắng</td>
+</tr>
+<tr>
+<td><strong>KR2.2</strong></td>
+<td style="text-align: right;">CPC trung bình tháng ≤ $0.50 trong tháng 5 và tháng 6</td>
+<td style="text-align: right;">tháng 4 ~$0.50</td>
+<td>AI</td>
+<td>Supabase 30d agg</td>
+</tr>
+<tr>
+<td><strong>KR2.3</strong></td>
+<td style="text-align: right;">Spend tăng <strong>+25%</strong> vs Q1 ($24.3K → ~$30.4K), CPC ≤ $0.52 (hạ từ +50%)</td>
+<td style="text-align: right;">Q1 spend $24.3K</td>
+<td>Đại vương duyệt</td>
+<td>Sustainable scale, không saturation</td>
+</tr>
+<tr>
+<td><strong>KR2.4</strong></td>
+<td style="text-align: right;">Tháng 6: <strong>baseline LTV:CAC</strong> ghi nhận (cohort #1 đủ 60d). <strong>Q3-end: target 3:1</strong> (đẩy timing)</td>
+<td style="text-align: right;">unknown</td>
+<td>AI + Shopify</td>
+<td>Cohort math cần 60d window</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2>O3 — Build email contribution → 12% revenue cuối Q2</h2>
+<table>
+<thead>
+<tr>
+<th>KR</th>
+<th style="text-align: right;">Target (v2)</th>
+<th style="text-align: right;">Baseline</th>
+<th>Owner</th>
+<th>Note</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>KR3.1</strong></td>
+<td style="text-align: right;">Flow revenue ≥ <strong>$400/tuần</strong> trong 4 tuần cuối Q2 (hạ từ $750)</td>
+<td style="text-align: right;">$141.55</td>
+<td>AI ship + Đại vương duyệt</td>
+<td>~3x baseline đã rất stretch</td>
+</tr>
+<tr>
+<td><strong>KR3.2</strong></td>
+<td style="text-align: right;">Campaign revenue ≥ $580/tuần trong 4 tuần cuối Q2</td>
+<td style="text-align: right;">~$317 est.</td>
+<td>AI ship + Đại vương duyệt</td>
+<td>1.8x — đạt được nếu ship 2 campaign/tuần</td>
+</tr>
+<tr>
+<td><strong>KR3.3</strong></td>
+<td style="text-align: right;">Email-attributed revenue ≥ <strong>12% total cuối Q2; ≥ 20% cuối Q3</strong> (hạ từ 25%)</td>
+<td style="text-align: right;">~6%</td>
+<td>AI + Đại vương</td>
+<td>2x trong 60d khả thi</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2>Weekly check-in cadence (auto-update mỗi Mon Weekly SCE)</h2>
+<table>
+<thead>
+<tr>
+<th>KR</th>
+<th style="text-align: center;">Score (0-1.0)</th>
+<th style="text-align: center;">Trend</th>
+<th>Latest evidence</th>
+<th style="text-align: center;">Risk flag</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>KR1.1</td>
+<td style="text-align: center;">0.0</td>
+<td style="text-align: center;">flat</td>
+<td>gap 7d run #10</td>
+<td style="text-align: center;">🔴</td>
+</tr>
+<tr>
+<td>KR1.2</td>
+<td style="text-align: center;">0.0</td>
+<td style="text-align: center;">flat</td>
+<td>unauth run #10</td>
+<td style="text-align: center;">🔴</td>
+</tr>
+<tr>
+<td>KR1.3</td>
+<td style="text-align: center;">0.0</td>
+<td style="text-align: center;">—</td>
+<td>chưa start</td>
+<td style="text-align: center;">🟡</td>
+</tr>
+<tr>
+<td>KR1.4</td>
+<td style="text-align: center;">n/a</td>
+<td style="text-align: center;">—</td>
+<td>chưa đến June</td>
+<td style="text-align: center;">⚪</td>
+</tr>
+<tr>
+<td>KR1.5</td>
+<td style="text-align: center;">n/a</td>
+<td style="text-align: center;">—</td>
+<td>cadence chưa chạy</td>
+<td style="text-align: center;">⚪</td>
+</tr>
+<tr>
+<td>KR2.1</td>
+<td style="text-align: center;">0.5 (est. tuần Apr 13-19: 1.99x)</td>
+<td style="text-align: center;">up</td>
+<td>spend $3,710 → $578 (1d)</td>
+<td style="text-align: center;">🟡</td>
+</tr>
+<tr>
+<td>KR2.2</td>
+<td style="text-align: center;">0.95 (Q1 90d $0.51)</td>
+<td style="text-align: center;">flat</td>
+<td>Apr 14-20 rolling $0.474</td>
+<td style="text-align: center;">🟢</td>
+</tr>
+<tr>
+<td>KR2.3</td>
+<td style="text-align: center;">n/a</td>
+<td style="text-align: center;">—</td>
+<td>chưa kết Q2</td>
+<td style="text-align: center;">⚪</td>
+</tr>
+<tr>
+<td>KR2.4</td>
+<td style="text-align: center;">0.0</td>
+<td style="text-align: center;">—</td>
+<td>chưa Shopify data</td>
+<td style="text-align: center;">🔴</td>
+</tr>
+<tr>
+<td>KR3.1</td>
+<td style="text-align: center;">0.35 ($141 / $400)</td>
+<td style="text-align: center;">flat</td>
+<td>Welcome $0/1430 recipients</td>
+<td style="text-align: center;">🔴</td>
+</tr>
+<tr>
+<td>KR3.2</td>
+<td style="text-align: center;">0.55 (~$317 / $580)</td>
+<td style="text-align: center;">flat</td>
+<td>Mother's Day mạnh</td>
+<td style="text-align: center;">🟡</td>
+</tr>
+<tr>
+<td>KR3.3</td>
+<td style="text-align: center;">0.5 (~6% / 12%)</td>
+<td style="text-align: center;">flat</td>
+<td>cần ship Welcome fix</td>
+<td style="text-align: center;">🟡</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Đầu Q2 score:</strong> 4 đỏ / 4 vàng / 1 xanh / 3 chưa đủ data. Khá hơn version cũ (6 đỏ) vì target realistic hơn.</p>
+<hr />
+<p><em>Updated 2026-04-27 20:35 ICT — sau khi đại vương yêu cầu "đừng tính timeline AI bằng tuần".</em><br />
+<em>Source: 84-day Supabase data + Blueprint v1 + Hormozi Path B principle.</em></p>
+<div class="footer">FD Agent v2 · auto-generated từ _okrs.md</div>
+</body>
+</html>

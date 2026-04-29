@@ -1,0 +1,3029 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<title>Kpi History — FaithfulDivine</title>
+<style>
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; max-width: 1180px; margin: 24px auto; padding: 0 16px; color: #1e293b; line-height: 1.55; background: #f8fafc; }
+h1 { color: #1e3a8a; border-bottom: 3px solid #1e3a8a; padding-bottom: 6px; margin-bottom: 4px; }
+h2 { color: #1e40af; margin-top: 28px; border-left: 4px solid #1e40af; padding-left: 12px; }
+h3 { color: #2563eb; margin-top: 20px; }
+table { width: 100%; border-collapse: collapse; margin: 10px 0; font-size: 13px; background: white; border-radius: 6px; overflow: hidden; box-shadow: 0 1px 3px rgba(0,0,0,0.05); }
+th { background: #1e3a8a; color: white; padding: 8px 10px; text-align: left; font-size: 12px; }
+td { padding: 7px 10px; border-bottom: 1px solid #e2e8f0; vertical-align: top; }
+tr:nth-child(even) td { background: #f8fafc; }
+code { background: #f1f5f9; padding: 1px 6px; border-radius: 4px; font-size: 12.5px; color: #0f172a; }
+pre { background: #0f172a; color: #e2e8f0; padding: 14px 16px; border-radius: 8px; overflow-x: auto; font-size: 12.5px; line-height: 1.5; }
+pre code { background: transparent; color: inherit; padding: 0; }
+blockquote { border-left: 4px solid #94a3b8; padding: 4px 14px; color: #475569; background: white; border-radius: 4px; margin: 10px 0; }
+ul, ol { padding-left: 22px; }
+li { margin: 3px 0; }
+hr { border: none; border-top: 1px solid #cbd5e1; margin: 22px 0; }
+a { color: #1e40af; text-decoration: none; }
+a:hover { text-decoration: underline; }
+.back-bar { background: linear-gradient(135deg, #1e3a8a, #2563eb); color: white; padding: 10px 16px; border-radius: 8px; margin-bottom: 18px; font-size: 14px; display: flex; justify-content: space-between; align-items: center; }
+.back-bar a { color: white; font-weight: 500; }
+.back-bar .meta { font-size: 12px; opacity: 0.85; }
+.footer { margin-top: 36px; padding-top: 12px; border-top: 1px solid #cbd5e1; font-size: 12px; color: #64748b; text-align: center; }
+</style>
+</head>
+<body>
+<div class="back-bar">
+  <a href="../">← Quay lại Dashboard</a>
+  <span class="meta">Source: <code>_kpi_history.json</code> · Generated 2026-04-28 21:20 VN</span>
+</div>
+<h1>Kpi History</h1>
+<details><summary>📦 Raw JSON</summary><pre><code>{
+  "schema_version": "1.0",
+  "generated_at": "2026-04-27T15:15:50.684543+07:00",
+  "description": "Time-series KPI cho FD Agent v2 — backfill từ FD_Reports + auto-update mỗi run.",
+  "sources": [
+    "[Supabase] facebook_ad_spend",
+    "[Klaviyo API]",
+    "[Manual]"
+  ],
+  "metrics": {
+    "fb_ads_daily": [
+      {
+        "date": "2026-01-27",
+        "spend": 129.53,
+        "impressions": 5049,
+        "clicks": 175,
+        "reach": 4005,
+        "cpc": 0.7402,
+        "cpm": 25.65,
+        "ctr_pct": 3.466
+      },
+      {
+        "date": "2026-01-28",
+        "spend": 131.86,
+        "impressions": 5739,
+        "clicks": 203,
+        "reach": 4793,
+        "cpc": 0.6496,
+        "cpm": 22.98,
+        "ctr_pct": 3.537
+      },
+      {
+        "date": "2026-01-29",
+        "spend": 128.3,
+        "impressions": 5117,
+        "clicks": 188,
+        "reach": 4096,
+        "cpc": 0.6824,
+        "cpm": 25.07,
+        "ctr_pct": 3.674
+      },
+      {
+        "date": "2026-01-30",
+        "spend": 142.74,
+        "impressions": 4965,
+        "clicks": 190,
+        "reach": 3898,
+        "cpc": 0.7513,
+        "cpm": 28.75,
+        "ctr_pct": 3.827
+      },
+      {
+        "date": "2026-01-31",
+        "spend": 123.29,
+        "impressions": 5891,
+        "clicks": 213,
+        "reach": 4746,
+        "cpc": 0.5788,
+        "cpm": 20.93,
+        "ctr_pct": 3.616
+      },
+      {
+        "date": "2026-02-01",
+        "spend": 184.97,
+        "impressions": 9885,
+        "clicks": 252,
+        "reach": 8091,
+        "cpc": 0.734,
+        "cpm": 18.71,
+        "ctr_pct": 2.549
+      },
+      {
+        "date": "2026-02-02",
+        "spend": 128.68,
+        "impressions": 7654,
+        "clicks": 199,
+        "reach": 6237,
+        "cpc": 0.6466,
+        "cpm": 16.81,
+        "ctr_pct": 2.6
+      },
+      {
+        "date": "2026-02-03",
+        "spend": 141.8,
+        "impressions": 12651,
+        "clicks": 211,
+        "reach": 10382,
+        "cpc": 0.672,
+        "cpm": 11.21,
+        "ctr_pct": 1.668
+      },
+      {
+        "date": "2026-02-04",
+        "spend": 121.75,
+        "impressions": 7851,
+        "clicks": 180,
+        "reach": 6545,
+        "cpc": 0.6764,
+        "cpm": 15.51,
+        "ctr_pct": 2.293
+      },
+      {
+        "date": "2026-02-05",
+        "spend": 142.19,
+        "impressions": 7967,
+        "clicks": 200,
+        "reach": 6382,
+        "cpc": 0.7109,
+        "cpm": 17.85,
+        "ctr_pct": 2.51
+      },
+      {
+        "date": "2026-02-06",
+        "spend": 180.13,
+        "impressions": 9581,
+        "clicks": 240,
+        "reach": 7792,
+        "cpc": 0.7505,
+        "cpm": 18.8,
+        "ctr_pct": 2.505
+      },
+      {
+        "date": "2026-02-07",
+        "spend": 194.83,
+        "impressions": 14527,
+        "clicks": 387,
+        "reach": 12198,
+        "cpc": 0.5034,
+        "cpm": 13.41,
+        "ctr_pct": 2.664
+      },
+      {
+        "date": "2026-02-08",
+        "spend": 256.51,
+        "impressions": 20903,
+        "clicks": 442,
+        "reach": 17410,
+        "cpc": 0.5803,
+        "cpm": 12.27,
+        "ctr_pct": 2.115
+      },
+      {
+        "date": "2026-02-09",
+        "spend": 154.89,
+        "impressions": 17681,
+        "clicks": 320,
+        "reach": 14652,
+        "cpc": 0.484,
+        "cpm": 8.76,
+        "ctr_pct": 1.81
+      },
+      {
+        "date": "2026-02-10",
+        "spend": 150.57,
+        "impressions": 15080,
+        "clicks": 331,
+        "reach": 12463,
+        "cpc": 0.4549,
+        "cpm": 9.98,
+        "ctr_pct": 2.195
+      },
+      {
+        "date": "2026-02-11",
+        "spend": 151.12,
+        "impressions": 16043,
+        "clicks": 313,
+        "reach": 13340,
+        "cpc": 0.4828,
+        "cpm": 9.42,
+        "ctr_pct": 1.951
+      },
+      {
+        "date": "2026-02-12",
+        "spend": 149.03,
+        "impressions": 17583,
+        "clicks": 305,
+        "reach": 13948,
+        "cpc": 0.4886,
+        "cpm": 8.48,
+        "ctr_pct": 1.735
+      },
+      {
+        "date": "2026-02-13",
+        "spend": 170.68,
+        "impressions": 13138,
+        "clicks": 282,
+        "reach": 10672,
+        "cpc": 0.6052,
+        "cpm": 12.99,
+        "ctr_pct": 2.146
+      },
+      {
+        "date": "2026-02-14",
+        "spend": 154.38,
+        "impressions": 15437,
+        "clicks": 324,
+        "reach": 13271,
+        "cpc": 0.4765,
+        "cpm": 10.0,
+        "ctr_pct": 2.099
+      },
+      {
+        "date": "2026-02-15",
+        "spend": 174.3,
+        "impressions": 17524,
+        "clicks": 409,
+        "reach": 14752,
+        "cpc": 0.4262,
+        "cpm": 9.95,
+        "ctr_pct": 2.334
+      },
+      {
+        "date": "2026-02-16",
+        "spend": 129.32,
+        "impressions": 14548,
+        "clicks": 288,
+        "reach": 12208,
+        "cpc": 0.449,
+        "cpm": 8.89,
+        "ctr_pct": 1.98
+      },
+      {
+        "date": "2026-02-17",
+        "spend": 114.28,
+        "impressions": 14589,
+        "clicks": 309,
+        "reach": 12697,
+        "cpc": 0.3698,
+        "cpm": 7.83,
+        "ctr_pct": 2.118
+      },
+      {
+        "date": "2026-02-18",
+        "spend": 115.25,
+        "impressions": 11819,
+        "clicks": 312,
+        "reach": 9923,
+        "cpc": 0.3694,
+        "cpm": 9.75,
+        "ctr_pct": 2.64
+      },
+      {
+        "date": "2026-02-19",
+        "spend": 107.3,
+        "impressions": 12675,
+        "clicks": 289,
+        "reach": 10591,
+        "cpc": 0.3713,
+        "cpm": 8.47,
+        "ctr_pct": 2.28
+      },
+      {
+        "date": "2026-02-20",
+        "spend": 110.98,
+        "impressions": 12459,
+        "clicks": 317,
+        "reach": 10453,
+        "cpc": 0.3501,
+        "cpm": 8.91,
+        "ctr_pct": 2.544
+      },
+      {
+        "date": "2026-02-21",
+        "spend": 111.07,
+        "impressions": 9643,
+        "clicks": 288,
+        "reach": 8049,
+        "cpc": 0.3857,
+        "cpm": 11.52,
+        "ctr_pct": 2.987
+      },
+      {
+        "date": "2026-02-22",
+        "spend": 150.22,
+        "impressions": 12684,
+        "clicks": 351,
+        "reach": 10603,
+        "cpc": 0.428,
+        "cpm": 11.84,
+        "ctr_pct": 2.767
+      },
+      {
+        "date": "2026-02-23",
+        "spend": 132.04,
+        "impressions": 12737,
+        "clicks": 317,
+        "reach": 10477,
+        "cpc": 0.4165,
+        "cpm": 10.37,
+        "ctr_pct": 2.489
+      },
+      {
+        "date": "2026-02-24",
+        "spend": 120.24,
+        "impressions": 11376,
+        "clicks": 332,
+        "reach": 9626,
+        "cpc": 0.3622,
+        "cpm": 10.57,
+        "ctr_pct": 2.918
+      },
+      {
+        "date": "2026-02-25",
+        "spend": 141.28,
+        "impressions": 11403,
+        "clicks": 308,
+        "reach": 9448,
+        "cpc": 0.4587,
+        "cpm": 12.39,
+        "ctr_pct": 2.701
+      },
+      {
+        "date": "2026-02-26",
+        "spend": 141.07,
+        "impressions": 11156,
+        "clicks": 329,
+        "reach": 9375,
+        "cpc": 0.4288,
+        "cpm": 12.65,
+        "ctr_pct": 2.949
+      },
+      {
+        "date": "2026-02-27",
+        "spend": 141.07,
+        "impressions": 10785,
+        "clicks": 310,
+        "reach": 8714,
+        "cpc": 0.4551,
+        "cpm": 13.08,
+        "ctr_pct": 2.874
+      },
+      {
+        "date": "2026-02-28",
+        "spend": 180.43,
+        "impressions": 11759,
+        "clicks": 394,
+        "reach": 9663,
+        "cpc": 0.4579,
+        "cpm": 15.34,
+        "ctr_pct": 3.351
+      },
+      {
+        "date": "2026-03-01",
+        "spend": 221.39,
+        "impressions": 15559,
+        "clicks": 520,
+        "reach": 13218,
+        "cpc": 0.4257,
+        "cpm": 14.23,
+        "ctr_pct": 3.342
+      },
+      {
+        "date": "2026-03-02",
+        "spend": 180.88,
+        "impressions": 12151,
+        "clicks": 402,
+        "reach": 10507,
+        "cpc": 0.45,
+        "cpm": 14.89,
+        "ctr_pct": 3.308
+      },
+      {
+        "date": "2026-03-03",
+        "spend": 174.3,
+        "impressions": 11611,
+        "clicks": 386,
+        "reach": 9773,
+        "cpc": 0.4516,
+        "cpm": 15.01,
+        "ctr_pct": 3.324
+      },
+      {
+        "date": "2026-03-04",
+        "spend": 143.87,
+        "impressions": 8746,
+        "clicks": 267,
+        "reach": 7333,
+        "cpc": 0.5388,
+        "cpm": 16.45,
+        "ctr_pct": 3.053
+      },
+      {
+        "date": "2026-03-05",
+        "spend": 144.59,
+        "impressions": 8380,
+        "clicks": 301,
+        "reach": 6939,
+        "cpc": 0.4804,
+        "cpm": 17.25,
+        "ctr_pct": 3.592
+      },
+      {
+        "date": "2026-03-06",
+        "spend": 177.91,
+        "impressions": 10119,
+        "clicks": 345,
+        "reach": 8133,
+        "cpc": 0.5157,
+        "cpm": 17.58,
+        "ctr_pct": 3.409
+      },
+      {
+        "date": "2026-03-07",
+        "spend": 222.07,
+        "impressions": 13222,
+        "clicks": 439,
+        "reach": 11087,
+        "cpc": 0.5059,
+        "cpm": 16.8,
+        "ctr_pct": 3.32
+      },
+      {
+        "date": "2026-03-08",
+        "spend": 235.13,
+        "impressions": 13383,
+        "clicks": 451,
+        "reach": 10986,
+        "cpc": 0.5214,
+        "cpm": 17.57,
+        "ctr_pct": 3.37
+      },
+      {
+        "date": "2026-03-09",
+        "spend": 221.91,
+        "impressions": 12855,
+        "clicks": 408,
+        "reach": 10887,
+        "cpc": 0.5439,
+        "cpm": 17.26,
+        "ctr_pct": 3.174
+      },
+      {
+        "date": "2026-03-10",
+        "spend": 207.22,
+        "impressions": 12380,
+        "clicks": 430,
+        "reach": 10135,
+        "cpc": 0.4819,
+        "cpm": 16.74,
+        "ctr_pct": 3.473
+      },
+      {
+        "date": "2026-03-11",
+        "spend": 213.88,
+        "impressions": 12369,
+        "clicks": 453,
+        "reach": 10185,
+        "cpc": 0.4721,
+        "cpm": 17.29,
+        "ctr_pct": 3.662
+      },
+      {
+        "date": "2026-03-12",
+        "spend": 182.03,
+        "impressions": 12718,
+        "clicks": 477,
+        "reach": 10421,
+        "cpc": 0.3816,
+        "cpm": 14.31,
+        "ctr_pct": 3.751
+      },
+      {
+        "date": "2026-03-13",
+        "spend": 207.7,
+        "impressions": 11577,
+        "clicks": 464,
+        "reach": 9523,
+        "cpc": 0.4476,
+        "cpm": 17.94,
+        "ctr_pct": 4.008
+      },
+      {
+        "date": "2026-03-14",
+        "spend": 266.63,
+        "impressions": 14954,
+        "clicks": 637,
+        "reach": 12127,
+        "cpc": 0.4186,
+        "cpm": 17.83,
+        "ctr_pct": 4.26
+      },
+      {
+        "date": "2026-03-15",
+        "spend": 298.6,
+        "impressions": 15120,
+        "clicks": 608,
+        "reach": 12286,
+        "cpc": 0.4911,
+        "cpm": 19.75,
+        "ctr_pct": 4.021
+      },
+      {
+        "date": "2026-03-16",
+        "spend": 533.38,
+        "impressions": 26038,
+        "clicks": 1189,
+        "reach": 22013,
+        "cpc": 0.4486,
+        "cpm": 20.48,
+        "ctr_pct": 4.566
+      },
+      {
+        "date": "2026-03-17",
+        "spend": 452.21,
+        "impressions": 26974,
+        "clicks": 1138,
+        "reach": 22951,
+        "cpc": 0.3974,
+        "cpm": 16.76,
+        "ctr_pct": 4.219
+      },
+      {
+        "date": "2026-03-18",
+        "spend": 417.66,
+        "impressions": 23009,
+        "clicks": 907,
+        "reach": 19202,
+        "cpc": 0.4605,
+        "cpm": 18.15,
+        "ctr_pct": 3.942
+      },
+      {
+        "date": "2026-03-19",
+        "spend": 425.73,
+        "impressions": 21951,
+        "clicks": 769,
+        "reach": 18667,
+        "cpc": 0.5536,
+        "cpm": 19.39,
+        "ctr_pct": 3.503
+      },
+      {
+        "date": "2026-03-20",
+        "spend": 500.52,
+        "impressions": 24349,
+        "clicks": 959,
+        "reach": 20685,
+        "cpc": 0.5219,
+        "cpm": 20.56,
+        "ctr_pct": 3.939
+      },
+      {
+        "date": "2026-03-21",
+        "spend": 406.63,
+        "impressions": 23368,
+        "clicks": 894,
+        "reach": 20484,
+        "cpc": 0.4548,
+        "cpm": 17.4,
+        "ctr_pct": 3.826
+      },
+      {
+        "date": "2026-03-22",
+        "spend": 573.63,
+        "impressions": 29705,
+        "clicks": 1115,
+        "reach": 25466,
+        "cpc": 0.5145,
+        "cpm": 19.31,
+        "ctr_pct": 3.754
+      },
+      {
+        "date": "2026-03-23",
+        "spend": 518.82,
+        "impressions": 26648,
+        "clicks": 948,
+        "reach": 22503,
+        "cpc": 0.5473,
+        "cpm": 19.47,
+        "ctr_pct": 3.557
+      },
+      {
+        "date": "2026-03-24",
+        "spend": 490.71,
+        "impressions": 26049,
+        "clicks": 937,
+        "reach": 22390,
+        "cpc": 0.5237,
+        "cpm": 18.84,
+        "ctr_pct": 3.597
+      },
+      {
+        "date": "2026-03-25",
+        "spend": 487.66,
+        "impressions": 23679,
+        "clicks": 787,
+        "reach": 20030,
+        "cpc": 0.6196,
+        "cpm": 20.59,
+        "ctr_pct": 3.324
+      },
+      {
+        "date": "2026-03-26",
+        "spend": 402.23,
+        "impressions": 18893,
+        "clicks": 698,
+        "reach": 16166,
+        "cpc": 0.5763,
+        "cpm": 21.29,
+        "ctr_pct": 3.694
+      },
+      {
+        "date": "2026-03-27",
+        "spend": 442.63,
+        "impressions": 21661,
+        "clicks": 839,
+        "reach": 18769,
+        "cpc": 0.5276,
+        "cpm": 20.43,
+        "ctr_pct": 3.873
+      },
+      {
+        "date": "2026-03-28",
+        "spend": 348.19,
+        "impressions": 19319,
+        "clicks": 719,
+        "reach": 16830,
+        "cpc": 0.4843,
+        "cpm": 18.02,
+        "ctr_pct": 3.722
+      },
+      {
+        "date": "2026-03-29",
+        "spend": 11.51,
+        "impressions": 370,
+        "clicks": 26,
+        "reach": 349,
+        "cpc": 0.4427,
+        "cpm": 31.11,
+        "ctr_pct": 7.027
+      },
+      {
+        "date": "2026-03-30",
+        "spend": 0.0,
+        "impressions": 0,
+        "clicks": 0,
+        "reach": 0,
+        "cpc": null,
+        "cpm": null,
+        "ctr_pct": null
+      },
+      {
+        "date": "2026-03-31",
+        "spend": 446.87,
+        "impressions": 16829,
+        "clicks": 709,
+        "reach": 14625,
+        "cpc": 0.6303,
+        "cpm": 26.55,
+        "ctr_pct": 4.213
+      },
+      {
+        "date": "2026-04-01",
+        "spend": 563.61,
+        "impressions": 24207,
+        "clicks": 1040,
+        "reach": 20775,
+        "cpc": 0.5419,
+        "cpm": 23.28,
+        "ctr_pct": 4.296
+      },
+      {
+        "date": "2026-04-02",
+        "spend": 550.21,
+        "impressions": 21881,
+        "clicks": 1012,
+        "reach": 19576,
+        "cpc": 0.5437,
+        "cpm": 25.15,
+        "ctr_pct": 4.625
+      },
+      {
+        "date": "2026-04-03",
+        "spend": 560.49,
+        "impressions": 22413,
+        "clicks": 915,
+        "reach": 19179,
+        "cpc": 0.6126,
+        "cpm": 25.01,
+        "ctr_pct": 4.082
+      },
+      {
+        "date": "2026-04-04",
+        "spend": 531.93,
+        "impressions": 27343,
+        "clicks": 992,
+        "reach": 23216,
+        "cpc": 0.5362,
+        "cpm": 19.45,
+        "ctr_pct": 3.628
+      },
+      {
+        "date": "2026-04-05",
+        "spend": 518.95,
+        "impressions": 38250,
+        "clicks": 1169,
+        "reach": 33435,
+        "cpc": 0.4439,
+        "cpm": 13.57,
+        "ctr_pct": 3.056
+      },
+      {
+        "date": "2026-04-06",
+        "spend": 419.26,
+        "impressions": 30974,
+        "clicks": 1011,
+        "reach": 26478,
+        "cpc": 0.4147,
+        "cpm": 13.54,
+        "ctr_pct": 3.264
+      },
+      {
+        "date": "2026-04-07",
+        "spend": 434.3,
+        "impressions": 25523,
+        "clicks": 885,
+        "reach": 21670,
+        "cpc": 0.4907,
+        "cpm": 17.02,
+        "ctr_pct": 3.467
+      },
+      {
+        "date": "2026-04-08",
+        "spend": 406.08,
+        "impressions": 23644,
+        "clicks": 793,
+        "reach": 20282,
+        "cpc": 0.5121,
+        "cpm": 17.17,
+        "ctr_pct": 3.354
+      },
+      {
+        "date": "2026-04-09",
+        "spend": 410.28,
+        "impressions": 18887,
+        "clicks": 608,
+        "reach": 15486,
+        "cpc": 0.6748,
+        "cpm": 21.72,
+        "ctr_pct": 3.219
+      },
+      {
+        "date": "2026-04-10",
+        "spend": 413.59,
+        "impressions": 20704,
+        "clicks": 706,
+        "reach": 17183,
+        "cpc": 0.5858,
+        "cpm": 19.98,
+        "ctr_pct": 3.41
+      },
+      {
+        "date": "2026-04-11",
+        "spend": 339.68,
+        "impressions": 22470,
+        "clicks": 877,
+        "reach": 19633,
+        "cpc": 0.3873,
+        "cpm": 15.12,
+        "ctr_pct": 3.903
+      },
+      {
+        "date": "2026-04-12",
+        "spend": 491.54,
+        "impressions": 30698,
+        "clicks": 1084,
+        "reach": 26499,
+        "cpc": 0.4535,
+        "cpm": 16.01,
+        "ctr_pct": 3.531
+      },
+      {
+        "date": "2026-04-13",
+        "spend": 459.29,
+        "impressions": 29589,
+        "clicks": 1043,
+        "reach": 24969,
+        "cpc": 0.4404,
+        "cpm": 15.52,
+        "ctr_pct": 3.525
+      },
+      {
+        "date": "2026-04-14",
+        "spend": 430.21,
+        "impressions": 26720,
+        "clicks": 950,
+        "reach": 24969,
+        "cpc": 0.4529,
+        "cpm": 16.1,
+        "ctr_pct": 3.555
+      },
+      {
+        "date": "2026-04-15",
+        "spend": 438.47,
+        "impressions": 27079,
+        "clicks": 1026,
+        "reach": 23045,
+        "cpc": 0.4274,
+        "cpm": 16.19,
+        "ctr_pct": 3.789
+      },
+      {
+        "date": "2026-04-16",
+        "spend": 417.82,
+        "impressions": 21351,
+        "clicks": 814,
+        "reach": 17728,
+        "cpc": 0.5133,
+        "cpm": 19.57,
+        "ctr_pct": 3.812
+      },
+      {
+        "date": "2026-04-17",
+        "spend": 718.59,
+        "impressions": 35841,
+        "clicks": 1336,
+        "reach": 30523,
+        "cpc": 0.5379,
+        "cpm": 20.05,
+        "ctr_pct": 3.728
+      },
+      {
+        "date": "2026-04-18",
+        "spend": 526.42,
+        "impressions": 31641,
+        "clicks": 1337,
+        "reach": 27114,
+        "cpc": 0.3937,
+        "cpm": 16.64,
+        "ctr_pct": 4.226
+      },
+      {
+        "date": "2026-04-19",
+        "spend": 719.18,
+        "impressions": 41852,
+        "clicks": 1518,
+        "reach": 35471,
+        "cpc": 0.4738,
+        "cpm": 17.18,
+        "ctr_pct": 3.627
+      },
+      {
+        "date": "2026-04-20",
+        "spend": 578.35,
+        "impressions": 29830,
+        "clicks": 1095,
+        "reach": 25304,
+        "cpc": 0.5282,
+        "cpm": 19.39,
+        "ctr_pct": 3.671
+      },
+      {
+        "date": "2026-04-21",
+        "spend": 589.71,
+        "impressions": 28374,
+        "clicks": 1094,
+        "reach": null,
+        "cpc": 0.539,
+        "cpm": 20.78,
+        "ctr_pct": 3.856
+      },
+      {
+        "date": "2026-04-22",
+        "spend": 664.22,
+        "impressions": 31751,
+        "clicks": 1175,
+        "reach": null,
+        "cpc": 0.5653,
+        "cpm": 20.92,
+        "ctr_pct": 3.701
+      },
+      {
+        "date": "2026-04-23",
+        "spend": 623.73,
+        "impressions": 30115,
+        "clicks": 1123,
+        "reach": null,
+        "cpc": 0.5554,
+        "cpm": 20.71,
+        "ctr_pct": 3.729
+      },
+      {
+        "date": "2026-04-24",
+        "spend": 1144.57,
+        "impressions": 56631,
+        "clicks": 2331,
+        "reach": null,
+        "cpc": 0.491,
+        "cpm": 20.21,
+        "ctr_pct": 4.116
+      },
+      {
+        "date": "2026-04-25",
+        "spend": 822.1,
+        "impressions": 42806,
+        "clicks": 1917,
+        "reach": null,
+        "cpc": 0.4288,
+        "cpm": 19.21,
+        "ctr_pct": 4.478
+      },
+      {
+        "date": "2026-04-26",
+        "spend": 1131.43,
+        "impressions": 58011,
+        "clicks": 2556,
+        "reach": null,
+        "cpc": 0.4427,
+        "cpm": 19.5,
+        "ctr_pct": 4.406
+      },
+      {
+        "date": "2026-04-27",
+        "spend": 1022.11,
+        "impressions": 45481,
+        "clicks": 1950,
+        "reach": 38734,
+        "cpc": 0.52,
+        "cpm": 22.47,
+        "ctr_pct": 4.29,
+        "captured_at": "2026-04-28T19:07:40.484426+07:00",
+        "run_id": "2026-04-28_PM_1907",
+        "source": "Supabase facebook_ad_spend"
+      }
+    ],
+    "fb_ads_7d_rolling": [
+      {
+        "run_id": "2026-04-12_AM_0236",
+        "date": "2026-04-12",
+        "period": "AM",
+        "time": "02:36",
+        "file": "FD_Report_2026-04-12_AM_0236.md"
+      },
+      {
+        "run_id": "2026-04-12_AM_0254",
+        "date": "2026-04-12",
+        "period": "AM",
+        "time": "02:54",
+        "file": "FD_Report_2026-04-12_AM_0254.md"
+      },
+      {
+        "run_id": "2026-04-12_AM_0705",
+        "date": "2026-04-12",
+        "period": "AM",
+        "time": "07:05",
+        "file": "FD_Report_2026-04-12_AM_0705.md"
+      },
+      {
+        "run_id": "2026-04-16_AM_0709",
+        "date": "2026-04-16",
+        "period": "AM",
+        "time": "07:09",
+        "file": "FD_Report_2026-04-16_AM_0709.md"
+      },
+      {
+        "run_id": "2026-04-18_AM_0705",
+        "date": "2026-04-18",
+        "period": "AM",
+        "time": "07:05",
+        "file": "FD_Report_2026-04-18_AM_0705.md"
+      },
+      {
+        "run_id": "2026-04-18_PM_1902",
+        "date": "2026-04-18",
+        "period": "PM",
+        "time": "19:02",
+        "file": "FD_Report_2026-04-18_PM_1902.md"
+      },
+      {
+        "run_id": "2026-04-20_AM_0703",
+        "date": "2026-04-20",
+        "period": "AM",
+        "time": "07:03",
+        "file": "FD_Report_2026-04-20_AM_0703.md"
+      },
+      {
+        "run_id": "2026-04-21_AM_0706",
+        "date": "2026-04-21",
+        "period": "AM",
+        "time": "07:06",
+        "file": "FD_Report_2026-04-21_AM_0706.md",
+        "spend_7d_usd": 3655.09,
+        "fb_pipeline_gap_days": 1
+      },
+      {
+        "run_id": "2026-04-21_PM_1903",
+        "date": "2026-04-21",
+        "period": "PM",
+        "time": "19:03",
+        "file": "FD_Report_2026-04-21_PM_1903.md",
+        "spend_7d_usd": 3826.2,
+        "cpc_7d_usd": 0.47,
+        "cpm_7d_usd": 17.86,
+        "ctr_7d_pct": 3.77,
+        "fb_pipeline_gap_days": 1
+      },
+      {
+        "run_id": "2026-04-22_PM_1906",
+        "date": "2026-04-22",
+        "period": "PM",
+        "time": "19:06",
+        "file": "FD_Report_2026-04-22_PM_1906.md",
+        "spend_7d_usd": 3398.83,
+        "cpc_7d_usd": 0.48,
+        "cpm_7d_usd": 18.12,
+        "ctr_7d_pct": 3.8,
+        "fb_pipeline_gap_days": 2
+      },
+      {
+        "run_id": "2026-04-23_AM_0827",
+        "date": "2026-04-23",
+        "period": "AM",
+        "time": "08:27",
+        "file": "FD_Report_2026-04-23_AM_0827.md",
+        "spend_7d_usd": 0.49,
+        "fb_pipeline_gap_days": 3
+      },
+      {
+        "run_id": "2026-04-24_AM_0922",
+        "date": "2026-04-24",
+        "period": "AM",
+        "time": "09:22",
+        "file": "FD_Report_2026-04-24_AM_0922.md",
+        "spend_7d_usd": 2542.54,
+        "cpc_7d_usd": 0.481,
+        "cpm_7d_usd": 18.27,
+        "ctr_7d_pct": 3.8,
+        "fb_pipeline_gap_days": 4
+      },
+      {
+        "run_id": "2026-04-24_PM_1906",
+        "date": "2026-04-24",
+        "period": "PM",
+        "time": "19:06",
+        "file": "FD_Report_2026-04-24_PM_1906.md",
+        "spend_7d_usd": 2542.54,
+        "cpc_7d_usd": 0.481,
+        "cpm_7d_usd": 18.27,
+        "ctr_7d_pct": 3.8,
+        "fb_pipeline_gap_days": 4,
+        "spend_30d_usd": 12067.34
+      },
+      {
+        "run_id": "2026-04-25_AM_0842",
+        "date": "2026-04-25",
+        "period": "AM",
+        "time": "08:42",
+        "file": "FD_Report_2026-04-25_AM_0842.md",
+        "spend_7d_usd": 2542.54,
+        "cpc_7d_usd": 0.481,
+        "cpm_7d_usd": 18.27,
+        "ctr_7d_pct": 3.8,
+        "fb_pipeline_gap_days": 5
+      },
+      {
+        "run_id": "2026-04-25_PM_1907",
+        "date": "2026-04-25",
+        "period": "PM",
+        "time": "19:07",
+        "file": "FD_Report_2026-04-25_PM_1907.md",
+        "spend_7d_usd": 1823.95,
+        "cpc_7d_usd": 0.46,
+        "cpm_7d_usd": 17.65,
+        "ctr_7d_pct": 3.82,
+        "fb_pipeline_gap_days": 5,
+        "klaviyo_status": "UNAUTH"
+      },
+      {
+        "run_id": "2026-04-26_AM_0002",
+        "date": "2026-04-26",
+        "period": "AM",
+        "time": "00:02",
+        "file": "FD_Report_2026-04-26_AM_0002.md",
+        "cpc_7d_usd": 0.5,
+        "cpm_7d_usd": 18.1,
+        "ctr_7d_pct": 3.65,
+        "fb_pipeline_gap_days": 6,
+        "klaviyo_status": "UNAUTH"
+      },
+      {
+        "run_id": "2026-04-26_PM_1903",
+        "date": "2026-04-26",
+        "period": "PM",
+        "time": "19:03",
+        "file": "FD_Report_2026-04-26_PM_1903.md",
+        "spend_7d_usd": 1297.53,
+        "cpc_7d_usd": 0.5,
+        "cpm_7d_usd": 18.1,
+        "ctr_7d_pct": 3.65,
+        "klaviyo_status": "UNAUTH",
+        "spend_30d_usd": 11177.45
+      },
+      {
+        "run_id": "2026-04-27_AM_0745",
+        "date": "2026-04-27",
+        "period": "AM",
+        "time": "07:45",
+        "file": "FD_Report_2026-04-27_AM_0745.md",
+        "spend_7d_usd": 578.35,
+        "cpc_7d_usd": 0.53,
+        "cpm_7d_usd": 19.39,
+        "ctr_7d_pct": 3.67,
+        "fb_pipeline_gap_days": 7,
+        "klaviyo_status": "UNAUTH",
+        "spend_30d_usd": 10734.82
+      },
+      {
+        "run_id": "2026-04-27_PM_1938",
+        "date": "2026-04-27",
+        "period": "PM",
+        "time": "19:38",
+        "file": "FD_Report_2026-04-27_PM_1938.md",
+        "spend_7d_usd": 578.35,
+        "cpc_7d_usd": 0.53,
+        "cpm_7d_usd": 19.39,
+        "ctr_7d_pct": 3.67,
+        "fb_pipeline_gap_days": 7,
+        "klaviyo_status": "UNAUTH",
+        "spend_30d_usd": 10734.82
+      }
+    ],
+    "fb_ads_30d_rolling": [],
+    "klaviyo_revenue_daily": [
+      {
+        "date": "2026-04-12",
+        "orders": 5,
+        "revenue": 215.46
+      },
+      {
+        "date": "2026-04-13",
+        "orders": 21,
+        "revenue": 1252.73
+      },
+      {
+        "date": "2026-04-14",
+        "orders": 19,
+        "revenue": 1051.67
+      },
+      {
+        "date": "2026-04-15",
+        "orders": 14,
+        "revenue": 611.58
+      },
+      {
+        "date": "2026-04-16",
+        "orders": 13,
+        "revenue": 721.45
+      },
+      {
+        "date": "2026-04-17",
+        "orders": 22,
+        "revenue": 1349.59
+      },
+      {
+        "date": "2026-04-18",
+        "orders": 20,
+        "revenue": 1073.76
+      },
+      {
+        "date": "2026-04-19",
+        "orders": 29,
+        "revenue": 1557.41
+      },
+      {
+        "date": "2026-04-20",
+        "orders": 13,
+        "revenue": 909.44
+      },
+      {
+        "date": "2026-04-21",
+        "orders": 26,
+        "revenue": 1572.53
+      },
+      {
+        "date": "2026-04-22",
+        "orders": 32,
+        "revenue": 1574.85
+      },
+      {
+        "date": "2026-04-23",
+        "orders": 18,
+        "revenue": 1030.28
+      },
+      {
+        "date": "2026-04-24",
+        "orders": 30,
+        "revenue": 1308.85
+      },
+      {
+        "date": "2026-04-25",
+        "orders": 31,
+        "revenue": 1618.53
+      },
+      {
+        "date": "2026-04-26",
+        "orders": 44,
+        "revenue": 2309.36
+      },
+      {
+        "date": "2026-04-27",
+        "orders": 6,
+        "revenue": 294.68
+      }
+    ],
+    "klaviyo_flow_revenue_7d": [
+      {
+        "anchor_date": "2026-04-27",
+        "window": "last_7_days_event_time",
+        "total": 651.41,
+        "by_flow": {
+          "Welcome Series Sy4yQ7": 204.66,
+          "Cross-sell Fulfilled UcQjaE": 0.0,
+          "Shipping Delivered WHzVmj": 87.78,
+          "Browse Abandonment SsEfTC": 0.0,
+          "Add to Cart Y5vBpn": 193.54,
+          "Abandoned Checkout SpCgkC": 40.96,
+          "Customer Winback Uheh2Y": 0.0,
+          "Welcome Flow T2.26 UU8cbf": 0.0,
+          "Sunset Flow XZjRWL": 0.0,
+          "Thank You R3WTZW": 0.0,
+          "Review Request YhBhYm": 39.98,
+          "Loyalty Onboarding VVAHB7": 84.49
+        }
+      },
+      {
+        "run_id": "2026-04-28_PM_1907",
+        "captured_at": "2026-04-28T19:07:40.484426+07:00",
+        "window": "2026-04-21..2026-04-27 (Klaviyo last_7_days)",
+        "revenue_usd": 461.56,
+        "top_flows": [
+          {
+            "flow_id": "Sy4yQ7",
+            "name": "Welcome Series",
+            "rev": 204.66
+          },
+          {
+            "flow_id": "WHzVmj",
+            "name": "Delivered",
+            "rev": 87.78
+          },
+          {
+            "flow_id": "VVAHB7",
+            "name": "Loyalty Onboarding",
+            "rev": 84.49
+          },
+          {
+            "flow_id": "Y5vBpn",
+            "name": "Abandoned Add to Cart",
+            "rev": 43.67
+          },
+          {
+            "flow_id": "SpCgkC",
+            "name": "Abandoned Checkout",
+            "rev": 40.96
+          }
+        ]
+      }
+    ],
+    "klaviyo_campaign_revenue_7d": [
+      {
+        "anchor_date": "2026-04-27",
+        "window": "last_7_days_event_time",
+        "total": 134.91,
+        "by_campaign": {
+          "Mother's Day Email 3 (Shipping Cutoff) 04-21": 40.96,
+          "Mother's Day Email 4 v4 (Psalm 46:5) 04-24": 93.95
+        }
+      },
+      {
+        "run_id": "2026-04-28_PM_1907",
+        "captured_at": "2026-04-28T19:07:40.484426+07:00",
+        "campaigns_sent_7d": 2,
+        "campaign_names": [
+          "FD - Mother's Day 2026 - Email 4 - Last Call v4 (Psalm 46:5, data-backed)",
+          "FD - Mother's Day 2026 - Email 3 - Shipping Cutoff Reminder"
+        ],
+        "drafts_pending": 1,
+        "revenue_usd": null,
+        "note": "Cần get_campaign_report cho revenue cụ thể (Weekly Review handle)"
+      }
+    ],
+    "blended_roas_7d": [
+      {
+        "anchor_date": "2026-04-20",
+        "window": "Apr 14-20 (FB spend full)",
+        "revenue_klaviyo": 7274.9,
+        "spend_fb": 3829.04,
+        "roas": 1.9
+      },
+      {
+        "anchor_date": "2026-04-26",
+        "window": "Apr 20-26 (post-token-fix)",
+        "revenue_klaviyo": 10323.84,
+        "spend_fb": 5554.11,
+        "roas": 1.859
+      },
+      {
+        "run_id": "2026-04-28_PM_1907",
+        "captured_at": "2026-04-28T19:07:40.484426+07:00",
+        "spend_usd": 6000.54,
+        "revenue_usd": 10793.6,
+        "roas": 1.8,
+        "target": 2.3,
+        "gap_pct": -21.7
+      }
+    ],
+    "scale_readiness_score_monthly": [],
+    "fb_ads_7d_rolling_supabase": [
+      {
+        "anchor_date": "2026-01-27",
+        "days_actual": 1,
+        "spend": 129.53,
+        "impressions": 5049,
+        "clicks": 175,
+        "cpc": 0.7402,
+        "cpm": 25.65,
+        "ctr_pct": 3.466
+      },
+      {
+        "anchor_date": "2026-01-28",
+        "days_actual": 2,
+        "spend": 261.39,
+        "impressions": 10788,
+        "clicks": 378,
+        "cpc": 0.6915,
+        "cpm": 24.23,
+        "ctr_pct": 3.504
+      },
+      {
+        "anchor_date": "2026-01-29",
+        "days_actual": 3,
+        "spend": 389.69,
+        "impressions": 15905,
+        "clicks": 566,
+        "cpc": 0.6885,
+        "cpm": 24.5,
+        "ctr_pct": 3.559
+      },
+      {
+        "anchor_date": "2026-01-30",
+        "days_actual": 4,
+        "spend": 532.43,
+        "impressions": 20870,
+        "clicks": 756,
+        "cpc": 0.7043,
+        "cpm": 25.51,
+        "ctr_pct": 3.622
+      },
+      {
+        "anchor_date": "2026-01-31",
+        "days_actual": 5,
+        "spend": 655.72,
+        "impressions": 26761,
+        "clicks": 969,
+        "cpc": 0.6767,
+        "cpm": 24.5,
+        "ctr_pct": 3.621
+      },
+      {
+        "anchor_date": "2026-02-01",
+        "days_actual": 6,
+        "spend": 840.69,
+        "impressions": 36646,
+        "clicks": 1221,
+        "cpc": 0.6885,
+        "cpm": 22.94,
+        "ctr_pct": 3.332
+      },
+      {
+        "anchor_date": "2026-02-02",
+        "days_actual": 7,
+        "spend": 969.37,
+        "impressions": 44300,
+        "clicks": 1420,
+        "cpc": 0.6827,
+        "cpm": 21.88,
+        "ctr_pct": 3.205
+      },
+      {
+        "anchor_date": "2026-02-03",
+        "days_actual": 7,
+        "spend": 981.64,
+        "impressions": 51902,
+        "clicks": 1456,
+        "cpc": 0.6742,
+        "cpm": 18.91,
+        "ctr_pct": 2.805
+      },
+      {
+        "anchor_date": "2026-02-04",
+        "days_actual": 7,
+        "spend": 971.53,
+        "impressions": 54014,
+        "clicks": 1433,
+        "cpc": 0.678,
+        "cpm": 17.99,
+        "ctr_pct": 2.653
+      },
+      {
+        "anchor_date": "2026-02-05",
+        "days_actual": 7,
+        "spend": 985.42,
+        "impressions": 56864,
+        "clicks": 1445,
+        "cpc": 0.682,
+        "cpm": 17.33,
+        "ctr_pct": 2.541
+      },
+      {
+        "anchor_date": "2026-02-06",
+        "days_actual": 7,
+        "spend": 1022.81,
+        "impressions": 61480,
+        "clicks": 1495,
+        "cpc": 0.6842,
+        "cpm": 16.64,
+        "ctr_pct": 2.432
+      },
+      {
+        "anchor_date": "2026-02-07",
+        "days_actual": 7,
+        "spend": 1094.35,
+        "impressions": 70116,
+        "clicks": 1669,
+        "cpc": 0.6557,
+        "cpm": 15.61,
+        "ctr_pct": 2.38
+      },
+      {
+        "anchor_date": "2026-02-08",
+        "days_actual": 7,
+        "spend": 1165.89,
+        "impressions": 81134,
+        "clicks": 1859,
+        "cpc": 0.6272,
+        "cpm": 14.37,
+        "ctr_pct": 2.291
+      },
+      {
+        "anchor_date": "2026-02-09",
+        "days_actual": 7,
+        "spend": 1192.1,
+        "impressions": 91161,
+        "clicks": 1980,
+        "cpc": 0.6021,
+        "cpm": 13.08,
+        "ctr_pct": 2.172
+      },
+      {
+        "anchor_date": "2026-02-10",
+        "days_actual": 7,
+        "spend": 1200.87,
+        "impressions": 93590,
+        "clicks": 2100,
+        "cpc": 0.5718,
+        "cpm": 12.83,
+        "ctr_pct": 2.244
+      },
+      {
+        "anchor_date": "2026-02-11",
+        "days_actual": 7,
+        "spend": 1230.24,
+        "impressions": 101782,
+        "clicks": 2233,
+        "cpc": 0.5509,
+        "cpm": 12.09,
+        "ctr_pct": 2.194
+      },
+      {
+        "anchor_date": "2026-02-12",
+        "days_actual": 7,
+        "spend": 1237.08,
+        "impressions": 111398,
+        "clicks": 2338,
+        "cpc": 0.5291,
+        "cpm": 11.11,
+        "ctr_pct": 2.099
+      },
+      {
+        "anchor_date": "2026-02-13",
+        "days_actual": 7,
+        "spend": 1227.63,
+        "impressions": 114955,
+        "clicks": 2380,
+        "cpc": 0.5158,
+        "cpm": 10.68,
+        "ctr_pct": 2.07
+      },
+      {
+        "anchor_date": "2026-02-14",
+        "days_actual": 7,
+        "spend": 1187.18,
+        "impressions": 115865,
+        "clicks": 2317,
+        "cpc": 0.5124,
+        "cpm": 10.25,
+        "ctr_pct": 2.0
+      },
+      {
+        "anchor_date": "2026-02-15",
+        "days_actual": 7,
+        "spend": 1104.97,
+        "impressions": 112486,
+        "clicks": 2284,
+        "cpc": 0.4838,
+        "cpm": 9.82,
+        "ctr_pct": 2.03
+      },
+      {
+        "anchor_date": "2026-02-16",
+        "days_actual": 7,
+        "spend": 1079.4,
+        "impressions": 109353,
+        "clicks": 2252,
+        "cpc": 0.4793,
+        "cpm": 9.87,
+        "ctr_pct": 2.059
+      },
+      {
+        "anchor_date": "2026-02-17",
+        "days_actual": 7,
+        "spend": 1043.11,
+        "impressions": 108862,
+        "clicks": 2230,
+        "cpc": 0.4678,
+        "cpm": 9.58,
+        "ctr_pct": 2.048
+      },
+      {
+        "anchor_date": "2026-02-18",
+        "days_actual": 7,
+        "spend": 1007.24,
+        "impressions": 104638,
+        "clicks": 2229,
+        "cpc": 0.4519,
+        "cpm": 9.63,
+        "ctr_pct": 2.13
+      },
+      {
+        "anchor_date": "2026-02-19",
+        "days_actual": 7,
+        "spend": 965.51,
+        "impressions": 99730,
+        "clicks": 2213,
+        "cpc": 0.4363,
+        "cpm": 9.68,
+        "ctr_pct": 2.219
+      },
+      {
+        "anchor_date": "2026-02-20",
+        "days_actual": 7,
+        "spend": 905.81,
+        "impressions": 99051,
+        "clicks": 2248,
+        "cpc": 0.4029,
+        "cpm": 9.14,
+        "ctr_pct": 2.27
+      },
+      {
+        "anchor_date": "2026-02-21",
+        "days_actual": 7,
+        "spend": 862.5,
+        "impressions": 93257,
+        "clicks": 2212,
+        "cpc": 0.3899,
+        "cpm": 9.25,
+        "ctr_pct": 2.372
+      },
+      {
+        "anchor_date": "2026-02-22",
+        "days_actual": 7,
+        "spend": 838.42,
+        "impressions": 88417,
+        "clicks": 2154,
+        "cpc": 0.3892,
+        "cpm": 9.48,
+        "ctr_pct": 2.436
+      },
+      {
+        "anchor_date": "2026-02-23",
+        "days_actual": 7,
+        "spend": 841.14,
+        "impressions": 86606,
+        "clicks": 2183,
+        "cpc": 0.3853,
+        "cpm": 9.71,
+        "ctr_pct": 2.521
+      },
+      {
+        "anchor_date": "2026-02-24",
+        "days_actual": 7,
+        "spend": 847.1,
+        "impressions": 83393,
+        "clicks": 2206,
+        "cpc": 0.384,
+        "cpm": 10.16,
+        "ctr_pct": 2.645
+      },
+      {
+        "anchor_date": "2026-02-25",
+        "days_actual": 7,
+        "spend": 873.13,
+        "impressions": 82977,
+        "clicks": 2202,
+        "cpc": 0.3965,
+        "cpm": 10.52,
+        "ctr_pct": 2.654
+      },
+      {
+        "anchor_date": "2026-02-26",
+        "days_actual": 7,
+        "spend": 906.9,
+        "impressions": 81458,
+        "clicks": 2242,
+        "cpc": 0.4045,
+        "cpm": 11.13,
+        "ctr_pct": 2.752
+      },
+      {
+        "anchor_date": "2026-02-27",
+        "days_actual": 7,
+        "spend": 936.99,
+        "impressions": 79784,
+        "clicks": 2235,
+        "cpc": 0.4192,
+        "cpm": 11.74,
+        "ctr_pct": 2.801
+      },
+      {
+        "anchor_date": "2026-02-28",
+        "days_actual": 7,
+        "spend": 1006.35,
+        "impressions": 81900,
+        "clicks": 2341,
+        "cpc": 0.4299,
+        "cpm": 12.29,
+        "ctr_pct": 2.858
+      },
+      {
+        "anchor_date": "2026-03-01",
+        "days_actual": 7,
+        "spend": 1077.52,
+        "impressions": 84775,
+        "clicks": 2510,
+        "cpc": 0.4293,
+        "cpm": 12.71,
+        "ctr_pct": 2.961
+      },
+      {
+        "anchor_date": "2026-03-02",
+        "days_actual": 7,
+        "spend": 1126.36,
+        "impressions": 84189,
+        "clicks": 2595,
+        "cpc": 0.4341,
+        "cpm": 13.38,
+        "ctr_pct": 3.082
+      },
+      {
+        "anchor_date": "2026-03-03",
+        "days_actual": 7,
+        "spend": 1180.42,
+        "impressions": 84424,
+        "clicks": 2649,
+        "cpc": 0.4456,
+        "cpm": 13.98,
+        "ctr_pct": 3.138
+      },
+      {
+        "anchor_date": "2026-03-04",
+        "days_actual": 7,
+        "spend": 1183.01,
+        "impressions": 81767,
+        "clicks": 2608,
+        "cpc": 0.4536,
+        "cpm": 14.47,
+        "ctr_pct": 3.19
+      },
+      {
+        "anchor_date": "2026-03-05",
+        "days_actual": 7,
+        "spend": 1186.53,
+        "impressions": 78991,
+        "clicks": 2580,
+        "cpc": 0.4599,
+        "cpm": 15.02,
+        "ctr_pct": 3.266
+      },
+      {
+        "anchor_date": "2026-03-06",
+        "days_actual": 7,
+        "spend": 1223.37,
+        "impressions": 78325,
+        "clicks": 2615,
+        "cpc": 0.4678,
+        "cpm": 15.62,
+        "ctr_pct": 3.339
+      },
+      {
+        "anchor_date": "2026-03-07",
+        "days_actual": 7,
+        "spend": 1265.01,
+        "impressions": 79788,
+        "clicks": 2660,
+        "cpc": 0.4756,
+        "cpm": 15.85,
+        "ctr_pct": 3.334
+      },
+      {
+        "anchor_date": "2026-03-08",
+        "days_actual": 7,
+        "spend": 1278.75,
+        "impressions": 77612,
+        "clicks": 2591,
+        "cpc": 0.4935,
+        "cpm": 16.48,
+        "ctr_pct": 3.338
+      },
+      {
+        "anchor_date": "2026-03-09",
+        "days_actual": 7,
+        "spend": 1319.78,
+        "impressions": 78316,
+        "clicks": 2597,
+        "cpc": 0.5082,
+        "cpm": 16.85,
+        "ctr_pct": 3.316
+      },
+      {
+        "anchor_date": "2026-03-10",
+        "days_actual": 7,
+        "spend": 1352.7,
+        "impressions": 79085,
+        "clicks": 2641,
+        "cpc": 0.5122,
+        "cpm": 17.1,
+        "ctr_pct": 3.339
+      },
+      {
+        "anchor_date": "2026-03-11",
+        "days_actual": 7,
+        "spend": 1422.71,
+        "impressions": 82708,
+        "clicks": 2827,
+        "cpc": 0.5033,
+        "cpm": 17.2,
+        "ctr_pct": 3.418
+      },
+      {
+        "anchor_date": "2026-03-12",
+        "days_actual": 7,
+        "spend": 1460.15,
+        "impressions": 87046,
+        "clicks": 3003,
+        "cpc": 0.4862,
+        "cpm": 16.77,
+        "ctr_pct": 3.45
+      },
+      {
+        "anchor_date": "2026-03-13",
+        "days_actual": 7,
+        "spend": 1489.94,
+        "impressions": 88504,
+        "clicks": 3122,
+        "cpc": 0.4772,
+        "cpm": 16.83,
+        "ctr_pct": 3.528
+      },
+      {
+        "anchor_date": "2026-03-14",
+        "days_actual": 7,
+        "spend": 1534.5,
+        "impressions": 90236,
+        "clicks": 3320,
+        "cpc": 0.4622,
+        "cpm": 17.01,
+        "ctr_pct": 3.679
+      },
+      {
+        "anchor_date": "2026-03-15",
+        "days_actual": 7,
+        "spend": 1597.97,
+        "impressions": 91973,
+        "clicks": 3477,
+        "cpc": 0.4596,
+        "cpm": 17.37,
+        "ctr_pct": 3.78
+      },
+      {
+        "anchor_date": "2026-03-16",
+        "days_actual": 7,
+        "spend": 1909.44,
+        "impressions": 105156,
+        "clicks": 4258,
+        "cpc": 0.4484,
+        "cpm": 18.16,
+        "ctr_pct": 4.049
+      },
+      {
+        "anchor_date": "2026-03-17",
+        "days_actual": 7,
+        "spend": 2154.43,
+        "impressions": 119750,
+        "clicks": 4966,
+        "cpc": 0.4338,
+        "cpm": 17.99,
+        "ctr_pct": 4.147
+      },
+      {
+        "anchor_date": "2026-03-18",
+        "days_actual": 7,
+        "spend": 2358.21,
+        "impressions": 130390,
+        "clicks": 5420,
+        "cpc": 0.4351,
+        "cpm": 18.09,
+        "ctr_pct": 4.157
+      },
+      {
+        "anchor_date": "2026-03-19",
+        "days_actual": 7,
+        "spend": 2601.91,
+        "impressions": 139623,
+        "clicks": 5712,
+        "cpc": 0.4555,
+        "cpm": 18.64,
+        "ctr_pct": 4.091
+      },
+      {
+        "anchor_date": "2026-03-20",
+        "days_actual": 7,
+        "spend": 2894.73,
+        "impressions": 152395,
+        "clicks": 6207,
+        "cpc": 0.4664,
+        "cpm": 18.99,
+        "ctr_pct": 4.073
+      },
+      {
+        "anchor_date": "2026-03-21",
+        "days_actual": 7,
+        "spend": 3034.73,
+        "impressions": 160809,
+        "clicks": 6464,
+        "cpc": 0.4695,
+        "cpm": 18.87,
+        "ctr_pct": 4.02
+      },
+      {
+        "anchor_date": "2026-03-22",
+        "days_actual": 7,
+        "spend": 3309.76,
+        "impressions": 175394,
+        "clicks": 6971,
+        "cpc": 0.4748,
+        "cpm": 18.87,
+        "ctr_pct": 3.974
+      },
+      {
+        "anchor_date": "2026-03-23",
+        "days_actual": 7,
+        "spend": 3295.2,
+        "impressions": 176004,
+        "clicks": 6730,
+        "cpc": 0.4896,
+        "cpm": 18.72,
+        "ctr_pct": 3.824
+      },
+      {
+        "anchor_date": "2026-03-24",
+        "days_actual": 7,
+        "spend": 3333.7,
+        "impressions": 175079,
+        "clicks": 6529,
+        "cpc": 0.5106,
+        "cpm": 19.04,
+        "ctr_pct": 3.729
+      },
+      {
+        "anchor_date": "2026-03-25",
+        "days_actual": 7,
+        "spend": 3403.7,
+        "impressions": 175749,
+        "clicks": 6409,
+        "cpc": 0.5311,
+        "cpm": 19.37,
+        "ctr_pct": 3.647
+      },
+      {
+        "anchor_date": "2026-03-26",
+        "days_actual": 7,
+        "spend": 3380.2,
+        "impressions": 172691,
+        "clicks": 6338,
+        "cpc": 0.5333,
+        "cpm": 19.57,
+        "ctr_pct": 3.67
+      },
+      {
+        "anchor_date": "2026-03-27",
+        "days_actual": 7,
+        "spend": 3322.31,
+        "impressions": 170003,
+        "clicks": 6218,
+        "cpc": 0.5343,
+        "cpm": 19.54,
+        "ctr_pct": 3.658
+      },
+      {
+        "anchor_date": "2026-03-28",
+        "days_actual": 7,
+        "spend": 3263.87,
+        "impressions": 165954,
+        "clicks": 6043,
+        "cpc": 0.5401,
+        "cpm": 19.67,
+        "ctr_pct": 3.641
+      },
+      {
+        "anchor_date": "2026-03-29",
+        "days_actual": 7,
+        "spend": 2701.75,
+        "impressions": 136619,
+        "clicks": 4954,
+        "cpc": 0.5454,
+        "cpm": 19.78,
+        "ctr_pct": 3.626
+      },
+      {
+        "anchor_date": "2026-03-30",
+        "days_actual": 7,
+        "spend": 2182.93,
+        "impressions": 109971,
+        "clicks": 4006,
+        "cpc": 0.5449,
+        "cpm": 19.85,
+        "ctr_pct": 3.643
+      },
+      {
+        "anchor_date": "2026-03-31",
+        "days_actual": 7,
+        "spend": 2139.09,
+        "impressions": 100751,
+        "clicks": 3778,
+        "cpc": 0.5662,
+        "cpm": 21.23,
+        "ctr_pct": 3.75
+      },
+      {
+        "anchor_date": "2026-04-01",
+        "days_actual": 7,
+        "spend": 2215.04,
+        "impressions": 101279,
+        "clicks": 4031,
+        "cpc": 0.5495,
+        "cpm": 21.87,
+        "ctr_pct": 3.98
+      },
+      {
+        "anchor_date": "2026-04-02",
+        "days_actual": 7,
+        "spend": 2363.02,
+        "impressions": 104267,
+        "clicks": 4345,
+        "cpc": 0.5438,
+        "cpm": 22.66,
+        "ctr_pct": 4.167
+      },
+      {
+        "anchor_date": "2026-04-03",
+        "days_actual": 7,
+        "spend": 2480.88,
+        "impressions": 105019,
+        "clicks": 4421,
+        "cpc": 0.5612,
+        "cpm": 23.62,
+        "ctr_pct": 4.21
+      },
+      {
+        "anchor_date": "2026-04-04",
+        "days_actual": 7,
+        "spend": 2664.62,
+        "impressions": 113043,
+        "clicks": 4694,
+        "cpc": 0.5677,
+        "cpm": 23.57,
+        "ctr_pct": 4.152
+      },
+      {
+        "anchor_date": "2026-04-05",
+        "days_actual": 7,
+        "spend": 3172.06,
+        "impressions": 150923,
+        "clicks": 5837,
+        "cpc": 0.5434,
+        "cpm": 21.02,
+        "ctr_pct": 3.868
+      },
+      {
+        "anchor_date": "2026-04-06",
+        "days_actual": 7,
+        "spend": 3591.32,
+        "impressions": 181897,
+        "clicks": 6848,
+        "cpc": 0.5244,
+        "cpm": 19.74,
+        "ctr_pct": 3.765
+      },
+      {
+        "anchor_date": "2026-04-07",
+        "days_actual": 7,
+        "spend": 3578.75,
+        "impressions": 190591,
+        "clicks": 7024,
+        "cpc": 0.5095,
+        "cpm": 18.78,
+        "ctr_pct": 3.685
+      },
+      {
+        "anchor_date": "2026-04-08",
+        "days_actual": 7,
+        "spend": 3421.22,
+        "impressions": 190028,
+        "clicks": 6777,
+        "cpc": 0.5048,
+        "cpm": 18.0,
+        "ctr_pct": 3.566
+      },
+      {
+        "anchor_date": "2026-04-09",
+        "days_actual": 7,
+        "spend": 3281.29,
+        "impressions": 187034,
+        "clicks": 6373,
+        "cpc": 0.5149,
+        "cpm": 17.54,
+        "ctr_pct": 3.407
+      },
+      {
+        "anchor_date": "2026-04-10",
+        "days_actual": 7,
+        "spend": 3134.39,
+        "impressions": 185325,
+        "clicks": 6164,
+        "cpc": 0.5085,
+        "cpm": 16.91,
+        "ctr_pct": 3.326
+      },
+      {
+        "anchor_date": "2026-04-11",
+        "days_actual": 7,
+        "spend": 2942.14,
+        "impressions": 180452,
+        "clicks": 6049,
+        "cpc": 0.4864,
+        "cpm": 16.3,
+        "ctr_pct": 3.352
+      },
+      {
+        "anchor_date": "2026-04-12",
+        "days_actual": 7,
+        "spend": 2914.73,
+        "impressions": 172900,
+        "clicks": 5964,
+        "cpc": 0.4887,
+        "cpm": 16.86,
+        "ctr_pct": 3.449
+      },
+      {
+        "anchor_date": "2026-04-13",
+        "days_actual": 7,
+        "spend": 2954.76,
+        "impressions": 171515,
+        "clicks": 5996,
+        "cpc": 0.4928,
+        "cpm": 17.23,
+        "ctr_pct": 3.496
+      },
+      {
+        "anchor_date": "2026-04-14",
+        "days_actual": 7,
+        "spend": 2950.67,
+        "impressions": 172712,
+        "clicks": 6061,
+        "cpc": 0.4868,
+        "cpm": 17.08,
+        "ctr_pct": 3.509
+      },
+      {
+        "anchor_date": "2026-04-15",
+        "days_actual": 7,
+        "spend": 2983.06,
+        "impressions": 176147,
+        "clicks": 6294,
+        "cpc": 0.474,
+        "cpm": 16.94,
+        "ctr_pct": 3.573
+      },
+      {
+        "anchor_date": "2026-04-16",
+        "days_actual": 7,
+        "spend": 2990.6,
+        "impressions": 178611,
+        "clicks": 6500,
+        "cpc": 0.4601,
+        "cpm": 16.74,
+        "ctr_pct": 3.639
+      },
+      {
+        "anchor_date": "2026-04-17",
+        "days_actual": 7,
+        "spend": 3295.6,
+        "impressions": 193748,
+        "clicks": 7130,
+        "cpc": 0.4622,
+        "cpm": 17.01,
+        "ctr_pct": 3.68
+      },
+      {
+        "anchor_date": "2026-04-18",
+        "days_actual": 7,
+        "spend": 3482.34,
+        "impressions": 202919,
+        "clicks": 7590,
+        "cpc": 0.4588,
+        "cpm": 17.16,
+        "ctr_pct": 3.74
+      },
+      {
+        "anchor_date": "2026-04-19",
+        "days_actual": 7,
+        "spend": 3709.98,
+        "impressions": 214073,
+        "clicks": 8024,
+        "cpc": 0.4624,
+        "cpm": 17.33,
+        "ctr_pct": 3.748
+      },
+      {
+        "anchor_date": "2026-04-20",
+        "days_actual": 7,
+        "spend": 3829.04,
+        "impressions": 214314,
+        "clicks": 8076,
+        "cpc": 0.4741,
+        "cpm": 17.87,
+        "ctr_pct": 3.768
+      },
+      {
+        "anchor_date": "2026-04-26",
+        "days_actual": 7,
+        "spend": 5554.11,
+        "impressions": 277418,
+        "clicks": 11291,
+        "cpc": 0.4919,
+        "cpm": 20.02,
+        "ctr_pct": 4.07
+      },
+      {
+        "run_id": "2026-04-28_PM_1907",
+        "captured_at": "2026-04-28T19:07:40.484426+07:00",
+        "window": "2026-04-21..2026-04-27",
+        "days_actual": 7,
+        "spend": 6000.54,
+        "clicks": 12154,
+        "impressions": 293316,
+        "cpc": 0.494,
+        "cpm": 20.46,
+        "ctr_pct": 4.14
+      }
+    ],
+    "fb_ads_30d_rolling_supabase": [
+      {
+        "anchor_date": "2026-02-02",
+        "days_actual": 7,
+        "spend": 969.37,
+        "impressions": 44300,
+        "clicks": 1420,
+        "cpc": 0.6827,
+        "cpm": 21.88,
+        "ctr_pct": 3.205
+      },
+      {
+        "anchor_date": "2026-02-03",
+        "days_actual": 8,
+        "spend": 1111.17,
+        "impressions": 56951,
+        "clicks": 1631,
+        "cpc": 0.6813,
+        "cpm": 19.51,
+        "ctr_pct": 2.864
+      },
+      {
+        "anchor_date": "2026-02-04",
+        "days_actual": 9,
+        "spend": 1232.92,
+        "impressions": 64802,
+        "clicks": 1811,
+        "cpc": 0.6808,
+        "cpm": 19.03,
+        "ctr_pct": 2.795
+      },
+      {
+        "anchor_date": "2026-02-05",
+        "days_actual": 10,
+        "spend": 1375.11,
+        "impressions": 72769,
+        "clicks": 2011,
+        "cpc": 0.6838,
+        "cpm": 18.9,
+        "ctr_pct": 2.764
+      },
+      {
+        "anchor_date": "2026-02-06",
+        "days_actual": 11,
+        "spend": 1555.24,
+        "impressions": 82350,
+        "clicks": 2251,
+        "cpc": 0.6909,
+        "cpm": 18.89,
+        "ctr_pct": 2.733
+      },
+      {
+        "anchor_date": "2026-02-07",
+        "days_actual": 12,
+        "spend": 1750.07,
+        "impressions": 96877,
+        "clicks": 2638,
+        "cpc": 0.6634,
+        "cpm": 18.06,
+        "ctr_pct": 2.723
+      },
+      {
+        "anchor_date": "2026-02-08",
+        "days_actual": 13,
+        "spend": 2006.58,
+        "impressions": 117780,
+        "clicks": 3080,
+        "cpc": 0.6515,
+        "cpm": 17.04,
+        "ctr_pct": 2.615
+      },
+      {
+        "anchor_date": "2026-02-09",
+        "days_actual": 14,
+        "spend": 2161.47,
+        "impressions": 135461,
+        "clicks": 3400,
+        "cpc": 0.6357,
+        "cpm": 15.96,
+        "ctr_pct": 2.51
+      },
+      {
+        "anchor_date": "2026-02-10",
+        "days_actual": 15,
+        "spend": 2312.04,
+        "impressions": 150541,
+        "clicks": 3731,
+        "cpc": 0.6197,
+        "cpm": 15.36,
+        "ctr_pct": 2.478
+      },
+      {
+        "anchor_date": "2026-02-11",
+        "days_actual": 16,
+        "spend": 2463.16,
+        "impressions": 166584,
+        "clicks": 4044,
+        "cpc": 0.6091,
+        "cpm": 14.79,
+        "ctr_pct": 2.428
+      },
+      {
+        "anchor_date": "2026-02-12",
+        "days_actual": 17,
+        "spend": 2612.19,
+        "impressions": 184167,
+        "clicks": 4349,
+        "cpc": 0.6006,
+        "cpm": 14.18,
+        "ctr_pct": 2.361
+      },
+      {
+        "anchor_date": "2026-02-13",
+        "days_actual": 18,
+        "spend": 2782.87,
+        "impressions": 197305,
+        "clicks": 4631,
+        "cpc": 0.6009,
+        "cpm": 14.1,
+        "ctr_pct": 2.347
+      },
+      {
+        "anchor_date": "2026-02-14",
+        "days_actual": 19,
+        "spend": 2937.25,
+        "impressions": 212742,
+        "clicks": 4955,
+        "cpc": 0.5928,
+        "cpm": 13.81,
+        "ctr_pct": 2.329
+      },
+      {
+        "anchor_date": "2026-02-15",
+        "days_actual": 20,
+        "spend": 3111.55,
+        "impressions": 230266,
+        "clicks": 5364,
+        "cpc": 0.5801,
+        "cpm": 13.51,
+        "ctr_pct": 2.329
+      },
+      {
+        "anchor_date": "2026-02-16",
+        "days_actual": 21,
+        "spend": 3240.87,
+        "impressions": 244814,
+        "clicks": 5652,
+        "cpc": 0.5734,
+        "cpm": 13.24,
+        "ctr_pct": 2.309
+      },
+      {
+        "anchor_date": "2026-02-17",
+        "days_actual": 22,
+        "spend": 3355.15,
+        "impressions": 259403,
+        "clicks": 5961,
+        "cpc": 0.5629,
+        "cpm": 12.93,
+        "ctr_pct": 2.298
+      },
+      {
+        "anchor_date": "2026-02-18",
+        "days_actual": 23,
+        "spend": 3470.4,
+        "impressions": 271222,
+        "clicks": 6273,
+        "cpc": 0.5532,
+        "cpm": 12.8,
+        "ctr_pct": 2.313
+      },
+      {
+        "anchor_date": "2026-02-19",
+        "days_actual": 24,
+        "spend": 3577.7,
+        "impressions": 283897,
+        "clicks": 6562,
+        "cpc": 0.5452,
+        "cpm": 12.6,
+        "ctr_pct": 2.311
+      },
+      {
+        "anchor_date": "2026-02-20",
+        "days_actual": 25,
+        "spend": 3688.68,
+        "impressions": 296356,
+        "clicks": 6879,
+        "cpc": 0.5362,
+        "cpm": 12.45,
+        "ctr_pct": 2.321
+      },
+      {
+        "anchor_date": "2026-02-21",
+        "days_actual": 26,
+        "spend": 3799.75,
+        "impressions": 305999,
+        "clicks": 7167,
+        "cpc": 0.5302,
+        "cpm": 12.42,
+        "ctr_pct": 2.342
+      },
+      {
+        "anchor_date": "2026-02-22",
+        "days_actual": 27,
+        "spend": 3949.97,
+        "impressions": 318683,
+        "clicks": 7518,
+        "cpc": 0.5254,
+        "cpm": 12.39,
+        "ctr_pct": 2.359
+      },
+      {
+        "anchor_date": "2026-02-23",
+        "days_actual": 28,
+        "spend": 4082.01,
+        "impressions": 331420,
+        "clicks": 7835,
+        "cpc": 0.521,
+        "cpm": 12.32,
+        "ctr_pct": 2.364
+      },
+      {
+        "anchor_date": "2026-02-24",
+        "days_actual": 29,
+        "spend": 4202.25,
+        "impressions": 342796,
+        "clicks": 8167,
+        "cpc": 0.5145,
+        "cpm": 12.26,
+        "ctr_pct": 2.382
+      },
+      {
+        "anchor_date": "2026-02-25",
+        "days_actual": 30,
+        "spend": 4343.53,
+        "impressions": 354199,
+        "clicks": 8475,
+        "cpc": 0.5125,
+        "cpm": 12.26,
+        "ctr_pct": 2.393
+      },
+      {
+        "anchor_date": "2026-02-26",
+        "days_actual": 30,
+        "spend": 4355.07,
+        "impressions": 360306,
+        "clicks": 8629,
+        "cpc": 0.5047,
+        "cpm": 12.09,
+        "ctr_pct": 2.395
+      },
+      {
+        "anchor_date": "2026-02-27",
+        "days_actual": 30,
+        "spend": 4364.28,
+        "impressions": 365352,
+        "clicks": 8736,
+        "cpc": 0.4996,
+        "cpm": 11.95,
+        "ctr_pct": 2.391
+      },
+      {
+        "anchor_date": "2026-02-28",
+        "days_actual": 30,
+        "spend": 4416.41,
+        "impressions": 371994,
+        "clicks": 8942,
+        "cpc": 0.4939,
+        "cpm": 11.87,
+        "ctr_pct": 2.404
+      },
+      {
+        "anchor_date": "2026-03-01",
+        "days_actual": 30,
+        "spend": 4495.06,
+        "impressions": 382588,
+        "clicks": 9272,
+        "cpc": 0.4848,
+        "cpm": 11.75,
+        "ctr_pct": 2.423
+      },
+      {
+        "anchor_date": "2026-03-02",
+        "days_actual": 30,
+        "spend": 4552.65,
+        "impressions": 388848,
+        "clicks": 9461,
+        "cpc": 0.4812,
+        "cpm": 11.71,
+        "ctr_pct": 2.433
+      },
+      {
+        "anchor_date": "2026-03-03",
+        "days_actual": 30,
+        "spend": 4541.98,
+        "impressions": 390574,
+        "clicks": 9595,
+        "cpc": 0.4734,
+        "cpm": 11.63,
+        "ctr_pct": 2.457
+      },
+      {
+        "anchor_date": "2026-03-04",
+        "days_actual": 30,
+        "spend": 4557.17,
+        "impressions": 391666,
+        "clicks": 9663,
+        "cpc": 0.4716,
+        "cpm": 11.64,
+        "ctr_pct": 2.467
+      },
+      {
+        "anchor_date": "2026-03-05",
+        "days_actual": 30,
+        "spend": 4559.96,
+        "impressions": 387395,
+        "clicks": 9753,
+        "cpc": 0.4675,
+        "cpm": 11.77,
+        "ctr_pct": 2.518
+      },
+      {
+        "anchor_date": "2026-03-06",
+        "days_actual": 30,
+        "spend": 4616.12,
+        "impressions": 389663,
+        "clicks": 9918,
+        "cpc": 0.4654,
+        "cpm": 11.85,
+        "ctr_pct": 2.545
+      },
+      {
+        "anchor_date": "2026-03-07",
+        "days_actual": 30,
+        "spend": 4696.0,
+        "impressions": 394918,
+        "clicks": 10157,
+        "cpc": 0.4623,
+        "cpm": 11.89,
+        "ctr_pct": 2.572
+      },
+      {
+        "anchor_date": "2026-03-08",
+        "days_actual": 30,
+        "spend": 4751.0,
+        "impressions": 398720,
+        "clicks": 10368,
+        "cpc": 0.4582,
+        "cpm": 11.92,
+        "ctr_pct": 2.6
+      },
+      {
+        "anchor_date": "2026-03-09",
+        "days_actual": 30,
+        "spend": 4778.08,
+        "impressions": 397048,
+        "clicks": 10389,
+        "cpc": 0.4599,
+        "cpm": 12.03,
+        "ctr_pct": 2.617
+      },
+      {
+        "anchor_date": "2026-03-10",
+        "days_actual": 30,
+        "spend": 4728.79,
+        "impressions": 388525,
+        "clicks": 10377,
+        "cpc": 0.4557,
+        "cpm": 12.17,
+        "ctr_pct": 2.671
+      },
+      {
+        "anchor_date": "2026-03-11",
+        "days_actual": 30,
+        "spend": 4787.78,
+        "impressions": 383213,
+        "clicks": 10510,
+        "cpc": 0.4555,
+        "cpm": 12.49,
+        "ctr_pct": 2.743
+      },
+      {
+        "anchor_date": "2026-03-12",
+        "days_actual": 30,
+        "spend": 4819.24,
+        "impressions": 380851,
+        "clicks": 10656,
+        "cpc": 0.4523,
+        "cpm": 12.65,
+        "ctr_pct": 2.798
+      },
+      {
+        "anchor_date": "2026-03-13",
+        "days_actual": 30,
+        "spend": 4875.82,
+        "impressions": 376385,
+        "clicks": 10807,
+        "cpc": 0.4512,
+        "cpm": 12.95,
+        "ctr_pct": 2.871
+      },
+      {
+        "anchor_date": "2026-03-14",
+        "days_actual": 30,
+        "spend": 4993.42,
+        "impressions": 373756,
+        "clicks": 11139,
+        "cpc": 0.4483,
+        "cpm": 13.36,
+        "ctr_pct": 2.98
+      },
+      {
+        "anchor_date": "2026-03-15",
+        "days_actual": 30,
+        "spend": 5121.34,
+        "impressions": 375738,
+        "clicks": 11465,
+        "cpc": 0.4467,
+        "cpm": 13.63,
+        "ctr_pct": 3.051
+      },
+      {
+        "anchor_date": "2026-03-16",
+        "days_actual": 30,
+        "spend": 5500.34,
+        "impressions": 386339,
+        "clicks": 12330,
+        "cpc": 0.4461,
+        "cpm": 14.24,
+        "ctr_pct": 3.191
+      },
+      {
+        "anchor_date": "2026-03-17",
+        "days_actual": 30,
+        "spend": 5778.25,
+        "impressions": 395789,
+        "clicks": 13059,
+        "cpc": 0.4425,
+        "cpm": 14.6,
+        "ctr_pct": 3.299
+      },
+      {
+        "anchor_date": "2026-03-18",
+        "days_actual": 30,
+        "spend": 6066.59,
+        "impressions": 404250,
+        "clicks": 13678,
+        "cpc": 0.4435,
+        "cpm": 15.01,
+        "ctr_pct": 3.384
+      },
+      {
+        "anchor_date": "2026-03-19",
+        "days_actual": 30,
+        "spend": 6378.04,
+        "impressions": 411612,
+        "clicks": 14138,
+        "cpc": 0.4511,
+        "cpm": 15.5,
+        "ctr_pct": 3.435
+      },
+      {
+        "anchor_date": "2026-03-20",
+        "days_actual": 30,
+        "spend": 6763.31,
+        "impressions": 424142,
+        "clicks": 14785,
+        "cpc": 0.4574,
+        "cpm": 15.95,
+        "ctr_pct": 3.486
+      },
+      {
+        "anchor_date": "2026-03-21",
+        "days_actual": 30,
+        "spend": 7062.64,
+        "impressions": 434835,
+        "clicks": 15390,
+        "cpc": 0.4589,
+        "cpm": 16.24,
+        "ctr_pct": 3.539
+      },
+      {
+        "anchor_date": "2026-03-22",
+        "days_actual": 30,
+        "spend": 7525.29,
+        "impressions": 452081,
+        "clicks": 16188,
+        "cpc": 0.4649,
+        "cpm": 16.65,
+        "ctr_pct": 3.581
+      },
+      {
+        "anchor_date": "2026-03-23",
+        "days_actual": 30,
+        "spend": 7933.04,
+        "impressions": 469086,
+        "clicks": 16848,
+        "cpc": 0.4709,
+        "cpm": 16.91,
+        "ctr_pct": 3.592
+      },
+      {
+        "anchor_date": "2026-03-24",
+        "days_actual": 30,
+        "spend": 8273.53,
+        "impressions": 482451,
+        "clicks": 17434,
+        "cpc": 0.4746,
+        "cpm": 17.15,
+        "ctr_pct": 3.614
+      },
+      {
+        "anchor_date": "2026-03-25",
+        "days_actual": 30,
+        "spend": 8629.15,
+        "impressions": 493393,
+        "clicks": 17904,
+        "cpc": 0.482,
+        "cpm": 17.49,
+        "ctr_pct": 3.629
+      },
+      {
+        "anchor_date": "2026-03-26",
+        "days_actual": 30,
+        "spend": 8911.14,
+        "impressions": 500910,
+        "clicks": 18270,
+        "cpc": 0.4877,
+        "cpm": 17.79,
+        "ctr_pct": 3.647
+      },
+      {
+        "anchor_date": "2026-03-27",
+        "days_actual": 30,
+        "spend": 9212.49,
+        "impressions": 511168,
+        "clicks": 18801,
+        "cpc": 0.49,
+        "cpm": 18.02,
+        "ctr_pct": 3.678
+      },
+      {
+        "anchor_date": "2026-03-28",
+        "days_actual": 30,
+        "spend": 9419.61,
+        "impressions": 519331,
+        "clicks": 19191,
+        "cpc": 0.4908,
+        "cpm": 18.14,
+        "ctr_pct": 3.695
+      },
+      {
+        "anchor_date": "2026-03-29",
+        "days_actual": 30,
+        "spend": 9290.05,
+        "impressions": 508916,
+        "clicks": 18907,
+        "cpc": 0.4914,
+        "cpm": 18.25,
+        "ctr_pct": 3.715
+      },
+      {
+        "anchor_date": "2026-03-30",
+        "days_actual": 30,
+        "spend": 9109.62,
+        "impressions": 497157,
+        "clicks": 18513,
+        "cpc": 0.4921,
+        "cpm": 18.32,
+        "ctr_pct": 3.724
+      },
+      {
+        "anchor_date": "2026-03-31",
+        "days_actual": 30,
+        "spend": 9335.1,
+        "impressions": 498427,
+        "clicks": 18702,
+        "cpc": 0.4991,
+        "cpm": 18.73,
+        "ctr_pct": 3.752
+      },
+      {
+        "anchor_date": "2026-04-01",
+        "days_actual": 30,
+        "spend": 9717.83,
+        "impressions": 510483,
+        "clicks": 19340,
+        "cpc": 0.5025,
+        "cpm": 19.04,
+        "ctr_pct": 3.789
+      },
+      {
+        "anchor_date": "2026-04-02",
+        "days_actual": 30,
+        "spend": 10093.74,
+        "impressions": 520753,
+        "clicks": 19966,
+        "cpc": 0.5055,
+        "cpm": 19.38,
+        "ctr_pct": 3.834
+      },
+      {
+        "anchor_date": "2026-04-03",
+        "days_actual": 30,
+        "spend": 10510.36,
+        "impressions": 534420,
+        "clicks": 20614,
+        "cpc": 0.5099,
+        "cpm": 19.67,
+        "ctr_pct": 3.857
+      },
+      {
+        "anchor_date": "2026-04-04",
+        "days_actual": 30,
+        "spend": 10897.7,
+        "impressions": 553383,
+        "clicks": 21305,
+        "cpc": 0.5115,
+        "cpm": 19.69,
+        "ctr_pct": 3.85
+      },
+      {
+        "anchor_date": "2026-04-05",
+        "days_actual": 30,
+        "spend": 11238.74,
+        "impressions": 581514,
+        "clicks": 22129,
+        "cpc": 0.5079,
+        "cpm": 19.33,
+        "ctr_pct": 3.805
+      },
+      {
+        "anchor_date": "2026-04-06",
+        "days_actual": 30,
+        "spend": 11435.93,
+        "impressions": 599266,
+        "clicks": 22701,
+        "cpc": 0.5038,
+        "cpm": 19.08,
+        "ctr_pct": 3.788
+      },
+      {
+        "anchor_date": "2026-04-07",
+        "days_actual": 30,
+        "spend": 11635.1,
+        "impressions": 611406,
+        "clicks": 23135,
+        "cpc": 0.5029,
+        "cpm": 19.03,
+        "ctr_pct": 3.784
+      },
+      {
+        "anchor_date": "2026-04-08",
+        "days_actual": 30,
+        "spend": 11819.27,
+        "impressions": 622195,
+        "clicks": 23520,
+        "cpc": 0.5025,
+        "cpm": 19.0,
+        "ctr_pct": 3.78
+      },
+      {
+        "anchor_date": "2026-04-09",
+        "days_actual": 30,
+        "spend": 12022.33,
+        "impressions": 628702,
+        "clicks": 23698,
+        "cpc": 0.5073,
+        "cpm": 19.12,
+        "ctr_pct": 3.769
+      },
+      {
+        "anchor_date": "2026-04-10",
+        "days_actual": 30,
+        "spend": 12222.04,
+        "impressions": 637037,
+        "clicks": 23951,
+        "cpc": 0.5103,
+        "cpm": 19.19,
+        "ctr_pct": 3.76
+      },
+      {
+        "anchor_date": "2026-04-11",
+        "days_actual": 30,
+        "spend": 12379.69,
+        "impressions": 646789,
+        "clicks": 24351,
+        "cpc": 0.5084,
+        "cpm": 19.14,
+        "ctr_pct": 3.765
+      },
+      {
+        "anchor_date": "2026-04-12",
+        "days_actual": 30,
+        "spend": 12663.53,
+        "impressions": 665910,
+        "clicks": 24971,
+        "cpc": 0.5071,
+        "cpm": 19.02,
+        "ctr_pct": 3.75
+      },
+      {
+        "anchor_date": "2026-04-13",
+        "days_actual": 30,
+        "spend": 12856.19,
+        "impressions": 680545,
+        "clicks": 25377,
+        "cpc": 0.5066,
+        "cpm": 18.89,
+        "ctr_pct": 3.729
+      },
+      {
+        "anchor_date": "2026-04-14",
+        "days_actual": 30,
+        "spend": 12987.8,
+        "impressions": 692145,
+        "clicks": 25719,
+        "cpc": 0.505,
+        "cpm": 18.76,
+        "ctr_pct": 3.716
+      },
+      {
+        "anchor_date": "2026-04-15",
+        "days_actual": 30,
+        "spend": 12892.89,
+        "impressions": 693186,
+        "clicks": 25556,
+        "cpc": 0.5045,
+        "cpm": 18.6,
+        "ctr_pct": 3.687
+      },
+      {
+        "anchor_date": "2026-04-16",
+        "days_actual": 30,
+        "spend": 12858.5,
+        "impressions": 687563,
+        "clicks": 25232,
+        "cpc": 0.5096,
+        "cpm": 18.7,
+        "ctr_pct": 3.67
+      },
+      {
+        "anchor_date": "2026-04-17",
+        "days_actual": 30,
+        "spend": 13159.43,
+        "impressions": 700395,
+        "clicks": 25661,
+        "cpc": 0.5128,
+        "cpm": 18.79,
+        "ctr_pct": 3.664
+      },
+      {
+        "anchor_date": "2026-04-18",
+        "days_actual": 30,
+        "spend": 13260.12,
+        "impressions": 710085,
+        "clicks": 26229,
+        "cpc": 0.5056,
+        "cpm": 18.67,
+        "ctr_pct": 3.694
+      },
+      {
+        "anchor_date": "2026-04-19",
+        "days_actual": 30,
+        "spend": 13478.78,
+        "impressions": 727588,
+        "clicks": 26788,
+        "cpc": 0.5032,
+        "cpm": 18.53,
+        "ctr_pct": 3.682
+      },
+      {
+        "anchor_date": "2026-04-20",
+        "days_actual": 30,
+        "spend": 13650.5,
+        "impressions": 734050,
+        "clicks": 26989,
+        "cpc": 0.5058,
+        "cpm": 18.6,
+        "ctr_pct": 3.677
+      },
+      {
+        "run_id": "2026-04-28_PM_1907",
+        "captured_at": "2026-04-28T19:07:40.484426+07:00",
+        "spend": 16389.93,
+        "days_actual": 30,
+        "cpc": 0.5,
+        "cpm": 19.02,
+        "ctr_pct": 3.84
+      }
+    ]
+  },
+  "last_updated": "2026-04-28T19:07:40.484426+07:00",
+  "notes": [
+    "fb_ads_daily: 84 ngày từ Supabase (window 2026-01-27 → 2026-04-20)",
+    "fb_ads_7d_rolling_supabase: 7d rolling computed từ daily, 84 entries",
+    "fb_ads_30d_rolling_supabase: 30d rolling, 78 entries",
+    "fb_ads_7d_rolling: parsed từ FD_Reports/*.md (legacy, dùng cho audit)",
+    "klaviyo_*: pending Klaviyo MCP reconnect (O1 KR1.2)",
+    "blended_roas_7d: pending Klaviyo revenue + Shopify cohort"
+  ],
+  "snapshots": [
+    {
+      "run_id": "2026-04-28_AM_0336",
+      "captured_at": "2026-04-28T10:36:13.179066+07:00",
+      "fb_ads_7d_spend_usd": 5931.53,
+      "fb_ads_30d_spend_usd": 16320.92,
+      "fb_ads_7d_cpc": 0.5,
+      "fb_ads_7d_cpm": 20.51,
+      "fb_ads_7d_ctr_pct": 4.07,
+      "fb_ads_pipeline_gap_days": 1,
+      "klaviyo_revenue_7d_usd": 10793.6,
+      "klaviyo_orders_7d": 204,
+      "klaviyo_aov_7d_usd": 52.91,
+      "klaviyo_flow_revenue_7d_usd": 651.41,
+      "blended_roas_7d": 1.82,
+      "campaigns_sent_7d": 2
+    }
+  ]
+}</code></pre></details>
+<div class="footer">FD Agent v2 · auto-generated từ _kpi_history.json</div>
+</body>
+</html>

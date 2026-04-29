@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<title>Self-Upgrade — FaithfulDivine</title>
+<style>
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; max-width: 1180px; margin: 24px auto; padding: 0 16px; color: #1e293b; line-height: 1.55; background: #f8fafc; }
+h1 { color: #1e3a8a; border-bottom: 3px solid #1e3a8a; padding-bottom: 6px; margin-bottom: 4px; }
+h2 { color: #1e40af; margin-top: 28px; border-left: 4px solid #1e40af; padding-left: 12px; font-size: 18px; }
+.back-bar { background: linear-gradient(135deg, #1e3a8a, #2563eb); color: white; padding: 10px 16px; border-radius: 8px; margin-bottom: 18px; font-size: 14px; display: flex; justify-content: space-between; align-items: center; }
+.back-bar a { color: white; font-weight: 500; text-decoration: none; }
+.back-bar .meta { font-size: 12px; opacity: 0.85; }
+.intro { background: white; border-left: 4px solid #ea580c; padding: 12px 16px; border-radius: 8px; margin: 14px 0 22px; font-size: 14px; box-shadow: 0 1px 3px rgba(0,0,0,0.04); }
+.entry { background: white; border-left: 4px solid #16a34a; padding: 10px 14px; margin: 10px 0; border-radius: 6px; box-shadow: 0 1px 3px rgba(0,0,0,0.04); }
+.entry.proposed { border-left-color: #dc2626; }
+.entry.approved { border-left-color: #16a34a; }
+.entry.merged { border-left-color: #1e40af; }
+.entry-header { display: flex; justify-content: space-between; align-items: center; font-size: 12px; color: #64748b; margin-bottom: 4px; }
+.entry-mistake { font-size: 14px; color: #1e293b; margin: 4px 0; }
+.entry-rule { font-size: 13.5px; color: #475569; padding-left: 14px; border-left: 2px solid #e2e8f0; margin-top: 6px; }
+.entry-rule strong { color: #ea580c; }
+.pill { display: inline-block; padding: 2px 8px; border-radius: 12px; font-size: 11px; font-weight: 600; }
+.pill.proposed { background: #fee2e2; color: #991b1b; }
+.pill.approved { background: #dcfce7; color: #166534; }
+.pill.merged { background: #dbeafe; color: #1e40af; }
+code { background: #f1f5f9; padding: 1px 6px; border-radius: 4px; font-size: 12.5px; color: #0f172a; }
+.summary-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px,1fr)); gap: 10px; margin: 14px 0 22px; }
+.summary-card { background: white; padding: 12px 14px; border-radius: 8px; border-left: 4px solid #94a3b8; box-shadow: 0 1px 3px rgba(0,0,0,0.05); }
+.summary-card .label { font-size: 11px; color: #64748b; text-transform: uppercase; letter-spacing: 0.5px; }
+.summary-card .value { font-size: 22px; font-weight: 700; color: #1e3a8a; margin-top: 2px; }
+.footer { margin-top: 36px; padding-top: 12px; border-top: 1px solid #cbd5e1; font-size: 12px; color: #64748b; text-align: center; }
+</style>
+</head>
+<body>
+<div class="back-bar">
+  <a href="/fd-reports">← Quay lại Dashboard</a>
+  <span class="meta">Cập nhật: 2026-04-29 · Self-audit 1×/ngày</span>
+</div>
+
+<h1>🪞 Self-Upgrade — Agent tự nâng cấp</h1>
+<div class="intro">
+  Trang này tổng hợp các lỗi thuộc hạ tự kiểm trong quá trình làm việc với đại vương, kèm rule đề xuất để không lặp lại. Đại vương duyệt rule bằng cách báo "approve entry [ID]" — thuộc hạ sẽ ghi vào CLAUDE.md ở phiên kế tiếp.
+</div>
+
+<div class="summary-grid">
+  <div class="summary-card"><div class="label">🔴 Đề xuất</div><div class="value">3</div></div>
+  <div class="summary-card"><div class="label">✅ Đã duyệt</div><div class="value">0</div></div>
+  <div class="summary-card"><div class="label">🟢 Merged vào CLAUDE.md</div><div class="value">0</div></div>
+  <div class="summary-card"><div class="label">📅 Audit gần nhất</div><div class="value" style="font-size:16px;">2026-04-29</div></div>
+</div>
+
+<h2>📋 Self-audit log (mới nhất ở trên)</h2>
+
+<div class="entry proposed">
+  <div class="entry-header">
+    <span><strong>2026-04-29</strong> · Phiên cowork với đại vương</span>
+    <span class="pill proposed">🔴 PROPOSED</span>
+  </div>
+  <div class="entry-mistake"><strong>Lỗi:</strong> Overengineer module Self-Upgrade — đại vương chỉ cần 1 ô nhỏ, thuộc hạ tạo schema JSON 5 nhóm + Python engine 10KB + 4 status promotion + hook vào run_agent.py.</div>
+  <div class="entry-rule"><strong>Rule đề xuất:</strong> Trước khi build infra (engine/schema/script), BẮT BUỘC hỏi đại vương "cần ô nhỏ static hay system đầy đủ?". Mặc định chọn cách đơn giản nhất, scale up khi đại vương yêu cầu rõ.</div>
+</div>
+
+<div class="entry proposed">
+  <div class="entry-header">
+    <span><strong>2026-04-28 PM</strong> · Phiên Notion update</span>
+    <span class="pill proposed">🔴 PROPOSED</span>
+  </div>
+  <div class="entry-mistake"><strong>Lỗi:</strong> Báo cáo "đã update Notion section 2.10 xong" mà không fetch lại page để verify thực sự đã ghi đúng vị trí + đúng nội dung.</div>
+  <div class="entry-rule"><strong>Rule đề xuất:</strong> Sau mỗi <code>notion-update-page</code> BẮT BUỘC gọi <code>notion-fetch</code> lại + đối chiếu nội dung mới có trong response. Không tin "success" của API.</div>
+</div>
+
+<div class="entry proposed">
+  <div class="entry-header">
+    <span><strong>2026-04-28 PM</strong> · Phiên vào sandbox</span>
+    <span class="pill proposed">🔴 PROPOSED</span>
+  </div>
+  <div class="entry-mistake"><strong>Lỗi:</strong> Gọi <code>mcp__cowork__request_cowork_directory</code> 4 lần liên tiếp dù sandbox chưa sẵn sàng, thay vì dừng lại sau 2 lần fail và báo đại vương.</div>
+  <div class="entry-rule"><strong>Rule đề xuất:</strong> Bất kỳ tool nào fail ≥2 lần liên tiếp → STOP, không retry mù. Báo lỗi cho đại vương + đề xuất bước tiếp theo (vd: "đại vương chọn folder thủ công giúp thuộc hạ").</div>
+</div>
+
+<h2>🛠 Cơ chế hoạt động</h2>
+<div class="entry">
+  <strong>Nguyên tắc:</strong> đại vương KHÔNG check task. Thuộc hạ tự kiểm sau mỗi phiên / mỗi ngày, append vào page này. Đại vương duyệt bằng câu lệnh "approve entry X". Khi merge ≥10 entry approved → đề xuất gộp thành section trong CLAUDE.md.
+</div>
+<div class="entry">
+  <strong>Trigger:</strong> 1 lần/ngày (cuối phiên cowork lớn hoặc cuối scheduled run AM). Cộng thêm in-session khi đại vương phản hồi tiêu cực ("ngươi vừa sai" / "lỗi này lặp rồi").
+</div>
+<div class="entry">
+  <strong>Guardrails:</strong> không tự sửa CLAUDE.md khi chưa APPROVED · không xóa rule cũ chỉ đánh dấu DEPRECATED · mỗi lần update CLAUDE.md ghi 1 dòng changelog cuối file.
+</div>
+
+<div class="footer">FaithfulDivine — Self-Upgrade Loop · Section 2.10 (Notion Tráng CEO Command Center) · Auto-curated by Agent</div>
+</body>
+</html>
